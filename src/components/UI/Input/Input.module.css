@@ -1,0 +1,15 @@
+.input{
+    background-color: rgb(190, 171, 171);
+    width: 300px;
+    height: 20px;
+    border: none;
+    padding: 15px 20px;
+    font-size: 15px;
+}
+.input_error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-size: 14px;
+}
