@@ -1,10 +1,12 @@
 .input{
-    background-color: hsl(0, 60%, 98%);
+    background-color: #f2f2f2;
     width: 300px;
     height: 20px;
     border: none;
     padding: 15px 20px;
     font-size: 15px;
+    color: #c2c2c2;
+    outline: none;
 }
 .input_error{
     display: flex;
