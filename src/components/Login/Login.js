@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Submit from "../UI/button/Button";
 class Login extends Component {
   state = {};
   render() {
@@ -7,7 +8,7 @@ class Login extends Component {
         <form>
           <input />
           <input />
-          <button>login</button>
+          <Submit value="Login" />
         </form>
       </div>
     );
