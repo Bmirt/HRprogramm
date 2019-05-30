@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from '../Header/Header'
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
 class Login extends Component {
@@ -6,6 +7,7 @@ class Login extends Component {
   render() {
     return (
       <div>
+        <Header/>
         <form>
           <Input errors={{}} />
           <Input errors={{}} />
