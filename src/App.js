@@ -9,12 +9,6 @@ function App() {
     <div className="App">
       <Router>
         <Route path="/Login" component={Login} />
-<<<<<<< HEAD
-
-=======
-        <Input placeholder="Username" type="text" errors={{username:"username invalid", password:"password invalid"}} />
-        <Input placeholder="Username" type="text" errors={{username:"username invalid", password:"password invalid"}} />
->>>>>>> 516ee5a85d184fc04207b67a511923e3574db5df
         {/* <Route path="/ResetPassword" component={Login} /> */}
       </Router>
     </div>
