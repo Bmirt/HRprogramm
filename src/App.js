@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Route path="/Login" component={Login} />
         <Input placeholder="Username" type="text" errors={{username:"username invalid", password:"password invalid"}} />
-        <Input placeholder="Username" type="text" errors={{username:"username invalid", password:"password invalid"}} />
+        <Input placeholder="Username" type="password" errors={{username:"username invalid", password:"password invalid"}} />
         {/* <Route path="/ResetPassword" component={Login} /> */}
       </Router>
     </div>
