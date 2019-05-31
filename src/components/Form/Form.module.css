@@ -1,6 +1,5 @@
 .formForm {
     margin: auto;
-    text-align: center;
 }
 .formBox {
     width: 320px;
@@ -13,6 +12,8 @@
 
 }
 label {
+    text-align: center;
+    display: block;
     font-size: 20px;
     line-height: 30px;
     font-weight: bold;
