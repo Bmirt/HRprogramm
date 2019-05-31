@@ -1,0 +1,21 @@
+.errorMessage {
+  margin: 0px;
+  display: inline-block;
+  font-size: 1rem;
+  animation: fadein 10s;
+  color: #a63232;
+  position: absolute;
+  left: 0px;
+  bottom: -26px;
+  text-align: center;
+  width: 100%;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

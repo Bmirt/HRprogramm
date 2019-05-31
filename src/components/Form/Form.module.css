@@ -1,26 +1,28 @@
 .loginForm {
-    margin: auto;
-    width: 250px;
-    text-align: center;
+  margin: auto;
+  width: 250px;
+  text-align: center;
+  transition: all 2s linear;
 }
 .loginBox {
-    width: 300px;
-    padding: 30px 20px;
-    background: #f5f5f5;
-    margin: 100px auto;
-    box-shadow: 5px -5px #e5e5e5d3;
+  width: 300px;
+  transition: all 2s linear;
+  padding: 30px 20px;
+  background: #f5f5f5;
+  margin: 100px auto;
+  box-shadow: 5px -5px #e5e5e5d3;
 }
 label {
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: bold;
-    color: #757575;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: bold;
+  color: #757575;
 }
-a{
-    color: #757575;
-    text-decoration: none;
-    font-size: 14px;
+a {
+  color: #757575;
+  text-decoration: none;
+  font-size: 14px;
 }
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
