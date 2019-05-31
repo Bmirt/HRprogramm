@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import Logo from '../../HRlogo.png'
+import Logo from '../../THlogo.png'
 import styles from './Header.module.css';
 
 class Header extends Component {

@@ -4,6 +4,8 @@ import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
 import KeepMeSignedIn from "../UI/keepMeSignedIn/keepMeSignedIn";
+import Logo from "../../TecHR.jpg";
+
 class Login extends Component {
   state = {
     username: "",
@@ -12,6 +14,7 @@ class Login extends Component {
   };
   handleSubmiit = e => {
     e.preventDefault();
+    console.log(this.state);
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "Username field is empty";
@@ -42,27 +45,29 @@ class Login extends Component {
   };
   render() {
     return (
-      <div>
-        <Form event={this.handleSubmiit}>
-          <label>Login</label>
-          <Input
-            event={this.handleChange}
-            name="username"
-            type="text"
-            error={this.state.errors.username}
-            placeholder="Email or Username"
-          />
+      <div className={styles.loginBox}>
+        <img src={Logo} className={styles.logo} />
+        <div className={styles.formBox}>
+          <Form event={this.handleSubmiit} className={styles.loginForm}>
+            <Input
+              event={this.handleChange}
+              name="username"
+              type="text"
+              error={this.state.errors.username}
+              placeholder="Email or Username"
+            />
 
-          <Input
-            event={this.handleChange}
-            name="password"
-            type="password"
-            placeholder="Password"
-            error={this.state.errors.password}
-          />
-          <KeepMeSignedIn />
-          <Submit value="Sign In" buttonClass="submit" />
-        </Form>
+            <Input
+              event={this.handleChange}
+              name="password"
+              type="password"
+              placeholder="Password"
+              error={this.state.errors.password}
+            />
+            <KeepMeSignedIn />
+            <Submit value="Sign In" buttonClass="submit" />
+          </Form>
+        </div>
       </div>
     );
   }

@@ -1,36 +1,7 @@
-.loginForm {
-  margin: auto;
-  width: 250px;
-  text-align: center;
-  transition: all 2s linear;
-}
-.loginBox {
-  width: 300px;
-  transition: all 2s linear;
-  padding: 30px 20px;
-  background: #f5f5f5;
-  margin: 100px auto;
-  box-shadow: 5px -5px #e5e5e5d3;
-}
-label {
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: bold;
-  color: #757575;
-}
 .formForm {
   margin: auto;
   text-align: center;
   font-family: "Barlow Condensed", sans-serif;
-}
-.formBox {
-  width: 320px;
-  padding: 30px 9px;
-  background: #f5f5f5;
-  margin: 100px auto;
-  -webkit-box-shadow: 0 0 5px 2px #e5e5e5d3;
-  -moz-box-shadow: 0 0 5px 2px #e5e5e5d3;
-  box-shadow: 0 0 10px 8px #e5e5e5d3;
 }
 label {
   font-size: 1.8em;
