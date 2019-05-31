@@ -12,9 +12,6 @@
   color: #828282;
 }
 .input_error {
-  display: block;
-  padding: 1px 5px;
-  color: rgb(241, 0, 0);
-  font-size: 0.9rem;
-  text-align: left;
+  composes:input;
+  border-color: rgb(241, 0, 0);
 }
