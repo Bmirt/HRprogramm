@@ -20,7 +20,7 @@ class ResetPassword extends Component {
     console.log(this.state);
   };
 
-  handeleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     if (this.state.isVerified) {
       alert("You are verified");
@@ -32,7 +32,7 @@ class ResetPassword extends Component {
   render() {
     return (
       <div>
-        <Form title="Reset Password" event={this.handeleSubmit}>
+        <Form title="Reset Password" event={this.handleSubmit}>
           <Input type="text" placeholder="Email or Username" errors={{}} />
           <Recaptcha
             size="normal"
