@@ -18,6 +18,26 @@ label {
   font-weight: bold;
   color: #757575;
 }
+.formForm {
+  margin: auto;
+  text-align: center;
+  font-family: "Barlow Condensed", sans-serif;
+}
+.formBox {
+  width: 320px;
+  padding: 30px 9px;
+  background: #f5f5f5;
+  margin: 100px auto;
+  -webkit-box-shadow: 0 0 5px 2px #e5e5e5d3;
+  -moz-box-shadow: 0 0 5px 2px #e5e5e5d3;
+  box-shadow: 0 0 10px 8px #e5e5e5d3;
+}
+label {
+  font-size: 1.8em;
+  line-height: 30px;
+  font-weight: bold;
+  color: #757575;
+}
 a {
   color: #757575;
   text-decoration: none;

@@ -1,39 +1,52 @@
 import React, { Component } from "react";
+import Recaptcha from "react-recaptcha";
+import styles from './ResetPassword.module.css'
 import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
-import Recaptcha from "react-recaptcha";
+import Form from "../Form/Form";
 class ResetPassword extends Component {
   state = {
     isVerified: false
   };
-  onLoadRecaptcha() {
+  recaptchaLoaded() {
     console.log("loaded");
   }
 
-  verifyCallback(recaptchaToken) {
-    if (recaptchaToken) {
+  verifyCallback = response => {
+    if (response) {
       this.setState({
         isVerified: true
       });
     }
-    console.log(recaptchaToken, "<= your recaptcha token");
-  }
+    console.log(this.state);
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.state.isVerified) {
+      alert("You are verified");
+    } else {
+      alert("Please verify");
+    }
+  };
+
   render() {
     return (
       <div>
-        <h1>ResetPassword</h1>
-        <form>
-          <Input type="text" placeholder="Email or Passwerd" errors={{}} />
-          <Recaptcha
-            size="normal"
-            render="explicit"
-            sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
-            "
-            onloadCallback={this.recaptchaLoaded}
-            verifyCallback={this.verifyCallback}
-          />
-          <Button type="submit" value="Reset Password" />
-        </form>
+        <Form title="Reset Password" event={this.handleSubmit}>
+          <Input type="text" placeholder="Email or Username" errors={{}} />
+          <div className={styles.recaptchaBox}>
+            <Recaptcha
+              size="normal"
+              render="explicit"
+              sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
+              "
+              onloadCallback={this.recaptchaLoaded}
+              verifyCallback={this.verifyCallback}
+            />
+          </div>
+          <Button type="submit" value="Reset Password" buttonClass="change" />
+        </Form>
       </div>
     );
   }

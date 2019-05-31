@@ -22,7 +22,13 @@ class Login extends Component {
     }
     this.setState({ errors: newErrors });
   };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
   render() {
+    console.log(this.state);
     return (
       <div>
         <Form event={this.handleSubmiit}>
