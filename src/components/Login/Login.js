@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from './Login.module.css';
+import { Link } from "react-router-dom";
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
 class Login extends Component {
@@ -8,10 +9,11 @@ class Login extends Component {
     return (
       <div>
         <form className={styles.loginForm}>
-          <Input errors={{}} />
-          <Input errors={{}} />
-          <Submit value="Login"/>
+          <Input type="text" errors={{}} placeholder="Email or Username" />
+          <Input type="password" errors={{}} placeholder="Password" />
+          <Submit value="Login" />
         </form>
+        <Link to="/reset-password">Forgot Password?</Link>
       </div>
     );
   }

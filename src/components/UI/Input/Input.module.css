@@ -1,15 +1,17 @@
-.input{
-    background-color: #f2f2f2;
-    width: 250px;
-    height: 40px;
-    border: none;
-    padding: 12 px 15px;
-    font-size: 15px;
-    color: #c2c2c2;
-    outline: none;
-    margin-top: 20px;
+.input {
+  background-color: #f2f2f2;
+  width: 250px;
+  height: 40px;
+  border: none;
+  padding: 12 px 15px;
+  font-size: 15px;
+  outline: none;
+  margin-top: 20px;
 }
-.input_error{
-    color: red;
-    font-size: 14px;
+::placeholder {
+  color: #c2c2c2;
+}
+.input_error {
+  color: red;
+  font-size: 14px;
 }
