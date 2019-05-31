@@ -1,29 +1,40 @@
 import React, { Component } from "react";
+import Recaptcha from "react-recaptcha";
 import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
-import Recaptcha from "react-recaptcha";
+import Form from "../Form/Form";
 class ResetPassword extends Component {
   state = {
     isVerified: false
   };
-  onLoadRecaptcha() {
+  recaptchaLoaded() {
     console.log("loaded");
   }
 
-  verifyCallback(recaptchaToken) {
-    if (recaptchaToken) {
+  verifyCallback = response => {
+    if (response) {
       this.setState({
         isVerified: true
       });
     }
-    console.log(recaptchaToken, "<= your recaptcha token");
-  }
+    console.log(this.state);
+  };
+
+  handeleSubmit = e => {
+    e.preventDefault();
+    if (this.state.isVerified) {
+      alert("You are verified");
+    } else {
+      alert("Please verify");
+    }
+  };
+
   render() {
     return (
       <div>
         <h1>ResetPassword</h1>
-        <form>
-          <Input type="text" placeholder="Email or Passwerd" errors={{}} />
+        <Form event={this.handeleSubmit}>
+          <Input type="text" placeholder="Email or Username" errors={{}} />
           <Recaptcha
             size="normal"
             render="explicit"
@@ -32,8 +43,8 @@ class ResetPassword extends Component {
             onloadCallback={this.recaptchaLoaded}
             verifyCallback={this.verifyCallback}
           />
-          <Button type="submit" value="Reset Password" />
-        </form>
+          <Button type="submit" value="Reset" buttonClass="change" />
+        </Form>
       </div>
     );
   }
