@@ -23,7 +23,6 @@ class Login extends Component {
     }
     this.setState({ errors: newErrors });
   };
-<<<<<<< HEAD
   handleSubmit = e => {
     e.preventDefault();
 
@@ -35,8 +34,6 @@ class Login extends Component {
       // .then(response => response.json())
       .then(res => console.log(res));
   };
-=======
->>>>>>> a986a6fc5350a4c9b5cab63cf234bd11e8478be1
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
