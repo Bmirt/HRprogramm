@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#g-recaptcha {
+  width: auto;
+}
+#g-recaptcha div,
+#g-recaptcha iframe {
+  width: 100% !important;
+}
