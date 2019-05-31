@@ -5,6 +5,7 @@ export class Input extends Component {
         return (
             <div>
                 <input 
+                onChange={this.props.event}
                 placeholder={this.props.placeholder}
                 type={this.props.type}
                 name="username"

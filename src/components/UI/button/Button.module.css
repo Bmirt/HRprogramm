@@ -1,7 +1,7 @@
-.buttonSubmit {
+.btn {
   display: inline-block;
   font-weight: 400;
-  width: 250px;
+  min-width: 120px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -14,16 +14,35 @@
   font-size: 1rem;
   line-height: 1.5;
   color: #fff;
-  background-color: #023875;
-  border-color: #023875;
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   outline: none;
+  margin-top: 0.6em;
+}
+
+.buttonSubmit {
+  color: #fff;
+  background-color: #023875;
+  border-color: #023875;
+  margin-right: 0.6em;
 }
 
 .buttonSubmit:hover {
   color: #fff;
-  background-color: #023875ef;
-  border-color: #023875ef;
+  background-color: rgb(0, 31, 92);
+  border-color: rgb(0, 31, 92);
+  box-shadow: 0px 15px 20px rgba(0, 31, 92, 0.4);
+}
+
+.buttonChange {
+  color: #fff;
+  background-color: #cedbef;
+  border-color: #cedbef;
+}
+.buttonChange:hover {
+  color: #fff;
+  background-color: #9ba8bc;
+  border-color: #9ba8bc;
+  box-shadow: 0px 15px 20px rgba(155, 168, 188, 0.4);
 }
