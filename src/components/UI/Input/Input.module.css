@@ -2,16 +2,14 @@
   background-color: #fafafa;
   width: 301px;
   height: 40px;
-  border-color: #FF2F2F;
+  border: 1px solid #a6a6a6;
   padding: 1.2em 0.8em;
   font-size: 1rem;
   outline: none;
   margin-top: 1.8em;
-  box-shadow: 0 0 10px 8px #e5e5e5d3;
-  font-family: 'Barlow Condensed', sans-serif;
 }
 ::placeholder {
-  color: #c2c2c2;
+  color: #828282;
 }
 .input_error {
   display: block;
