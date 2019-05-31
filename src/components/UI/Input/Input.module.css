@@ -1,5 +1,5 @@
 .input {
-  background-color: #f2f2f2;
+  background-color: #fafafa;
   width: 301px;
   height: 40px;
   border: none;
@@ -13,5 +13,5 @@
 }
 .input_error {
   color: red;
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
