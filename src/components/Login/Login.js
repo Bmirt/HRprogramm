@@ -16,10 +16,10 @@ class Login extends Component {
     e.preventDefault();
     console.log(this.state);
     let newErrors = {};
-    if (this.state.username !== true) {
+    if (this.state.username.length <= 0) {
       newErrors.username = "Username field is empty";
     }
-    if (this.state.password !== true) {
+    if (this.state.password.length <= 0) {
       newErrors.password = "The password field is empty";
     }
     this.setState({ errors: newErrors });
@@ -41,7 +41,6 @@ class Login extends Component {
     });
   };
   render() {
-    console.log(this.state);
     return (
       <div>
         <Form event={this.handleSubmiit}>
