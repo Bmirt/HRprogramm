@@ -4,10 +4,11 @@
   height: 40px;
   border: none;
   padding: 1.2em 1.5em;
-  font-size: 1.rem;
+  font-size: 1rem;
   outline: none;
   margin-top: 2em;
   box-shadow: 0 0 10px 8px #e5e5e5d3;
+  font-family: 'Barlow Condensed', sans-serif;
 }
 ::placeholder {
   color: #c2c2c2;
