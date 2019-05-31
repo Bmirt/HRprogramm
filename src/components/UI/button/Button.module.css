@@ -1,7 +1,7 @@
 .btn {
   display: inline-block;
-  font-weight: 400;
-  min-width: 145px;
+  font-weight: bold;
+  min-width: 275px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -24,8 +24,8 @@
 
 .buttonSubmit {
   color: #fff;
-  background-color: #023875;
-  border-color: #023875;
+  background-color: #ff4343;
+  border-color: #ff4343;
   margin-right: 0.6em;
 }
 

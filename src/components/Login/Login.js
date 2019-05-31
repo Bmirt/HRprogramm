@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
-import ForgotPassword from "../UI/button/Button";
 import Input from "../UI/Input/Input";
-import Validation from "../Validation/Validation";
+import KeepMeSignedIn from "../UI/keepMeSignedIn/keepMeSignedIn";
 class Login extends Component {
   state = {
     username: "",
@@ -15,6 +13,9 @@ class Login extends Component {
   handleSubmiit = e => {
     e.preventDefault();
     let newErrors = {};
+    if (this.state.username.length <= 0) {
+      newErrors.username = "Username field is empty";
+    }
     if (this.state.username.length <= 0) {
       newErrors.username = "Username field is empty";
     }
@@ -59,11 +60,8 @@ class Login extends Component {
             placeholder="Password"
             error={this.state.errors.password}
           />
-
-          <Submit value="Login" buttonClass="submit" />
-          <Link to="/reset-password">
-            <ForgotPassword value="Recover" buttonClass="change" />
-          </Link>
+          <KeepMeSignedIn />
+          <Submit value="Sign In" buttonClass="submit" />
         </Form>
       </div>
     );
