@@ -15,6 +15,7 @@ class Login extends Component {
   handleSubmiit = e => {
     e.preventDefault();
     let newErrors = {};
+    console.log(typeof this.state.username);
     if (this.state.username !== true) {
       newErrors.username = "Username field is empty";
     }
