@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="*" component={Header} />
+        {/* <Route path="*" component={Header} /> */}
         <Route path="/Login" component={Login} />
         <Route path="/reset-password" component={ResetPassword} />
       </Router>
