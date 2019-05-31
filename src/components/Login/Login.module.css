@@ -1,7 +1,7 @@
 .loginBox {
     max-width: 700px;
     padding: 30px 20px;
-    background: #fffdfd;
+    background: #f5f5f5;
     margin: 100px auto;
 }
 .logo {
@@ -11,9 +11,9 @@
 }
 .formBox::before {
     display: block;
-    margin: auto;
+    margin: 20px auto -4px auto;
     content: '';
-    width: 70%;
+    width: 60%;
     height: 2px;
     background: #ccc;
 }

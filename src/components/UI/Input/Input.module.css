@@ -1,12 +1,12 @@
 .input {
   background-color: #fafafa;
-  width: 301px;
-  height: 40px;
-  border: 1px solid #a6a6a6;
+  width: 500px;
+  height: 60px;
+  border: 2px solid #a6a6a6;
   padding: 1.2em 0.8em;
   font-size: 1rem;
   outline: none;
-  margin-top: 1.8em;
+  margin-top: 1.3em;
 }
 ::placeholder {
   color: #828282;
