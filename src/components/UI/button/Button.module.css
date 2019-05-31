@@ -1,6 +1,7 @@
 .buttonSubmit {
   display: inline-block;
   font-weight: 400;
+  width: 250px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -16,7 +17,6 @@
   background-color: #28a745;
   border-color: #28a745;
   cursor: pointer;
-  border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   outline: none;
