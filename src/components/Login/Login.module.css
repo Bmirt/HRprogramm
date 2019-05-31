@@ -11,7 +11,7 @@
 }
 .formBox::before {
     display: block;
-    margin: 20px auto -4px auto;
+    margin: 16px auto 0 auto;
     content: '';
     width: 60%;
     height: 2px;

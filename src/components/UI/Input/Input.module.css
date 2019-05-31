@@ -7,6 +7,7 @@
   font-size: 1rem;
   outline: none;
   margin-top: 1.3em;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 ::placeholder {
   color: #828282;
