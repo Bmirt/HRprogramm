@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Recaptcha from "react-recaptcha";
+import styles from './ResetPassword.module.css'
 import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
 import Form from "../Form/Form";
@@ -34,14 +35,16 @@ class ResetPassword extends Component {
       <div>
         <Form title="Reset Password" event={this.handleSubmit}>
           <Input type="text" placeholder="Email or Username" errors={{}} />
-          <Recaptcha
-            size="normal"
-            render="explicit"
-            sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
-            "
-            onloadCallback={this.recaptchaLoaded}
-            verifyCallback={this.verifyCallback}
-          />
+          <div className={styles.recaptchaBox}>
+            <Recaptcha
+              size="normal"
+              render="explicit"
+              sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
+              "
+              onloadCallback={this.recaptchaLoaded}
+              verifyCallback={this.verifyCallback}
+            />
+          </div>
           <Button type="submit" value="Reset Password" buttonClass="change" />
         </Form>
       </div>
