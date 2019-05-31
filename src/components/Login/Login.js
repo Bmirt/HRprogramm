@@ -5,11 +5,25 @@ import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import ForgotPassword from "../UI/button/Button";
 import Input from "../UI/Input/Input";
+import Validation from "../Validation/Validation";
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    errors: {}
   };
+  handleSubmiit = e => {
+    e.preventDefault();
+    let newErrors = {};
+    if (this.state.username !== true) {
+      newErrors.username = "Username field is empty";
+    }
+    if (this.state.password !== true) {
+      newErrors.password = "The password field is empty";
+    }
+    this.setState({ errors: newErrors });
+  };
+<<<<<<< HEAD
   handleSubmit = e => {
     e.preventDefault();
 
@@ -21,6 +35,8 @@ class Login extends Component {
       // .then(response => response.json())
       .then(res => console.log(res));
   };
+=======
+>>>>>>> a986a6fc5350a4c9b5cab63cf234bd11e8478be1
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -30,22 +46,25 @@ class Login extends Component {
     console.log(this.state);
     return (
       <div>
-        <Form event={this.handleSubmit} title="Login">
+        <Form event={this.handleSubmiit}>
+          <label>Login</label>
           <Input
-            name="username"
-            event={this.handleChange}
             type="text"
-            errors={{ username: "invalid" }}
+            error={this.state.errors.username}
             placeholder="Email or Username"
           />
+
           <Input
-            name="password"
-            event={this.handleChange}
             type="password"
-            errors={{}}
             placeholder="Password"
+            error={this.state.errors.password}
           />
-          <Submit value="Login" buttonClass="submit" />
+
+          <Submit
+            value="Login"
+            buttonClass="submit"
+            event={e => this.handleSubmiit(e)}
+          />
           <Link to="/reset-password">
             <ForgotPassword value="Recover" buttonClass="change" />
           </Link>
