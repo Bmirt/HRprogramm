@@ -8,8 +8,9 @@ class Login extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className={styles.loginBox}>
         <form className={styles.loginForm}>
+          <label>Login</label>
           <Input type="text" errors={{}} placeholder="Email or Username" />
           <Input type="password" errors={{}} placeholder="Password" />
           <Submit value="Login" buttonClass="submit" />
