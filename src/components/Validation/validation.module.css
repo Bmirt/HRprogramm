@@ -2,11 +2,11 @@
   margin: 0px;
   display: inline-block;
   font-size: 1rem;
-  animation: fadein 10s;
+  animation: fadein 3s;
   color: #a63232;
   position: absolute;
   left: 0px;
-  bottom: -21px;
+  bottom: -1.5rem;
   text-align: center;
   width: 100%;
 }
