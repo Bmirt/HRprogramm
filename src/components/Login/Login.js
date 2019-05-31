@@ -27,7 +27,7 @@ class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    fetch("laraver.local/api/test", {
+    fetch("laraver.local/api/login", {
       headers: {
         "Content-Type": "application/json"
       }
@@ -47,22 +47,22 @@ class Login extends Component {
         <Form event={this.handleSubmiit}>
           <label>Login</label>
           <Input
+            event={this.handleChange}
+            name="username"
             type="text"
             error={this.state.errors.username}
             placeholder="Email or Username"
           />
 
           <Input
+            event={this.handleChange}
+            name="password"
             type="password"
             placeholder="Password"
             error={this.state.errors.password}
           />
 
-          <Submit
-            value="Login"
-            buttonClass="submit"
-            event={e => this.handleSubmiit(e)}
-          />
+          <Submit value="Login" buttonClass="submit" />
           <Link to="/reset-password">
             <ForgotPassword value="Recover" buttonClass="change" />
           </Link>

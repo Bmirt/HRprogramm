@@ -9,7 +9,7 @@ export class Input extends Component {
           onChange={this.props.event}
           placeholder={this.props.placeholder}
           type={this.props.type}
-          name="username"
+          name={this.props.name}
           className={Classes.input}
         />
         <Validation error={this.props.error} />
