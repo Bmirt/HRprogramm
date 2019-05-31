@@ -1,13 +1,15 @@
-.loginForm {
+.formForm {
     margin: auto;
-    width: 250px;
     text-align: center;
 }
-.loginBox {
-    width: 300px;
+.formBox {
+    width: 335px;
     padding: 30px 20px;
     background: #f5f5f5;
     margin: 100px auto;
+    -webkit-box-shadow: 0 0 5px 2px #fff;
+    -moz-box-shadow: 0 0 5px 2px #fff;
+    box-shadow: 0 0 5px 2px #fff;
     box-shadow: 5px -5px #e5e5e5d3;
 }
 label {

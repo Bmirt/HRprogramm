@@ -4,8 +4,9 @@ import styles from './Form.module.css'
 class Form extends Component {
     render(){
         return(
-            <div className={styles.loginBox}>
-                <form onSubmit={this.props.event} className={styles.loginForm}>
+            <div className={styles.formBox}>
+                <form onSubmit={this.props.event} className={styles.formForm}>
+                    <label>{this.props.title}</label>
                     {this.props.children}
                 </form>
             </div>
