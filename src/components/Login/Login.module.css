@@ -1,0 +1,19 @@
+.loginBox {
+    max-width: 700px;
+    padding: 30px 20px;
+    background: #fffdfd;
+    margin: 100px auto;
+}
+.logo {
+    width: 10rem;
+    display: block;
+    margin: auto;
+}
+.formBox::before {
+    display: block;
+    margin: auto;
+    content: '';
+    width: 70%;
+    height: 2px;
+    background: #ccc;
+}

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import styles from './Login.module.css'
 import axios from "axios";
 import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import ForgotPassword from "../UI/button/Button";
 import Input from "../UI/Input/Input";
 import Validation from "../Validation/Validation";
+import Logo from '../../TecHR.jpg'
+
 class Login extends Component {
   state = {
     username: "",
@@ -42,9 +45,10 @@ class Login extends Component {
   };
   render() {
     return (
-      <div>
-        <Form event={this.handleSubmiit}>
-          <label>Login</label>
+      <div className={styles.loginBox}>
+        <img src={Logo} className={styles.logo}/>
+        <div className={styles.formBox}>
+        <Form event={this.handleSubmiit} className={styles.loginForm}>
           <Input
             event={this.handleChange}
             name="username"
@@ -66,6 +70,7 @@ class Login extends Component {
             <ForgotPassword value="Recover" buttonClass="change" />
           </Link>
         </Form>
+        </div>
       </div>
     );
   }
