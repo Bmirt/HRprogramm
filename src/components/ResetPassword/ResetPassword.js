@@ -32,8 +32,7 @@ class ResetPassword extends Component {
   render() {
     return (
       <div>
-        <h1>ResetPassword</h1>
-        <Form event={this.handeleSubmit}>
+        <Form title="Reset Password" event={this.handeleSubmit}>
           <Input type="text" placeholder="Email or Username" errors={{}} />
           <Recaptcha
             size="normal"
@@ -43,7 +42,7 @@ class ResetPassword extends Component {
             onloadCallback={this.recaptchaLoaded}
             verifyCallback={this.verifyCallback}
           />
-          <Button type="submit" value="Reset" buttonClass="change" />
+          <Button type="submit" value="Reset Password" buttonClass="change" />
         </Form>
       </div>
     );
