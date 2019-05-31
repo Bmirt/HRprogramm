@@ -10,8 +10,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Form event={this.handleSubmiit}>
-          <label>Login</label>
+        <Form event={this.handleSubmiit} title='Login'>
           <Input type="text" errors={{}} placeholder="Email or Username" />
           <Input type="password" errors={{}} placeholder="Password" />
           <Submit value="Login" buttonClass="submit" />
