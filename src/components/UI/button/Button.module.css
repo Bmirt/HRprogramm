@@ -30,9 +30,9 @@
 
 .buttonSubmit:hover {
   color: #fff;
-  background-color: #023875;
-  border-color: #023875;
-  box-shadow: 0px 15px 20px rgba(2, 56, 117, 0.4);
+  background-color: rgb(0, 31, 92);
+  border-color: rgb(0, 31, 92);
+  box-shadow: 0px 15px 20px rgba(0, 31, 92, 0.4);
 }
 
 .buttonChange {
