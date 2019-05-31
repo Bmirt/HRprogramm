@@ -10,7 +10,7 @@ export class Input extends Component {
           placeholder={this.props.placeholder}
           type={this.props.type}
           name={this.props.name}
-          className={Classes.input}
+          className={Classes.input_error}
         />
         <Validation error={this.props.error} />
       </div>
