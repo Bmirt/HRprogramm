@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import ForgotPassword from "../UI/button/Button";
@@ -9,7 +10,17 @@ class Login extends Component {
     username: "",
     password: ""
   };
-  handleSubmit = () => {};
+  handleSubmit = e => {
+    e.preventDefault();
+
+    fetch("laraver.local/api/test", {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      // .then(response => response.json())
+      .then(res => console.log(res));
+  };
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
