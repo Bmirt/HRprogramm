@@ -18,8 +18,8 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   outline: none;
-  margin-top: 1.6em;
-  font-family: 'Barlow Condensed', sans-serif;
+  margin-top: 2em;
+  font-family: "Barlow Condensed", sans-serif;
 }
 
 .buttonSubmit {
@@ -27,7 +27,6 @@
   background-color: #023875;
   border-color: #023875;
   margin-right: 0.6em;
-  margin-top: 2em;
 }
 
 .buttonSubmit:hover {
