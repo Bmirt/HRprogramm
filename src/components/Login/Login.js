@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from '../Header/Header'
+import styles from './Login.module.css';
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
 class Login extends Component {
@@ -7,11 +7,10 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Header/>
-        <form>
+        <form className={styles.loginForm}>
           <Input errors={{}} />
           <Input errors={{}} />
-          <Submit value="Login" />
+          <Submit value="Login"/>
         </form>
       </div>
     );
