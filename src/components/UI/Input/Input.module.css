@@ -7,11 +7,14 @@
   font-size: 1.rem;
   outline: none;
   margin-top: 2em;
+  box-shadow: 0 0 10px 8px #e5e5e5d3;
 }
 ::placeholder {
   color: #c2c2c2;
 }
 .input_error {
+  display: block;
   color: red;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  text-align: left;
 }
