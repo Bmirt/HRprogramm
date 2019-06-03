@@ -8,7 +8,8 @@ import Validation from "../Validation/Validation";
 class ResetPassword extends Component {
   state = {
     username: "",
-    isVerified: false
+    isVerified: false,
+    validated: false
   };
   recaptchaLoaded() {
     console.log("loaded");
@@ -17,7 +18,8 @@ class ResetPassword extends Component {
   verifyCallback = response => {
     if (response) {
       this.setState({
-        isVerified: true
+        isVerified: true,
+        validated: 1
       });
     }
     console.log(this.state);
@@ -33,12 +35,13 @@ class ResetPassword extends Component {
     if (this.state.isVerified) {
       alert("You are verified");
     } else {
-      alert("Please verify");
+      this.setState({
+        validated: 0
+      });
     }
   };
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <Form title="Reset Password" event={this.handleSubmit}>
@@ -53,7 +56,9 @@ class ResetPassword extends Component {
               verifyCallback={this.verifyCallback}
             />
           </div>
-          <Validation value={() => this.handleSubmit()} />
+          <Validation
+            value={this.state.validated === 0 ? "Please verify" : null}
+          />
           <Button type="submit" value="Reset Password" buttonClass="change" />
         </Form>
       </div>
