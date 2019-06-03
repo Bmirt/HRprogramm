@@ -45,7 +45,7 @@ class ResetPassword extends Component {
     return (
       <div>
         <Form title="Reset Password" event={this.handleSubmit}>
-          <Input type="text" placeholder="Email or Username" errors={{}} />
+          <Input type="email" placeholder="Email or Username" errors={{}} />
           <div className={styles.recaptchaBox}>
             <Recaptcha
               size="normal"
