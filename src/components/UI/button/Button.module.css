@@ -24,6 +24,7 @@
 }
 
 .buttonSubmit {
+  composes: btn;
   color: #fff;
   background-color: #ff4343;
   border-color: #ff4343;
@@ -35,6 +36,7 @@
 }
 
 .buttonChange {
+  composes: btn;
   color: #fff;
   background-color: #737373;
   border-color: #737373;

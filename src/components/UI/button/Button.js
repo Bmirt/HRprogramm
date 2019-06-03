@@ -6,11 +6,11 @@ export default class Button extends Component {
       let btn = styles.btn;
       switch (temp) {
         case "submit":
-          return `${btn} ${styles.buttonSubmit}`;
+          return `${styles.buttonSubmit}`;
         case "change":
-          return `${btn} ${styles.buttonChange}`;
+          return `${styles.buttonChange}`;
         case "delete":
-          return `${btn} ${styles.buttonDelete}`;
+          return `${styles.buttonDelete}`;
       }
     }
     return (
