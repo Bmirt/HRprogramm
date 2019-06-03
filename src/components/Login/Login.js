@@ -37,7 +37,12 @@ class Login extends Component {
       newErrors.error = "Fill in empty fields";
     }
     this.setState({ errors: newErrors });
-    if (newErrors.error !== undefined) {
+    if (typeof newErrors.error !== undefined) {
+      fetch("http://139.59.131.157/api/test", {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => console.log(res));
     }
   };
 
