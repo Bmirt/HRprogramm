@@ -21,7 +21,6 @@ class Login extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "username field is empty";
@@ -38,9 +37,8 @@ class Login extends Component {
         headers: {
           "Content-Type": "application/json"
         }
-      })
-        // .then(response => response.json())
-        .then(res => console.log(res));
+      }).then(res => console.log(res));
+      // .then(response => response.json())
     }
   };
   handleChange = e => {
