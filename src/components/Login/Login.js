@@ -12,20 +12,16 @@ class Login extends Component {
   state = {
     username: "",
     password: "",
-    isCheked: true,
+    isChecked: true,
     errors: {}
   };
   changeCheckBoxState = () => {
     this.setState({
-      isCheked: !this.state.isCheked
+      isChecked: !this.state.isChecked
     });
   };
   handleSubmit = e => {
     e.preventDefault();
-    axios
-      .get("laravel.local/api/test")
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "username field is empty";
@@ -38,11 +34,18 @@ class Login extends Component {
     }
     this.setState({ errors: newErrors });
     if (typeof newErrors.error !== undefined) {
-      fetch("http://139.59.131.157/api/test", {
+      fetch("http://139.59.131.157/api/login", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json"
-        }
-      }).then(res => console.log(res));
+        },
+        body: JSON.stringify({
+          email: this.state.username,
+          password: this.state.password
+        })
+      })
+        .then(res => res.json())
+        .then(res => console.log(res));
     }
   };
 
