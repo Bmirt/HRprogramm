@@ -14,22 +14,19 @@ class keepMeSignedIn extends Component {
   render() {
     console.log(this.props);
     return (
-      <div className={styles.mamaContainer}>
-        <div className={styles.container}>
-          <span>
-            <label className={styles.checkBoxContainer}>
-              <input
-                onClick={this.props.functionCheck()}
-                className={styles.containerInput}
-                type="checkbox"
-                checked={this.props.cheked}
-              />
-              <span className={styles.checkmark} />
-            </label>
-            Keep me signed in
-          </span>
+      <div className={styles.container}>
+        <div className={styles.checkBoxContainer}>
+          <input
+            onClick={this.changeCheckBoxState}
+            className={styles.containerInput}
+            type="checkbox"
+            checked={this.state.isCheked}
+          />
+          <span>Keep me Logged In</span>
+        </div>
+        <div>
           <Link to="/reset-password">
-            <span>Forgot Password</span>
+            <span className={styles.link}>Forgot Password?</span>{" "}
           </Link>
         </div>
       </div>

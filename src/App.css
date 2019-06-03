@@ -3,3 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.rc-anchor-normal {
+  width: 500px !important;
+}
