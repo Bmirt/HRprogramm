@@ -47,11 +47,11 @@ class ResetPassword extends Component {
           <Input type="email" placeholder="Email or Username" errors={{}} />
           <div className={styles.recaptchaBox}>
             <Recaptcha
+              onloadCallback={callback}
               size="normal"
               render="explicit"
               sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
               "
-              onloadCallback={callback}
               verifyCallback={this.verifyCallback}
             />
           </div>
