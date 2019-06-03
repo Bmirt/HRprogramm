@@ -8,6 +8,7 @@ import Validation from "../Validation/Validation";
 var callback = function() {
   console.log("Done!!!!");
 };
+const grecaptchaObject = window.grecaptcha;
 class ResetPassword extends Component {
   state = {
     username: "",
@@ -39,6 +40,9 @@ class ResetPassword extends Component {
       });
     }
   };
+  componentWillUnmount() {
+    grecaptchaObject.reset();
+  }
 
   render() {
     return (
@@ -53,6 +57,7 @@ class ResetPassword extends Component {
               sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
               "
               verifyCallback={this.verifyCallback}
+              grecaptcha={grecaptchaObject}
             />
           </div>
           <Validation
