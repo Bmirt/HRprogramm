@@ -21,7 +21,6 @@ class Login extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "username field is empty";
@@ -34,13 +33,12 @@ class Login extends Component {
     }
     this.setState({ errors: newErrors });
     if (this.state.errors) {
-      fetch("laraver.local/api/login", {
+      fetch("laraver.local/api/test", {
         headers: {
           "Content-Type": "application/json"
         }
-      })
-        // .then(response => response.json())
-        .then(res => console.log(res));
+      }).then(res => console.log(res));
+      // .then(response => response.json())
     }
   };
   handleChange = e => {
@@ -49,7 +47,6 @@ class Login extends Component {
     });
   };
   render() {
-    console.log("this is state", this.state);
     return (
       <div className={styles.loginBox}>
         <img src={Logo} className={styles.logo} />

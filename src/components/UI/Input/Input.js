@@ -4,7 +4,7 @@ export class Input extends Component {
   render() {
     const styles = this.props.error ? Classes.input_error : Classes.input;
     return (
-      <div style={{ position: "relative" }}>
+      <div>
         <input
           onChange={this.props.event}
           placeholder={this.props.placeholder}
