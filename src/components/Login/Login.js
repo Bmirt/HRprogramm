@@ -60,7 +60,7 @@ class Login extends Component {
             <Input
               event={this.handleChange}
               name="username"
-              type="text"
+              type="email"
               error={this.state.errors.username}
               placeholder="Email or Username"
             />
