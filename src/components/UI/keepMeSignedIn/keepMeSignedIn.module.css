@@ -16,7 +16,7 @@
 .link {
   color: red;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.7rem;
 }
 
 .containerInput[type="checkbox"] {
@@ -45,4 +45,9 @@
 .containerInput[type="checkbox"]:checked:after {
   content: "\2714";
   font-weight: bold;
+}
+.text {
+  color: #7f7f7f;
+  font-weight: 600;
+  font-size: 1.7rem;
 }

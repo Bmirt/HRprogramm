@@ -7,3 +7,11 @@
 .rc-anchor-normal {
   width: 500px !important;
 }
+
+a:hover {
+  text-decoration: none;
+}
+
+html {
+  font-size: 10px;
+}

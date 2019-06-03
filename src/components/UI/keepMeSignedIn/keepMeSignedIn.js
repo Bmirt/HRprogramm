@@ -21,11 +21,11 @@ export default class keepMeSignedIn extends Component {
             type="checkbox"
             checked={this.state.isCheked}
           />
-          <span>Keep me Logged In</span>
+          <span className={styles.text}>Keep me Logged In</span>
         </div>
         <div>
-          <Link to="/reset-password">
-            <span className={styles.link}>Forgot Password?</span>{" "}
+          <Link to="/reset-password" className={styles.link}>
+            <span>Forgot Password?</span>{" "}
           </Link>
         </div>
       </div>
