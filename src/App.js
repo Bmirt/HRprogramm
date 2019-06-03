@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./components/Login/Login";
 import Input from "./components/UI/Input/Input";
-import './App.css'
+import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
