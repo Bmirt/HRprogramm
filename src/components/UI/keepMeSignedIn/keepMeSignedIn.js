@@ -4,7 +4,6 @@ import styles from "./keepMeSignedIn.module.css";
 
 class keepMeSignedIn extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className={styles.container}>
         <div className={styles.checkBoxContainer}>

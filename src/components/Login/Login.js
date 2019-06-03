@@ -33,7 +33,7 @@ class Login extends Component {
       newErrors.error = "Fill in empty fields";
     }
     this.setState({ errors: newErrors });
-    if (this.state.errors) {
+    if (newErrors.error !== undefined) {
       fetch("laraver.local/api/login", {
         headers: {
           "Content-Type": "application/json"
@@ -49,7 +49,6 @@ class Login extends Component {
     });
   };
   render() {
-    console.log("this is state", this.state);
     return (
       <div className={styles.loginBox}>
         <img src={Logo} className={styles.logo} />
