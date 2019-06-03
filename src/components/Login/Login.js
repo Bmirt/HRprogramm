@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
