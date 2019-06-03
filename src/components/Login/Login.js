@@ -19,7 +19,7 @@ class Login extends Component {
       isCheked: !this.state.isCheked
     });
   };
-  handleSubmiit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
     let newErrors = {};
@@ -33,17 +33,15 @@ class Login extends Component {
       newErrors.error = "Fill in empty fields";
     }
     this.setState({ errors: newErrors });
-  };
-  handleSubmit = e => {
-    e.preventDefault();
-
-    fetch("laraver.local/api/login", {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      // .then(response => response.json())
-      .then(res => console.log(res));
+    if (this.state.errors) {
+      fetch("laraver.local/api/login", {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        // .then(response => response.json())
+        .then(res => console.log(res));
+    }
   };
   handleChange = e => {
     this.setState({
@@ -56,7 +54,7 @@ class Login extends Component {
       <div className={styles.loginBox}>
         <img src={Logo} className={styles.logo} />
         <div className={styles.formBox}>
-          <Form event={this.handleSubmiit} className={styles.loginForm}>
+          <Form event={this.handleSubmit} className={styles.loginForm}>
             <Input
               event={this.handleChange}
               name="username"

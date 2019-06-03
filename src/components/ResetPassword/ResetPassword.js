@@ -5,15 +5,15 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
 import Form from "../Form/Form";
 import Validation from "../Validation/Validation";
+var callback = function() {
+  console.log("Done!!!!");
+};
 class ResetPassword extends Component {
   state = {
     username: "",
     isVerified: false,
     validated: false
   };
-  recaptchaLoaded() {
-    console.log("loaded");
-  }
   verifyCallback = response => {
     if (response) {
       this.setState({
@@ -41,7 +41,6 @@ class ResetPassword extends Component {
   };
 
   render() {
-    // window.recaptchaLoaded = this.recaptchaLoaded;
     return (
       <div>
         <Form title="Reset Password" event={this.handleSubmit}>
@@ -52,7 +51,7 @@ class ResetPassword extends Component {
               render="explicit"
               sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
               "
-              onloadCallback={this.recaptchaLoaded}
+              onloadCallback={callback}
               verifyCallback={this.verifyCallback}
             />
           </div>
