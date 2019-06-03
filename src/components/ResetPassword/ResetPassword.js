@@ -14,7 +14,6 @@ class ResetPassword extends Component {
   recaptchaLoaded() {
     console.log("loaded");
   }
-
   verifyCallback = response => {
     if (response) {
       this.setState({
@@ -42,6 +41,7 @@ class ResetPassword extends Component {
   };
 
   render() {
+    // window.recaptchaLoaded = this.recaptchaLoaded;
     return (
       <div>
         <Form title="Reset Password" event={this.handleSubmit}>
