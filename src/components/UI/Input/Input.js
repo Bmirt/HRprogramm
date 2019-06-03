@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Classes from "./Input.module.css";
-import Validation from "../../Validation/Validation";
 export class Input extends Component {
   render() {
+    console.log(this.props)
+    const styles = this.props.error ? Classes.input_error : Classes.input;
     return (
       <div style={{ position: "relative" }}>
         <input
@@ -10,9 +11,9 @@ export class Input extends Component {
           placeholder={this.props.placeholder}
           type={this.props.type}
           name={this.props.name}
-          className={Classes.input_error}
+          className={styles}
         />
-        <Validation error={this.props.error} />
+        
       </div>
     );
   }
