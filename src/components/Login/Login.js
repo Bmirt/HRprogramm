@@ -32,7 +32,7 @@ class Login extends Component {
       newErrors.error = "Fill in empty fields";
     }
     this.setState({ errors: newErrors });
-    if (this.state.errors) {
+    if (!this.state.errors) {
       fetch("laraver.local/api/test", {
         headers: {
           "Content-Type": "application/json"
