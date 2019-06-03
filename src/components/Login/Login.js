@@ -6,6 +6,7 @@ import KeepMeSignedIn from "../UI/keepMeSignedIn/keepMeSignedIn";
 import Logo from "../../TecHR.jpg";
 import styles from "./Login.module.css";
 import Validation from "../Validation/Validation";
+import axios from "axios";
 
 class Login extends Component {
   state = {
@@ -21,6 +22,10 @@ class Login extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    axios
+      .get("laravel.local/api/test")
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "username field is empty";
@@ -33,14 +38,14 @@ class Login extends Component {
     }
     this.setState({ errors: newErrors });
     if (newErrors.error !== undefined) {
-      fetch("laraver.local/api/login", {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(res => console.log(res));
-      // .then(response => response.json())
     }
   };
+
+  submit = e => {
+    e.preventDefault();
+    axios.get("laravel.local/api/test").then(res => res.data);
+  };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -49,7 +54,7 @@ class Login extends Component {
   render() {
     return (
       <div className={styles.loginBox}>
-        <img src={Logo} className={styles.logo} />
+        <img src={Logo} className={styles.logo} alt="" />
         <div className={styles.formBox}>
           <Form event={this.handleSubmit} className={styles.loginForm}>
             <Input
