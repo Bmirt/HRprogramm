@@ -41,7 +41,9 @@ class ResetPassword extends Component {
     }
   };
   componentWillUnmount() {
-    grecaptchaObject.reset();
+    if (this.recaptchaInstance) {
+      this.recaptchaInstance.reset();
+    }
   }
 
   render() {
@@ -52,6 +54,7 @@ class ResetPassword extends Component {
           <div className={styles.recaptchaBox}>
             <Recaptcha
               onloadCallback={callback}
+              ref={e => (this.recaptchaInstance = e)}
               size="normal"
               render="explicit"
               sitekey="6LcddKYUAAAAAMg-9zW-nKLB9OoO6SCPmFuSviBJ
