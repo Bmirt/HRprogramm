@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Classes from "./Input.module.css";
 export class Input extends Component {
   render() {
-    console.log(this.props)
     const styles = this.props.error ? Classes.input_error : Classes.input;
     return (
       <div style={{ position: "relative" }}>
@@ -13,7 +12,6 @@ export class Input extends Component {
           name={this.props.name}
           className={styles}
         />
-        
       </div>
     );
   }

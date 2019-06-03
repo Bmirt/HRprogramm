@@ -5,6 +5,7 @@ import Input from "../UI/Input/Input";
 import KeepMeSignedIn from "../UI/keepMeSignedIn/keepMeSignedIn";
 import Logo from "../../TecHR.jpg";
 import styles from "./Login.module.css";
+import Validation from "../Validation/Validation";
 
 class Login extends Component {
   state = {
@@ -23,13 +24,13 @@ class Login extends Component {
     console.log(this.state);
     let newErrors = {};
     if (this.state.username.length <= 0) {
-      newErrors.username = "Username field is empty";
-    }
-    if (this.state.username.length <= 0) {
-      newErrors.username = "Username field is empty";
+      newErrors.username = "username field is empty";
     }
     if (this.state.password.length <= 0) {
-      newErrors.password = "The password field is empty";
+      newErrors.password = "password field is empty";
+    }
+    if (this.state.password.length <= 0 || this.state.username.length <= 0) {
+      newErrors.error = "Fill in empty fields";
     }
     this.setState({ errors: newErrors });
   };
@@ -50,6 +51,7 @@ class Login extends Component {
     });
   };
   render() {
+    console.log("this is state", this.state);
     return (
       <div className={styles.loginBox}>
         <img src={Logo} className={styles.logo} />
@@ -74,6 +76,7 @@ class Login extends Component {
               checked={this.state.isCheked}
               functionCheck={() => this.changeCheckBoxState}
             />
+            <Validation value={this.state.errors.error} />
             <Submit value="Sign In" buttonClass="submit" />
           </Form>
         </div>
