@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Classes from "./Input.module.css";
 export class Input extends Component {
   render() {
-    console.log(this.props)
+    console.log('this is inputjs',this.props)
     const styles = this.props.error ? Classes.input_error : Classes.input;
     return (
       <div style={{ position: "relative" }}>
