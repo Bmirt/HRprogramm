@@ -15,7 +15,6 @@ class Login extends Component {
     errors: {}
   };
   changeCheckBoxState = () => {
-    console.log("been here");
     this.setState({
       isCheked: !this.state.isCheked
     });
@@ -73,7 +72,7 @@ class Login extends Component {
               error={this.state.errors.password}
             />
             <KeepMeSignedIn
-              cheked={this.state.isCheked}
+              checked={this.state.isCheked}
               functionCheck={() => this.changeCheckBoxState}
             />
             <Submit value="Sign In" buttonClass="submit" />
