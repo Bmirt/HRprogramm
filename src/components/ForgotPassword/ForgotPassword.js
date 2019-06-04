@@ -64,13 +64,13 @@ class ForgotPassword extends Component {
     return (
       <div className={styles.forgotPasswordBox}>
         <img src={Logo} className={styles.logo} alt="" />
-        <div className={styles.formBox}></div>
+        <div className={styles.formBox} />
         <Form event={this.handleSubmit}>
           <Input
             event={this.handleChange}
             name="username"
             type="email"
-            placeholder="Email or Username"
+            placeholder="Registered E-Mail"
             errors={{}}
           />
           <div className={styles.recaptchaBox}>
@@ -85,7 +85,15 @@ class ForgotPassword extends Component {
             />
           </div>
           {this.state.validated === 0 && <Validation value="Please Verify" />}
-          <Button type="submit" value="Forgot Password" buttonClass="change" />
+          <div className={styles.buttonContainer}>
+            <Button
+              type="submit"
+              value="Request"
+              buttonClass="submit"
+              className={styles.somebtn}
+            />
+            <Button value="Back to Sign In" buttonClass="change" />
+          </div>
         </Form>
       </div>
     );
