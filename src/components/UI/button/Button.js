@@ -3,7 +3,6 @@ import styles from "./Button.module.css";
 export default class Button extends Component {
   render() {
     function buttonClass(temp) {
-      let btn = styles.btn;
       switch (temp) {
         case "submit":
           return `${styles.buttonSubmit}`;
@@ -11,6 +10,8 @@ export default class Button extends Component {
           return `${styles.buttonChange}`;
         case "delete":
           return `${styles.buttonDelete}`;
+        default:
+          return styles.buttonSubmit;
       }
     }
     return (

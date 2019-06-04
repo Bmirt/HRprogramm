@@ -12,7 +12,7 @@ var callback = function() {
 class ResetPassword extends Component {
   state = {
     username: "",
-    isVerified: false,
+    isVerified: true,
     validated: false
   };
   verifyCallback = response => {
@@ -32,8 +32,20 @@ class ResetPassword extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state);
     if (this.state.isVerified) {
-      alert("You are verified");
+      fetch("http://laravel.local/api/getemail", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          email: this.state.username
+        })
+      })
+        .then(res => res.json())
+        .then(res => console.log(res));
     } else {
       this.setState({
         validated: 0
@@ -50,7 +62,13 @@ class ResetPassword extends Component {
     return (
       <div>
         <Form title="Reset Password" event={this.handleSubmit}>
-          <Input type="email" placeholder="Email or Username" errors={{}} />
+          <Input
+            event={this.handleChange}
+            name="username"
+            type="email"
+            placeholder="Email or Username"
+            errors={{}}
+          />
           <div className={styles.recaptchaBox}>
             <Recaptcha
               onloadCallback={callback}

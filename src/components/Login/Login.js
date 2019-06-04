@@ -6,17 +6,18 @@ import KeepMeSignedIn from "../UI/keepMeSignedIn/keepMeSignedIn";
 import Logo from "../../TecHR.jpg";
 import styles from "./Login.module.css";
 import Validation from "../Validation/Validation";
+import axios from "axios";
 
 class Login extends Component {
   state = {
     username: "",
     password: "",
-    isCheked: true,
+    isChecked: true,
     errors: {}
   };
   changeCheckBoxState = () => {
     this.setState({
-      isCheked: !this.state.isCheked
+      isChecked: !this.state.isChecked
     });
   };
   handleSubmit = e => {
@@ -33,13 +34,26 @@ class Login extends Component {
     }
     this.setState({ errors: newErrors });
     if (typeof newErrors.error !== undefined) {
-      fetch("http://139.59.131.157/api/test", {
+      fetch("http://139.59.131.157/api/login", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json"
-        }
-      }).then(res => console.log(res));
+        },
+        body: JSON.stringify({
+          email: this.state.username,
+          password: this.state.password
+        })
+      })
+        .then(res => res.json())
+        .then(res => console.log(res));
     }
   };
+
+  submit = e => {
+    e.preventDefault();
+    axios.get("laravel.local/api/test").then(res => res.data);
+  };
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -48,7 +62,7 @@ class Login extends Component {
   render() {
     return (
       <div className={styles.loginBox}>
-        <img src={Logo} className={styles.logo} />
+        <img src={Logo} className={styles.logo} alt="" />
         <div className={styles.formBox}>
           <Form event={this.handleSubmit} className={styles.loginForm}>
             <Input
@@ -67,7 +81,7 @@ class Login extends Component {
               error={this.state.errors.password}
             />
             <KeepMeSignedIn
-              checked={this.state.isCheked}
+              checked={this.state.isChecked}
               functionCheck={() => this.changeCheckBoxState}
             />
             <Validation value={this.state.errors.error} />
