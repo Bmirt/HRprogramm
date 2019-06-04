@@ -12,7 +12,7 @@ var callback = function() {
 class ResetPassword extends Component {
   state = {
     username: "",
-    isVerified: true,
+    isVerified: false,
     validated: false
   };
   verifyCallback = response => {
@@ -80,9 +80,7 @@ class ResetPassword extends Component {
               verifyCallback={this.verifyCallback}
             />
           </div>
-          <Validation
-            value={this.state.validated === 0 ? "Please verify" : null}
-          />
+          {this.state.validated === 0 && <Validation value="Please Verify" />}
           <Button type="submit" value="Reset Password" buttonClass="change" />
         </Form>
       </div>

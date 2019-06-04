@@ -84,7 +84,10 @@ class Login extends Component {
               checked={this.state.isChecked}
               functionCheck={() => this.changeCheckBoxState}
             />
-            <Validation value={this.state.errors.error} />
+            {/* <Validation value={this.state.errors.error} /> */}
+            {this.state.errors.error && (
+              <Validation value={this.state.errors.error} />
+            )}
             <Submit value="Sign In" buttonClass="submit" />
           </Form>
         </div>
