@@ -30,7 +30,7 @@ class Login extends Component {
       newErrors.password = "password field is empty";
     }
     if (this.state.password.length <= 0 || this.state.username.length <= 0) {
-      newErrors.error = "Fill in empty fields";
+      newErrors.error = "Fill in empty field(s)";
     }
     this.setState({ errors: newErrors });
     if (typeof newErrors.error !== undefined) {
