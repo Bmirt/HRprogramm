@@ -31,8 +31,10 @@ class Login extends Component {
     }
     if (this.state.password.length <= 0 || this.state.username.length <= 0) {
       newErrors.error = "Fill in empty field(s)";
+      this.setState({ errors: {} });
+      this.setState({ errors: newErrors });
+      return;
     }
-    this.setState({ errors: newErrors });
     if (typeof newErrors.error !== undefined) {
       fetch("http://139.59.131.157/api/login", {
         method: "POST",
@@ -45,7 +47,17 @@ class Login extends Component {
         })
       })
         .then(res => res.json())
-        .then(res => console.log(res));
+        .then(res => {
+          console.log(res);
+          if (res.errors) {
+            console.log(res.errors);
+            newErrors.error = res.errors;
+            this.setState({ errors: {} });
+            this.setState({ errors: newErrors });
+          } else if (res.success) {
+            alert("You have Successfully Signed In");
+          }
+        });
     }
   };
 
@@ -84,7 +96,6 @@ class Login extends Component {
               checked={this.state.isChecked}
               functionCheck={() => this.changeCheckBoxState}
             />
-            {/* <Validation value={this.state.errors.error} /> */}
             {this.state.errors.error && (
               <Validation value={this.state.errors.error} />
             )}

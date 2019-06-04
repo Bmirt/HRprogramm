@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Recaptcha from "react-recaptcha";
-import styles from "./ResetPassword.module.css";
+import styles from "./ForgotPassword.module.css";
 import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
 import Form from "../Form/Form";

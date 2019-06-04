@@ -5,7 +5,7 @@ import "./App.css";
 // import Header from "./components/Header/Header";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import ResetPassword from "./components/ResetPassword/ResetPassword";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Router>
         {/* <Route path="/" component={Header} /> */}
         <Route path="/Login" component={Login} />
-        <Route path="/reset-password" component={ResetPassword} />
+        <Route path="/reset-password" component={ForgotPassword} />
       </Router>
     </div>
   );
