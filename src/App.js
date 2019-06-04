@@ -6,6 +6,7 @@ import "./App.css";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import PasswordReset from "./components/PasswordReset/PasswordReset";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Router>
         {/* <Route path="/" component={Header} /> */}
         <Route path="/Login" component={Login} />
-        <Route path="/reset-password" component={ForgotPassword} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/password-reset/:path_id" component={PasswordReset} />
       </Router>
     </div>
   );

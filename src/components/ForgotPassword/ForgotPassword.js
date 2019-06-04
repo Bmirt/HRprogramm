@@ -9,7 +9,7 @@ var callback = function() {
   console.log("Done!!!!");
 };
 
-class ResetPassword extends Component {
+class ForgotPassword extends Component {
   state = {
     username: "",
     isVerified: false,
@@ -61,7 +61,7 @@ class ResetPassword extends Component {
   render() {
     return (
       <div>
-        <Form title="Reset Password" event={this.handleSubmit}>
+        <Form title="Forgot Password" event={this.handleSubmit}>
           <Input
             event={this.handleChange}
             name="username"
@@ -81,11 +81,11 @@ class ResetPassword extends Component {
             />
           </div>
           {this.state.validated === 0 && <Validation value="Please Verify" />}
-          <Button type="submit" value="Reset Password" buttonClass="change" />
+          <Button type="submit" value="Forgot Password" buttonClass="change" />
         </Form>
       </div>
     );
   }
 }
 
-export default ResetPassword;
+export default ForgotPassword;
