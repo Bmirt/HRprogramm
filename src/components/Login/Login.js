@@ -81,7 +81,7 @@ class Login extends Component {
               error={this.state.errors.password}
             />
             <KeepMeSignedIn
-              checked={this.state.isCheked}
+              checked={this.state.isChecked}
               functionCheck={() => this.changeCheckBoxState}
             />
             <Validation value={this.state.errors.error} />
