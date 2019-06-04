@@ -9,6 +9,15 @@
   margin: 1.3em 0;
   font-family: "Roboto Condensed", sans-serif;
 }
+::-webkit-input-placeholder {
+  color: #828282;
+}
+:-ms-input-placeholder {
+  color: #828282;
+}
+::-ms-input-placeholder {
+  color: #828282;
+}
 ::placeholder {
   color: #828282;
 }
