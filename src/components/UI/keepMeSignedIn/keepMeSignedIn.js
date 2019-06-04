@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Checkbox from '../Checkbox/Checkbox'
 import styles from "./keepMeSignedIn.module.css";
 
 class keepMeSignedIn extends Component {
   render() {
+    console.log(this.props.checked)
     return (
       <div className={styles.container}>
         <div className={styles.checkBoxContainer}>
-          <input
-            onChange={this.props.functionCheck()}
-            className={styles.containerInput}
-            type="checkbox"
-            checked={this.props.checked}
-          />
+          <Checkbox checked={this.props.checked} handleClick={this.props.functionCheck()}/>
           <span className={styles.text}>Keep me Logged In</span>
         </div>
         <div>

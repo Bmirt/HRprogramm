@@ -21,8 +21,6 @@
   -ms-flex-pack: start;
   justify-content: flex-start;
   width: auto;
-  position: relative;
-  padding-left: 35px;
 }
 
 .link {
@@ -31,35 +29,6 @@
   font-size: 1.7rem;
 }
 
-.containerInput[type="checkbox"] {
-  cursor: pointer;
-  font-size: 12px;
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  transform: scale(1.5);
-}
-
-.containerInput[type="checkbox"]::after {
-  content: " ";
-  background-color: #fff;
-  display: inline-block;
-  color: #00bff0;
-  width: 10px;
-  height: 14px;
-  visibility: visible;
-  border: 1px solid #00bff0;
-  padding: 0 3px;
-  margin: 2px 0;
-}
-
-.containerInput[type="checkbox"]:checked:after {
-  content: "\2714";
-  font-weight: bold;
-}
 .text {
   color: #7f7f7f;
   font-weight: 600;
