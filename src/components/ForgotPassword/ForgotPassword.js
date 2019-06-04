@@ -5,6 +5,8 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
 import Form from "../Form/Form";
 import Validation from "../Validation/Validation";
+import Logo from "../../TecHR.jpg";
+
 var callback = function() {
   console.log("Done!!!!");
 };
@@ -60,8 +62,10 @@ class ForgotPassword extends Component {
 
   render() {
     return (
-      <div>
-        <Form title="Forgot Password" event={this.handleSubmit}>
+      <div className={styles.forgotPasswordBox}>
+        <img src={Logo} className={styles.logo} alt="" />
+        <div className={styles.formBox}></div>
+        <Form event={this.handleSubmit}>
           <Input
             event={this.handleChange}
             name="username"
