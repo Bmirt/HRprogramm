@@ -11,8 +11,8 @@ export class Input extends Component {
           type={this.props.type}
           name={this.props.name}
           className={styles}
-          minlength={this.props.minlength}
-          maxlength={this.props.maxlength}
+          minLength={this.props.minlength}
+          maxLength={this.props.maxlength}
           required={this.props.required}
         />
       </div>
