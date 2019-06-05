@@ -25,12 +25,25 @@ class PasswordReset extends Component {
       this.state.newpassword === this.state.newpasswordconfirm
     ) {
       console.log("ima fetch");
-    } else {
+      if (
+        !this.state.newpassword.match(
+          /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
+        )
+      ) {
+        this.setState({
+          errors: {
+            error:
+              "New password should have 1 number, 1 capital letter, 1 small letter, and 1 symbol"
+          }
+        });
+      }
+    } else if (this.state.newpassword !== this.state.newpasswordconfirm) {
       let newErrors = {};
       console.log("changing state");
       newErrors.error = "Please check Password and confirm new password fields";
       this.setState({ errors: { error: "hi" } });
       this.setState({ errors: newErrors });
+    } else if (typeof this.state.newpassword !== undefined) {
     }
   };
 
@@ -44,13 +57,19 @@ class PasswordReset extends Component {
             type="password"
             placeholder="New Password"
             errors={{}}
+            minlength={"9"}
+            maxlength={"64"}
+            required={true}
           />
           <Input
             event={this.handleChange}
             name="newpasswordconfirm"
             type="password"
             placeholder="Confirm New Password"
+            minlength={"9"}
+            maxlength={"64"}
             errors={{}}
+            required={true}
           />
           {this.state.errors.error && (
             <Validation value={this.state.errors.error} />
