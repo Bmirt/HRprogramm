@@ -7,15 +7,17 @@ import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
+import Sidebar from './components/Sidebar/Sidebar'
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Route path="/" component={Header} /> */}
+        <Route path="/" component={Header} />
         <Route exact path="/" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/reset-password/:path_id" component={PasswordReset} />
+      <Sidebar />
       </Router>
     </div>
   );
