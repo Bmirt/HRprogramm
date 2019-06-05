@@ -19,7 +19,7 @@
     padding: 10px; 
 }
 @keyframes example {
-    from {left: -180px}
+    from {left: -200px}
     to {left: 0}
   }
 
