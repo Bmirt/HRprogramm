@@ -1,0 +1,50 @@
+.sidebar {
+    color: black;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    top: 150px;
+    position: absolute;
+}
+.slidingSidebar {
+    position: absolute;
+    animation-name: example;
+    animation-duration: 1s;
+    background: white;
+    border-radius: 15px;
+}
+@keyframes example {
+    from {left: -100px}
+    to {left: 0}
+  }
+
+.btnSlide {
+    background: blue;
+    border-radius: 15px;
+    animation-name: example2;
+    animation-duration: 1s;
+    width: 230px
+}
+@keyframes example2 {
+    from {width: 30px}
+    to {width: 230px;}
+}
+
+a{
+   color: black;
+}
+.sidebar li {
+    padding: 3px;
+    background: white;
+    width: 200px;
+    margin: 10px;
+}
+.toggleExpandBtn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid blue;
+    border-radius: 50%;
+    outline: none;
+    position: relative;
+    left: Calc( 100% - 30px );
+}
