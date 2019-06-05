@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin: 1rem auto;
 }
 
 .checkBoxContainer {
@@ -13,12 +13,12 @@
 
 .link {
   color: #c00000;
-  font-weight: bold;
-  font-size: 1.7rem;
+  font-weight: 600;
+  font-size: 1.4rem;
 }
 
 .text {
   color: #7f7f7f;
-  font-weight: 600;
-  font-size: 1.7rem;
+  font-weight: 500;
+  font-size: 1.4rem;
 }

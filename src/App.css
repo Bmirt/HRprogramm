@@ -5,35 +5,14 @@
   box-sizing: border-box;
 }
 
-.rc-anchor-normal {
-  width: 500px !important;
-}
-
 a:hover {
   text-decoration: none;
 }
 
 html {
   font-size: 10px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 body {
   background: #f5f5f5;
 }
-/* #g-recaptcha div {
-  margin: 0;
-  width: 100%;
-}
-
-iframe {
-  width: 100% !important;
-}
-
-.rc-anchor-normal {
-  width: 500px !important;
-}
-
-#g-recaptcha {
-  transform: scale(1.66, 1);
-  transform-origin: left;
-} */
