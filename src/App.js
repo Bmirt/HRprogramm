@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Route exact path="/" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/reset-password/:path_id" component={PasswordReset} />
+        <Route path="/reset-password/:token_id" component={PasswordReset} />
         <Route
           path="/home"
           render={() => (
