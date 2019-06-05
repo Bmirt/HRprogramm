@@ -53,13 +53,15 @@ class Login extends Component {
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           if (res.errors) {
             console.log(res.errors);
             newErrors.error = res.errors;
             this.setState({ errors: {} });
             this.setState({ errors: newErrors });
           } else if (res.success) {
+            console.log("this is res", res);
+
+            localStorage.setItem("token", "Bearer " + res.success.token);
             this.props.history.push("/home");
             alert("You have Successfully Signed In");
           }
