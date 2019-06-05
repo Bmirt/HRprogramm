@@ -16,8 +16,9 @@ export default class Button extends Component {
     }
     return (
       <button
-        onClick={() => this.props.event}
+        onClick={this.props.function}
         className={buttonClass(this.props.buttonClass)}
+        type={this.props.buttonType}
       >
         {this.props.value}
       </button>

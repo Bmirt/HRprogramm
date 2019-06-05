@@ -59,6 +59,10 @@ class ForgotPassword extends Component {
       this.recaptchaInstance.reset();
     }
   }
+  goBack = () => {
+    console.log("hello");
+    this.props.history.push("/");
+  };
 
   render() {
     return (
@@ -87,12 +91,17 @@ class ForgotPassword extends Component {
           {this.state.validated === 0 && <Validation value="Please Verify" />}
           <div className={styles.buttonContainer}>
             <Button
-              type="submit"
+              buttonType="submit"
               value="Request"
               buttonClass="submit"
               className={styles.somebtn}
             />
-            <Button value="Back to Sign In" buttonClass="change" />
+            <Button
+              buttonType="button"
+              value="Back to Sign In"
+              buttonClass="change"
+              function={() => this.goBack()}
+            />
           </div>
         </Form>
       </div>
