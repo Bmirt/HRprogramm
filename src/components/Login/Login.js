@@ -63,7 +63,7 @@ class Login extends Component {
 
             localStorage.setItem("token", "Bearer " + res.success.token);
             this.props.history.push("/home");
-            alert("You have Successfully Signed In");
+            alert("Welcome " + res.user.name);
           }
         });
     }
