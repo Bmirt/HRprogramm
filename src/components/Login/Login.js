@@ -37,7 +37,7 @@ class Login extends Component {
     ) {
       newErrors.error = "Fill in empty field(s)";
 
-      this.setState({ errors: { error: "Fill in empty field(s)" } });
+      this.setState({ errors: newErrors });
       return;
     }
     if (typeof newErrors.error !== undefined) {
@@ -104,7 +104,7 @@ class Login extends Component {
             {this.state.errors.error && (
               <Validation value={this.state.errors.error} />
             )}
-            <Submit value="Sign In" buttonClass="submit" />
+            <Submit value="Sign In" buttonClass="submit" buttonType="submit" />
           </Form>
         </div>
       </div>
