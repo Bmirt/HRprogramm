@@ -17,7 +17,7 @@ export class Sidebar extends Component {
     if (this.state.open) {
       return (
         <div>
-          <div className={styles.btnSlide}>
+          <div className={styles.btnOpen}>
             <button
               className={styles.toggleExpandBtn}
               onClick={this.handleClick}
@@ -25,7 +25,7 @@ export class Sidebar extends Component {
               {'<'}
             </button>
           </div>
-          <ul className={styles.slidingSidebar}>
+          <ul className={styles.sidebarOpen}>
             <li>
               <NavLink exact to="/">
                 Profile List

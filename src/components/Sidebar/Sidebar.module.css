@@ -5,7 +5,12 @@
     top: 150px;
     position: absolute;
 }
-.slidingSidebar {
+
+
+
+
+/* ---------animations----------- */
+.sidebarOpen {
     position: absolute;
     animation-name: example;
     animation-duration: 0.5s;
@@ -23,7 +28,7 @@
     to {left: 0}
   }
 
-.btnSlide {
+.btnOpen {
     background-color: #3185b4; 
     background-image: linear-gradient(to right, #66777f, #3185b4, #5ca8da, white);
     border-radius: 15px;
@@ -35,6 +40,15 @@
     from {width: 30px}
     to {width: 230px;}
 }
+
+
+
+
+
+
+
+
+
 
 a{
    color: rgb(83, 78, 78);
