@@ -1,6 +1,5 @@
 .sidebar {
-    color: black;
-    background: white;
+    color: rgb(102, 94, 94);
     display: flex;
     flex-direction: column;
     top: 150px;
@@ -9,20 +8,27 @@
 .slidingSidebar {
     position: absolute;
     animation-name: example;
-    animation-duration: 1s;
-    background: white;
-    border-radius: 15px;
+    animation-duration: 0.5s;
+    width: 220px;
+    background-color: white
+}
+.slidingSidebar span {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 10px; 
 }
 @keyframes example {
-    from {left: -100px}
+    from {left: -180px}
     to {left: 0}
   }
 
 .btnSlide {
-    background: blue;
+    background-color: #3185b4; 
+    background-image: linear-gradient(to right, #66777f, #3185b4, #5ca8da, white);
     border-radius: 15px;
     animation-name: example2;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     width: 230px
 }
 @keyframes example2 {
@@ -31,20 +37,23 @@
 }
 
 a{
-   color: black;
+   color: rgb(83, 78, 78);
 }
 .sidebar li {
     padding: 3px;
-    background: white;
-    width: 200px;
     margin: 10px;
 }
 .toggleExpandBtn {
     width: 30px;
     height: 30px;
-    border: 1px solid blue;
+    margin: 1px;
+    border: 2px solid #66777fab;
     border-radius: 50%;
     outline: none;
     position: relative;
-    left: Calc( 100% - 30px );
+    background: rgb(255, 255, 255);
+    left: Calc( 100% - 31px );
+    color: #66777f;
+    font-size: 24px;
+    font-weight: bold;
 }

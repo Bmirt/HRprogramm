@@ -22,7 +22,7 @@ export class Sidebar extends Component {
               className={styles.toggleExpandBtn}
               onClick={this.handleClick}
             >
-              >
+              {'<'}
             </button>
           </div>
           <ul className={styles.slidingSidebar}>
