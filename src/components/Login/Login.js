@@ -20,8 +20,10 @@ class Login extends Component {
       isChecked: !this.state.isChecked
     });
   };
+
   handleSubmit = e => {
     e.preventDefault();
+    console.log("signup", this.state);
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "username field is empty";
@@ -29,10 +31,13 @@ class Login extends Component {
     if (this.state.password.length <= 0) {
       newErrors.password = "password field is empty";
     }
-    if (this.state.password.length <= 0 || this.state.username.length <= 0) {
+    if (
+      this.state.password.trim().length <= 0 ||
+      this.state.username.trim().length <= 0
+    ) {
       newErrors.error = "Fill in empty field(s)";
-      this.setState({ errors: {} });
-      this.setState({ errors: newErrors });
+
+      this.setState({ errors: { error: "Fill in empty field(s)" } });
       return;
     }
     if (typeof newErrors.error !== undefined) {

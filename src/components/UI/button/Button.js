@@ -16,7 +16,6 @@ export default class Button extends Component {
     }
     return (
       <button
-        type="submit"
         onClick={() => this.props.event}
         className={buttonClass(this.props.buttonClass)}
       >

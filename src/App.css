@@ -5,9 +5,7 @@
   box-sizing: border-box;
 }
 
-.rc-anchor-normal {
-  width: 500px !important;
-}
+
 
 
 a:hover {
@@ -16,13 +14,9 @@ a:hover {
 
 html {
   font-size: 10px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 body {
   background: #f5f5f5;
 }
-
-
-
-
 
