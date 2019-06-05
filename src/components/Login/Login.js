@@ -60,6 +60,7 @@ class Login extends Component {
             this.setState({ errors: {} });
             this.setState({ errors: newErrors });
           } else if (res.success) {
+            this.props.history.push("/home");
             alert("You have Successfully Signed In");
           }
         });
