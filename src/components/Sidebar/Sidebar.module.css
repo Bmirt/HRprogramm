@@ -5,8 +5,7 @@
     width: 60px;
     background: #314455;
     height: 100vh;
-    position: fixed;
-    padding: 100px 0;
+    padding: 20px 0;
 }
 .menuBtn {
     width: 40px;
@@ -22,9 +21,7 @@
     width: 220px;
     height: 110vh;
     background: #314455;
-    position: fixed;
-    top: 0;
-    padding: 100px 0;
+    padding: 20px 0;
 }
 a {
     color: white;
@@ -35,7 +32,6 @@ a {
     width: 220px;
     list-style: none;
     display: flex;
-
 }
 .sidebarIcon {
     width: 28px;
