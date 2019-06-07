@@ -34,8 +34,10 @@ function App() {
           render={() => (
             <div>
               <Header />
-              <ProfileList />
+              <div className="mainContent">
               <Sidebar />
+              <ProfileList />
+              </div>
             </div>
           )}
         />
