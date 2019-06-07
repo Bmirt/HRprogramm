@@ -9,12 +9,12 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <div className={styles.logoWrapper}>
-          <img src={logo} className={styles.logo}></img>
+          <img src={logo} className={styles.logo} alt='logo'></img>
         </div>
         <div className={styles.headerLists}>
           <ul>
             <li>Hi, Lika Zuroshvili</li>
-            <li><button><img className={styles.icon} src={signOut}></img></button></li>
+            <li><button><img className={styles.icon} src={signOut} alt='sign out'/></button></li>
           </ul>
         </div>
       </header>
