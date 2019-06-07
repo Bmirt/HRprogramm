@@ -1,7 +1,8 @@
 import {
   ADD_PROFILE,
   DELETE_PROFILE,
-  CHANGE_PROFILE
+  CHANGE_PROFILE,
+  FETCH_PROFILES
 } from "../constants/profileListConstants";
 
 export const addProfile = (newId, name) => ({
@@ -18,4 +19,9 @@ export const deleteProfile = name => ({
 export const changeProfile = otherProfiles => ({
   type: CHANGE_PROFILE,
   otherProfiles
+});
+
+export const fetchProfiles = profiles => ({
+  type: FETCH_PROFILES,
+  profiles: profiles
 });

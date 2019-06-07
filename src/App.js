@@ -8,6 +8,7 @@ import PasswordReset from "./components/PasswordReset/PasswordReset";
 import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
+import ProfileList from "./components/Home/Projects/Projects";
 
 function App() {
   return (
@@ -22,6 +23,16 @@ function App() {
             <div>
               <Header />
               <Home />
+              <Sidebar />
+            </div>
+          )}
+        />
+        <Route
+          path="/guga"
+          render={() => (
+            <div>
+              <Header />
+              <ProfileList />
               <Sidebar />
             </div>
           )}
