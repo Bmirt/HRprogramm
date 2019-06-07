@@ -17,5 +17,6 @@ body {
   background: #f5f5f5;
 }
 .mainContent {
+  width: 100%;
   display: flex;
 }

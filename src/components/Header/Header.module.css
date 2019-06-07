@@ -1,11 +1,12 @@
 .header {
   width: 100%;
-  background: white;
+  background: #97aabd;
   margin: auto;
-  border-bottom: 1px solid #ccc;
+  min-height: 90px;
 }
 .logo {
   width: 60px;
+  margin: 5px 10px;
 }
 .logoWrapper {
   display: inline;

@@ -5,7 +5,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/button/Button";
 import Form from "../Form/Form";
 import Validation from "../Validation/Validation";
-import Logo from "../../TecHR.jpg";
+import Logo from "../../logo.png";
 
 var callback = function() {
   console.log("Done!!!!");

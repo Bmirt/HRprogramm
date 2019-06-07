@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
-import logo from '../../TecHR.jpg'
+import logo from '../../logo.png'
 import signOut from '../../signOutIcon.png'
 
 class Header extends Component {

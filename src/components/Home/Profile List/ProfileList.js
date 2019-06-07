@@ -6,6 +6,9 @@ export default class Home extends Component {
   render() {
     return (
       <div className={styles.container}>
+        <div className={styles.search}>
+          <input type='text' className={styles.searchInput} placeholder='Search...'></input>
+        </div>
         <table>
           <tbody>
             <tr>
@@ -28,8 +31,8 @@ export default class Home extends Component {
               <td>Smith</td> 
               <td>50</td>
               <td>Jill</td>
-              <td>Smith</td> 
-              <td>50</td>
+              <td>Smithfduirsdf sudgfiwer uigersujkhfds</td> 
+              <td>react, php, nodejs, java, cpp, python</td>
               <td>Jill</td>
               <td>Smith</td> 
               <td>50</td>
