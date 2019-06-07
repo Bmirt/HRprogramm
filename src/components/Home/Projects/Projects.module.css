@@ -4,7 +4,7 @@
   background: red;
 }
 
-.container table, .cointainer th, .container td {
+.container table, .container th, .container td {
   border: 1px solid black;
   padding: 25px;
   font-size: 15px;
