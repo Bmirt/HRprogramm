@@ -22,8 +22,10 @@ function App() {
           render={() => (
             <div>
               <Header />
-              <Home />
-              <Sidebar />
+              <div className='mainContent'>
+                <Sidebar />
+                <Home />
+              </div>
             </div>
           )}
         />
