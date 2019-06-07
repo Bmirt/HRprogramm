@@ -12,9 +12,10 @@ const initialState = {
 const profileListReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PROFILES:
+      console.log("i was here", action);
       return {
         ...state,
-        profiles: action.payload
+        profiles: action.profiles
       };
     case ADD_PROFILE:
       console.log("add profile");
