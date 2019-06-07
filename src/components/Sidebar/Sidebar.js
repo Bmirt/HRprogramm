@@ -27,42 +27,42 @@ export class Sidebar extends Component {
           <ul>
             <li>
               <button className={styles.menuBtn+' '+styles.sidebarBtn} onClick={this.handleClick}>
-                  <img src={menuIcon} className={styles.sidebarIcon}/>
+                  <img src={menuIcon} className={styles.sidebarIcon} alt='menu'/>
               </button>
             </li>
             <li>
               <button className={styles.menuBtn}>
-                <img src={profilesIcon} className={styles.sidebarIcon} />
+                <img src={profilesIcon} className={styles.sidebarIcon} alt='profile list'/>
               </button>
               <NavLink exact to="/">Profile List</NavLink>
             </li>
             <li>
             <button className={styles.menuBtn}>
-              <img src={projectsIcon} className={styles.sidebarIcon} />
+              <img src={projectsIcon} className={styles.sidebarIcon} alt='projects'/>
             </button>
               <NavLink to="/projects">Projects</NavLink>
             </li>
             <li>
               <button className={styles.menuBtn}>
-                <img src={analyticsIcon} className={styles.sidebarIcon} />
+                <img src={analyticsIcon} className={styles.sidebarIcon} alt='analytics'/>
               </button>
               <NavLink to="/Analytics">Analytics</NavLink>
             </li>
             <li>
               <button className={styles.menuBtn}>
-                <img src={calendarIcon} className={styles.sidebarIcon} />
+                <img src={calendarIcon} className={styles.sidebarIcon} alt='calendar'/>
               </button>
               <NavLink to="/Calendar">Calendar</NavLink>
             </li>
             <li>
               <button className={styles.menuBtn}>
-                <img src={blackListIcon} className={styles.sidebarIcon} />
+                <img src={blackListIcon} className={styles.sidebarIcon} alt='black list'/>
               </button>
               <NavLink to="/BlackList">Black List</NavLink>
             </li>
             <li>
               <button className={styles.menuBtn}>
-                <img src={userManagmentIcon} className={styles.sidebarIcon} />
+                <img src={userManagmentIcon} className={styles.sidebarIcon} alt='user managment'/>
               </button>
               <NavLink to="/UserManagment">User Managment</NavLink>
             </li>
@@ -74,25 +74,25 @@ export class Sidebar extends Component {
       return (
         <div className={styles.sidebar}>
           <button className={styles.menuBtn+' '+styles.sidebarBtn} onClick={this.handleClick}>
-            <img src={menuIcon} className={styles.sidebarIcon}/>
+            <img src={menuIcon} className={styles.sidebarIcon} alt='menu' />
           </button>
           <button className={styles.menuBtn}>
-            <img src={profilesIcon} className={styles.sidebarIcon} />
+            <img src={profilesIcon} className={styles.sidebarIcon} alt='profile list' />
           </button>
           <button className={styles.menuBtn}>
-            <img src={projectsIcon} className={styles.sidebarIcon} />
+            <img src={projectsIcon} className={styles.sidebarIcon} alt='projects' />
           </button>
           <button className={styles.menuBtn}>
-            <img src={analyticsIcon} className={styles.sidebarIcon} />
+            <img src={analyticsIcon} className={styles.sidebarIcon} alt='analytics' />
           </button>
           <button className={styles.menuBtn}>
-            <img src={calendarIcon} className={styles.sidebarIcon} />
+            <img src={calendarIcon} className={styles.sidebarIcon} alt='calendar' />
           </button>
           <button className={styles.menuBtn}>
-            <img src={blackListIcon} className={styles.sidebarIcon} />
+            <img src={blackListIcon} className={styles.sidebarIcon} alt='black list' />
           </button>
           <button className={styles.menuBtn}>
-            <img src={userManagmentIcon} className={styles.sidebarIcon} />
+            <img src={userManagmentIcon} className={styles.sidebarIcon} alt='user managment' />
           </button>
         </div>
       );
@@ -102,7 +102,7 @@ export class Sidebar extends Component {
   render() {
     console.log(this.state.open);
     console.log(this.content);
-    return <div>{this.generateContent()}</div>;
+    return <div className={styles.sidebarComponent}>{this.generateContent()}</div>;
   }
 }
 
