@@ -32,7 +32,7 @@ function App() {
           render={() => (
             <div>
               <Header />
-              <Home />
+              <ProfileList />
               <Sidebar />
             </div>
           )}
