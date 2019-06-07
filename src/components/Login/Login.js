@@ -3,7 +3,7 @@ import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
 import KeepMeSignedIn from "../UI/keepMeSignedIn/keepMeSignedIn";
-import Logo from "../../logo.png";
+import Logo from "../../images/logo.png";
 import styles from "./Login.module.css";
 import Validation from "../Validation/Validation";
 import axios from "axios";
