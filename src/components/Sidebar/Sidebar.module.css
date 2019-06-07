@@ -5,6 +5,8 @@
     width: 60px;
     background: #314455;
     height: 100vh;
+    position: fixed;
+    padding: 100px 0;
 }
 .menuBtn {
     width: 40px;
@@ -18,8 +20,11 @@
 }
 .sidebarOpen {
     width: 220px;
-    height: 100vh;
+    height: 110vh;
     background: #314455;
+    position: fixed;
+    top: 0;
+    padding: 100px 0;
 }
 a {
     color: white;
@@ -34,4 +39,19 @@ a {
 }
 .sidebarIcon {
     width: 28px;
+}
+
+span {
+  color: white;
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
+span::before{
+  display: block;
+  content: '';
+  width: 100%;
+  background: grey;
+  height: 1px;
+  margin: 10px 0;
 }
