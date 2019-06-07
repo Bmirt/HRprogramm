@@ -27,13 +27,37 @@ export default class Home extends Component {
       })
       .catch(error => error);
   }
+
+
+
+  candidateList = this.props.state.profileListReducer.profiles.map((candidate)=>{
+    return(
+      <tbody>
+        <tr>
+          <td>{candidate.name}</td>
+          <td>{candidate.phone}</td>
+          <td>{candidate.position}</td>
+          <td>{candidate.profile}</td>
+          <td>{candidate.portfolio}</td>
+          <td>ver vipove</td>
+          <td>{candidate.english}</td>
+          <td>{candidate.salary}</td>
+          <td>{candidate.source}</td>
+          <td>{candidate.status}</td>
+          <td>proeqtebi</td>
+        </tr>
+      </tbody>
+    )
+  })
   render() {
     console.log('helo i am guga', this.props)
     return (
       <div className={styles.container}>
         <div className={styles.search}>
           <input type='text' className={styles.searchInput} placeholder='Search...'></input>
-          <img src={searchIcon} alt='search'/>
+          <button>
+            <img src={searchIcon} alt='search'/>
+          </button>
         </div>
         <table>
           <tbody>

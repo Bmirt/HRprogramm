@@ -23,14 +23,21 @@
   margin-bottom: 20px;
   background: white;
   border-radius: 20px;
+  display: flex;
 }
 .search img {
   width: 20px;
-  margin: 5px;
+  margin: 8px;
 }
 .searchInput {
-  width: Calc(100% - 80px);
+  width: Calc(100% - 40px);
   height: 40px;
   border: none;
   background: none;
+  padding: 0 10px;
+  color: #575757;
+  outline: none;
+}
+button {
+  outline: none;
 }

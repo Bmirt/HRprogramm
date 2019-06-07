@@ -34,7 +34,8 @@
     display: flex;
 }
 .sidebarIcon {
-    width: 28px;
+    width: 24px;
+    margin: 3px auto;
 }
 
 .sidebarComponent span {
