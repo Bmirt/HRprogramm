@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ProfileList from "./Profile List/ProfileList";
+import styles from "./ProfileList.module.css";
 export default class Home extends Component {
   render() {
-    return <ProfileList />;
+    return <div className={styles.container}>Hello</div>;
   }
 }
