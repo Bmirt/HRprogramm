@@ -8,7 +8,8 @@ import PasswordReset from "./components/PasswordReset/PasswordReset";
 import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
-import ProfileList from "./components/Home/Projects/Projects";
+import Projects from "./components/Home/Projects/Projects";
+import ProfileList from "./containers/ProfileListContainer";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           render={() => (
             <div>
               <Header />
-              <div className='mainContent'>
+              <div className="mainContent">
                 <Sidebar />
                 <Home />
               </div>
@@ -35,8 +36,8 @@ function App() {
             <div>
               <Header />
               <div className="mainContent">
-              <Sidebar />
-              <ProfileList />
+                <Sidebar />
+                <Projects />
               </div>
             </div>
           )}

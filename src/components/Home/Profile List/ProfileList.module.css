@@ -6,11 +6,11 @@
   color: #575757;
   cursor: pointer;
 }
-.container th:hover{
+.container th:hover {
   background: rgb(235, 233, 233);
-  color: #737373
+  color: #737373;
 }
-.container table{
+.container table {
   min-width: 100%;
 }
 .container td {
@@ -24,10 +24,13 @@
   background: white;
   border-radius: 20px;
 }
+.search img {
+  width: 20px;
+  margin: 5px;
+}
 .searchInput {
   width: Calc(100% - 80px);
   height: 40px;
   border: none;
   background: none;
-
 }
