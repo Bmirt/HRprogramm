@@ -21,7 +21,9 @@ export const changeProfile = otherProfiles => ({
   otherProfiles
 });
 
-export const fetchProfiles = profiles => ({
-  type: FETCH_PROFILES,
-  profiles: profiles
-});
+export const fetchProfiles = profiles => {
+  return (dispatch, getState) => {
+    // make async call to database
+    dispatch({ type: FETCH_PROFILES, profiles });
+  };
+};
