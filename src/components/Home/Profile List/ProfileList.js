@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
+import searchIcon from '../../../searchIcon.png'
 
 
 export default class Home extends Component {
@@ -8,6 +9,7 @@ export default class Home extends Component {
       <div className={styles.container}>
         <div className={styles.search}>
           <input type='text' className={styles.searchInput} placeholder='Search...'></input>
+          <img src={searchIcon} alt='search'/>
         </div>
         <table>
           <tbody>
