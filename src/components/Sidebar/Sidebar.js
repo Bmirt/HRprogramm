@@ -23,8 +23,8 @@ export class Sidebar extends Component {
   generateContent() {
     if (this.state.open) {
       return (
-        <div>
-          <ul className={styles.sidebarOpen}>
+        <div className={styles.sidebarOpen}>
+          <ul>
             <li>
               <button className={styles.menuBtn+' '+styles.sidebarBtn} onClick={this.handleClick}>
                   <img src={menuIcon} className={styles.sidebarIcon}/>
@@ -72,7 +72,7 @@ export class Sidebar extends Component {
       );
     } else {
       return (
-        <div>
+        <div className={styles.sidebar}>
           <button className={styles.menuBtn+' '+styles.sidebarBtn} onClick={this.handleClick}>
             <img src={menuIcon} className={styles.sidebarIcon}/>
           </button>
@@ -102,7 +102,7 @@ export class Sidebar extends Component {
   render() {
     console.log(this.state.open);
     console.log(this.content);
-    return <div className={styles.sidebar}>{this.generateContent()}</div>;
+    return <div>{this.generateContent()}</div>;
   }
 }
 
