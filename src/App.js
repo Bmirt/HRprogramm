@@ -5,11 +5,10 @@ import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
-import Home from "./components/Home/Home";
+import Home from "./containers/HomeContainer";
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Sidebar from "./containers/SidebarContainer";
 import Projects from "./components/Home/Projects/Projects";
-import ProfileList from "./containers/ProfileListContainer";
 
 function App() {
   return (

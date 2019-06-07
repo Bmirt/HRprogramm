@@ -4,6 +4,7 @@ export default class Home extends Component {
   render() {
     return <div className={styles.container}>
       <table >
+        <tbody>
   <tr>
     <th>Paylix</th>
     <th>nOMS</th> 
@@ -23,6 +24,8 @@ export default class Home extends Component {
     <th>Project Test</th>
     <th>Project Test</th>
   </tr>
+  </tbody>
+  <tbody>
   <tr>
     <td>Testing</td>
     <td>Testing</td>
@@ -42,6 +45,8 @@ export default class Home extends Component {
     <td>Testing</td>
     <td>Testing</td>
   </tr>
+  </tbody>
+  <tbody>
   <tr>
   <td>Testing</td>
     <td>Testing</td>
@@ -60,7 +65,8 @@ export default class Home extends Component {
     <td>Testing</td>
     <td>Testing</td>
     <td>Testing</td>
-  </tr>
+  </tr></tbody>
+  <tbody>
   <tr>
     <td>Testing</td>
     <td>Testing</td>
@@ -80,6 +86,8 @@ export default class Home extends Component {
     <td>Testing</td>
     <td>Testing</td>
   </tr>
+  </tbody>
+  <tbody>
   <tr>
     <td>Testing</td>
     <td>Testing</td>
@@ -99,6 +107,8 @@ export default class Home extends Component {
     <td>Testing</td>
     <td>Testing</td>
   </tr>
+  </tbody>
+  <tbody>
   <tr>
     <td>Testing</td>
     <td>Testing</td>
@@ -118,6 +128,7 @@ export default class Home extends Component {
     <td>Testing</td>
     <td>Testing</td>
   </tr>
+  </tbody>
 </table>
 
       </div>;

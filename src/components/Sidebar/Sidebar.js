@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 import menuIcon from '../../images/menuIcon.png'
 import profilesIcon from '../../images/profilesIcon.png'
@@ -20,6 +19,9 @@ export class Sidebar extends Component {
       this.setState({ ...this.state, open: true });
     }
   };
+  changeActiveFunction = button => {
+    this.props.changeActive(button)
+  }
   generateContent() {
     if (this.state.open) {
       return (
@@ -30,41 +32,41 @@ export class Sidebar extends Component {
                   <img src={menuIcon} className={styles.sidebarIcon} alt='menu'/>
               </button>
             </li>
-            <li>
+            <li onClick={() => this.changeActiveFunction(0)}>
               <button className={styles.menuBtn}>
                 <img src={profilesIcon} className={styles.sidebarIcon} alt='profile list'/>
               </button>
-              <NavLink exact to="/">Profile List</NavLink>
+              Profile List
             </li>
-            <li>
+            <li onClick={() => this.changeActiveFunction(1)}>
             <button className={styles.menuBtn}>
               <img src={projectsIcon} className={styles.sidebarIcon} alt='projects'/>
             </button>
-              <NavLink to="/projects">Projects</NavLink>
+              Projects
             </li>
-            <li>
+            <li onClick={() => this.changeActiveFunction(2)}>
               <button className={styles.menuBtn}>
                 <img src={analyticsIcon} className={styles.sidebarIcon} alt='analytics'/>
               </button>
-              <NavLink to="/Analytics">Analytics</NavLink>
+              Analytics
             </li>
-            <li>
+            <li onClick={() => this.changeActiveFunction(3)}>
               <button className={styles.menuBtn}>
                 <img src={calendarIcon} className={styles.sidebarIcon} alt='calendar'/>
               </button>
-              <NavLink to="/Calendar">Calendar</NavLink>
+              Calendar
             </li>
-            <li>
+            <li onClick={() => this.changeActiveFunction(4)}>
               <button className={styles.menuBtn}>
                 <img src={blackListIcon} className={styles.sidebarIcon} alt='black list'/>
               </button>
-              <NavLink to="/BlackList">Black List</NavLink>
+              Black List
             </li>
-            <li>
+            <li onClick={() => this.changeActiveFunction(5)}>
               <button className={styles.menuBtn}>
                 <img src={userManagmentIcon} className={styles.sidebarIcon} alt='user managment'/>
               </button>
-              <NavLink to="/UserManagment">User Managment</NavLink>
+              User Managment
             </li>
             <span>V.1.0.1</span>
           </ul>
