@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
-import searchIcon from '../../../searchIcon.png'
+import searchIcon from '../../../images/searchIcon.png'
 
 import { fetchProfiles } from "../../../actions/profileListActions";
 

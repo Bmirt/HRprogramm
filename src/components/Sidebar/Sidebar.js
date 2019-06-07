@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
-import menuIcon from '../../menuIcon.png'
-import profilesIcon from '../../profilesIcon.png'
-import projectsIcon from '../../projectsIcon.png'
-import analyticsIcon from '../../analyticsIcon.png'
-import calendarIcon from '../../calendarIcon.png'
-import blackListIcon from '../../blackListIcon.png'
-import userManagmentIcon from '../../userManagmentIcon.png'
+import menuIcon from '../../images/menuIcon.png'
+import profilesIcon from '../../images/profilesIcon.png'
+import projectsIcon from '../../images/projectsIcon.png'
+import analyticsIcon from '../../images/analyticsIcon.png'
+import calendarIcon from '../../images/calendarIcon.png'
+import blackListIcon from '../../images/blackListIcon.png'
+import userManagmentIcon from '../../images/userManagmentIcon.png'
 
 export class Sidebar extends Component {
   state = {

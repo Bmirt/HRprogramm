@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
-import logo from '../../logo.png'
-import signOut from '../../signOutIcon.png'
+import logo from '../../images/logo.png'
+import signOut from '../../images/signOutIcon.png'
 
 class Header extends Component {
   render() {
