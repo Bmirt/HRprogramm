@@ -23,10 +23,11 @@
     background: #314455;
     padding: 20px 0;
 }
-.sidebarComponent a {
+.sidebarComponent span {
     color: white;
     font-weight: bold;
     line-height: 60px;
+    font-size: 1.3em;
 }
 .sidebarOpen li {
     width: 220px;
@@ -38,17 +39,19 @@
     margin: 3px auto;
 }
 
-.sidebarComponent span {
+span.versionText {
   color: white;
   display: block;
-  width: 100%;
+  width: 210px;
   padding: 10px;
+  margin: 10px auto;
+  line-height: 40px;
+  font-weight: 100;
 }
-.sidebarComponent span::before{
+.versionText::before{
   display: block;
   content: '';
   width: 100%;
   background: grey;
   height: 1px;
-  margin: 10px 0;
 }

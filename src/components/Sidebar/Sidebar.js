@@ -36,39 +36,39 @@ export class Sidebar extends Component {
               <button className={styles.menuBtn}>
                 <img src={profilesIcon} className={styles.sidebarIcon} alt='profile list'/>
               </button>
-              Profile List
+              <span>Profile List</span>
             </li>
             <li onClick={() => this.changeActiveFunction(1)}>
             <button className={styles.menuBtn}>
               <img src={projectsIcon} className={styles.sidebarIcon} alt='projects'/>
             </button>
-              Projects
+            <span>Projects</span>      
             </li>
             <li onClick={() => this.changeActiveFunction(2)}>
               <button className={styles.menuBtn}>
                 <img src={analyticsIcon} className={styles.sidebarIcon} alt='analytics'/>
               </button>
-              Analytics
+              <span>Analytics</span>
             </li>
             <li onClick={() => this.changeActiveFunction(3)}>
               <button className={styles.menuBtn}>
                 <img src={calendarIcon} className={styles.sidebarIcon} alt='calendar'/>
               </button>
-              Calendar
+              <span>Calendar</span>
             </li>
             <li onClick={() => this.changeActiveFunction(4)}>
               <button className={styles.menuBtn}>
                 <img src={blackListIcon} className={styles.sidebarIcon} alt='black list'/>
               </button>
-              Black List
+              <span>Black List</span>
             </li>
             <li onClick={() => this.changeActiveFunction(5)}>
               <button className={styles.menuBtn}>
                 <img src={userManagmentIcon} className={styles.sidebarIcon} alt='user managment'/>
               </button>
-              User Managment
+              <span>User Managment</span>
             </li>
-            <span>V.1.0.1</span>
+            <span className={styles.versionText}>V.1.0.1</span>
           </ul>
         </div>
       );
