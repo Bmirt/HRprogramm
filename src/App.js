@@ -1,36 +1,36 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Login from "./components/Login/Login";
 import "./App.css";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
-import Home from "./containers/HomeContainer";
+import ProfileList from "./containers/ProfileListContainer";
 import Header from "./components/Header/Header";
 import Sidebar from "./containers/SidebarContainer";
 import Projects from "./components/Home/Projects/Projects";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
+    <Router>
+      <div className="App">
         <Route exact path="/" component={Login} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/reset-password/:token_id" component={PasswordReset} />
         <Route
-          path="/home"
+          path="/home/profile_list"
           render={() => (
             <div>
               <Header />
               <div className="mainContent">
                 <Sidebar />
-                <Home />
+                <ProfileList />
               </div>
             </div>
           )}
         />
         <Route
-          path="/guga"
+          path="/home/projects"
           render={() => (
             <div>
               <Header />
@@ -41,8 +41,8 @@ function App() {
             </div>
           )}
         />
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 
