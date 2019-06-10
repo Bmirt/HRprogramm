@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Form from "../Form/Form";
 import Submit from "../UI/button/Button";
 import Input from "../UI/Input/Input";
@@ -7,6 +8,7 @@ import Logo from "../../images/logo.png";
 import styles from "./Login.module.css";
 import Validation from "../Validation/Validation";
 import axios from "axios";
+import auth from "../../auth/auth";
 
 class Login extends Component {
   state = {
@@ -61,8 +63,8 @@ class Login extends Component {
           } else if (res.success) {
             console.log("this is res", res);
 
-            localStorage.setItem("token", "Bearer " + res.success.token);
-            this.props.history.push("/home");
+            auth.login("Bearer " + res.success.token);
+            this.props.history.push("/home/profile_list");
             alert("Welcome " + res.user.name);
           }
         });
@@ -115,4 +117,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

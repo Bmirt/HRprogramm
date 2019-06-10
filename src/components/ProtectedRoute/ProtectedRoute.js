@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
+import React from "react";
+import { Route } from "react-router-dom";
 import auth from "../../auth/auth";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
@@ -10,16 +10,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
         if (auth.isAuthenticated()) {
           return <Component {...props} />;
         } else {
-          return (
-            <Redirect
-              to={{
-                pathname: "/",
-                state: {
-                  from: props.location
-                }
-              }}
-            />
-          );
+          return props.history.push("/");
         }
       }}
     />

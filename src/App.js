@@ -1,11 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Login from "./components/Login/Login";
 import "./App.css";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
-import Home from "./containers/HomeContainer";
+import ProfileList from "./containers/ProfileListContainer";
 import Header from "./components/Header/Header";
 import Sidebar from "./containers/SidebarContainer";
 import Projects from "./components/Home/Projects/Projects";
@@ -20,19 +19,20 @@ function App() {
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password/:token_id" component={PasswordReset} />
           <ProtectedRoute
-            path="/home"
-            render={() => (
+            path="/home/profile_list"
+            component={() => (
               <div>
                 <Header />
                 <div className="mainContent">
                   <Sidebar />
-                  <Home />
+                  <ProfileList />
                 </div>
               </div>
             )}
           />
+          <ProtectedRoute />
           <Route
-            path="/guga"
+            path="/home/projects"
             render={() => (
               <div>
                 <Header />
