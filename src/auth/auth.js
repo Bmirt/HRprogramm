@@ -5,8 +5,9 @@ class Auth {
   login(token) {
     localStorage.setItem("token", token);
   }
-  logout() {
+  logout(cb) {
     localStorage.removeItem("token");
+    cb();
   }
   isAuthenticated() {
     return !!localStorage.getItem("token");

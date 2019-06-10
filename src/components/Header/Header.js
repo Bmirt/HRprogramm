@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styles from "./Header.module.css";
 import logo from "../../images/logo.png";
 import signOut from "../../images/signOutIcon.png";
 import auth from "../../auth/auth";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <header className={styles.header}>
@@ -16,7 +19,9 @@ class Header extends Component {
           <ul>
             <li>Hi, Lika Zuroshvili</li>
             <li>
-              <button onClick={() => auth.logout()}>
+              <button
+                onClick={() => auth.logout(() => this.props.history.push("/"))}
+              >
                 <img className={styles.icon} src={signOut} alt="sign out" />
               </button>
             </li>
@@ -27,4 +32,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
