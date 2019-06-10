@@ -30,10 +30,9 @@ function App() {
               </div>
             )}
           />
-          <ProtectedRoute />
-          <Route
+          <ProtectedRoute
             path="/home/projects"
-            render={() => (
+            component={() => (
               <div>
                 <Header />
                 <div className="mainContent">
