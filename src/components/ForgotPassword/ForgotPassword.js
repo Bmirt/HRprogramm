@@ -76,6 +76,7 @@ class ForgotPassword extends Component {
             type="email"
             placeholder="Registered E-Mail"
             errors={{}}
+            required
           />
           <div className={styles.recaptchaBox}>
             <Recaptcha
