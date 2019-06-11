@@ -21,13 +21,23 @@ export default class Home extends Component {
         if (res.error) {
           throw res.error;
         }
-        console.log("this is me", res.profiles);
         dispatch(fetchProfiles(res.profiles));
         return res.products;
       })
       .then(() => {})
       .catch(error => error);
   }
+  profilesFilterer = e => {
+    const filtered = this.props.state.profileListReducer.profiles.filter(
+      profile => {
+        return profile.name
+          .trim()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase().trim());
+      }
+    );
+    this.props.filteredProfiles(filtered);
+  };
 
   render() {
     console.log(this.props.state.profileListReducer.profiles);
@@ -38,6 +48,7 @@ export default class Home extends Component {
             type="text"
             className={styles.searchInput}
             placeholder="Search..."
+            onChange={e => this.profilesFilterer(e)}
           />
           <button>
             <img src={searchIcon} alt="search" />
