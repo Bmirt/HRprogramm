@@ -10,6 +10,42 @@
   width: Calc(100vw - 250px);
   margin: auto;
 }
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+}
+.profilesListBtnRight {
+  display: flex;
+}
+.profilesListBtn {
+  padding: 5px 20px;
+  background: transparent;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-weight: 600;
+  color: #575757;
+  cursor: pointer;
+  outline: none;
+  line-height: 24px;
+  min-height: 40px;
+}
+.profilesListBtn:hover {
+  background: #fefefe;
+}
+.profilesListBtn:active {
+  background: transparent;
+}
+.profilesListBtn span {
+  display: block;
+  float: right;
+}
+.btnIcon {
+  width: 24px;
+  float: left;
+  margin-right: 20px;
+}
 .container th {
   font-size: 16px;
   padding: 10px 40px;
@@ -57,12 +93,17 @@ button {
   cursor: move;
 }
 .addcandidate {
-  width: 110px;
-  background-color: #8f848b;
-  border-radius: 15px;
-  height: 25px;
+  width: 160px;
+  background-color: rgb(204, 204, 204);
+  border-radius: 10px;
+  height: 40px;
+  font-size: 1.2rem;
+  color: #575757;
+  font-weight: 600;
+  line-height: 40px;
+  border: 2px solid #ccc;
 }
 .addcandidate:hover {
-  background: rgb(156, 149, 149);
+  background: #fefefe;
   /* color: #737373; */
 }

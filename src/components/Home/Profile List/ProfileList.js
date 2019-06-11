@@ -4,6 +4,8 @@ import searchIcon from "../../../images/searchIcon.png";
 import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
+import ExportFileIcon from "../../../images/exportFile.png";
+import FilterIcon from "../../../images/filterIcon.png";
 
 import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
@@ -156,12 +158,29 @@ export default class Home extends Component {
                 <img src={searchIcon} alt="search" />
               </button>
             </div>
-            <button
-              className={styles.addcandidate}
-              onClick={this.startCreateEventHandler}
-            >
-              Add a candidate
-            </button>
+            <div className={styles.buttonContainer}>
+              <div>
+                <button
+                  className={styles.addcandidate}
+                  onClick={this.startCreateEventHandler}
+                >
+                  <img src="" />
+                  Create Profile
+                </button>
+              </div>
+              <div className={styles.profilesListBtnRight}>
+                <select className={styles.profilesListBtn}>
+                  <img src={ExportFileIcon} className={styles.btnIcon} />
+                  <option value="0">Export</option>
+                  <option value="1">PDF</option>
+                  <option value="2">Exel</option>
+                </select>
+                <button className={styles.profilesListBtn}>
+                  <img src={FilterIcon} className={styles.btnIcon} />
+                  <span>Filter</span>
+                </button>
+              </div>
+            </div>
             <div className={styles.profilesTable}>
               <SmartTable
                 columnHeaders={this.state.columnHeaders}
