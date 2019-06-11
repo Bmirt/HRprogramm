@@ -114,7 +114,6 @@ export class Sidebar extends Component {
   }
 
   render() {
-    console.log(this.state.array);
     return (
       <div className={styles.sidebarComponent}>{this.generateContent()}</div>
     );

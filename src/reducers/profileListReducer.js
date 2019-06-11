@@ -2,7 +2,8 @@ import {
   DELETE_PROFILE,
   ADD_PROFILE,
   CHANGE_PROFILE,
-  FETCH_PROFILES
+  FETCH_PROFILES,
+  FILTER_PROFILES
 } from "../constants/profileListConstants";
 const initialState = {
   profiles: [],
@@ -12,7 +13,6 @@ const initialState = {
 const profileListReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PROFILES:
-      console.log("i was here", action);
       return {
         ...state,
         profiles: action.profiles
@@ -26,6 +26,11 @@ const profileListReducer = (state = initialState, action) => {
     case CHANGE_PROFILE:
       console.log("change profile");
       return state;
+    case FILTER_PROFILES:
+      return {
+        ...state,
+        profiles: action.profiles
+      };
     default:
       return state;
   }

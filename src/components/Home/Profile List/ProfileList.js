@@ -1,17 +1,61 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
 import searchIcon from "../../../images/searchIcon.png";
-import SmartTable from "../SmartTable/SmartTable"
+import Modal from "../../Modal/Modal";
+import Backdrop from "../../Backdrop/Backdrop";
+import SmartTable from "../SmartTable/SmartTable";
 
 import { fetchProfiles } from "../../../actions/profileListActions";
-// import { ClientHttp2Session } from "http2";
+import Pagination from "../../pagination/Pagination";
+import { paginate } from "../../../utils/paginate";
 
 export default class Home extends Component {
   state = {
-    columnHeaders: ['Name, Surname','Phone','Current Position','Profile','Portfolio','Technologies','English','Salary Expectation','Source','Status','Projects'],
+    pageSize: 3,
+    creating: false,
+    name: "",
+    phone: "",
+    position: "",
+    profile: "",
+    portfolio: "",
+    comment: "",
+    english: "",
+    salary: "",
+    status: "",
+    projects: [],
+    technologies: "",
+    pageSize: 2,
+    currentPage: 1,
+    columnHeaders: [
+      "Name, Surname",
+      "Phone",
+      "Current Position",
+      "Profile",
+      "Portfolio",
+      "Technologies",
+      "English",
+      "Salary Expectation",
+      "Source",
+      "Status",
+      "Projects"
+    ],
     rows: []
-  }
-  componentDidMount() {
+  };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state);
+  };
+
+  startCreateEventHandler = () => {
+    this.setState({ creating: true });
+  };
+  modalConfirmHandler = () => {
+    this.setState({ creating: false });
+  };
+  modalCancelHandler = () => {
+    this.setState({ creating: false });
+  };
+  fetchingProfiles = () => {
     let token = localStorage.getItem("token");
     const { dispatch } = this.props;
     fetch("http://laravel.local/api/all-profiles", {
@@ -30,50 +74,216 @@ export default class Home extends Component {
         return res.products;
       })
       .then(() => {
-        let myrows = []
+        let myrows = [];
         this.props.state.profileListReducer.profiles.map(candidate => {
-          myrows.push({ 'Name, Surname': candidate.name || "-",
-                      'Phone': candidate.phone || "-",
-                      'Current Position': candidate.phone || "-",
-                      'Profile': candidate.profile || "-",
-                      'Portfolio': candidate.portfolio || "-",
-                      'Technologies': 'ver vipove',
-                      'English': candidate.english || "-",
-                      'Salary Expectation': candidate.salary || "-",
-                      'Source': candidate.source || "-",
-                      'Status': candidate.status || "-",
-                      'Projects': 'proeqtebi'
-                    })
-
-        })
-        this.setState({rows: myrows})
-        console.log(this.state.rows)
+          myrows.push({
+            "Name, Surname": candidate.name || "-",
+            Phone: candidate.phone || "-",
+            "Current Position": candidate.phone || "-",
+            Profile: candidate.profile || "-",
+            Portfolio: candidate.portfolio || "-",
+            Technologies: "ver vipove",
+            English: candidate.english || "-",
+            "Salary Expectation": candidate.salary || "-",
+            Source: candidate.source || "-",
+            Status: candidate.status || "-",
+            Projects: "proeqtebi"
+          });
+        });
+        this.setState({ rows: myrows });
       })
       .catch(error => error);
+  };
+  componentDidMount() {
+    this.fetchingProfiles();
   }
+  profilesFilterer = e => {
+    console.log(e.target.value);
+    if (!e.target.value) {
+      this.fetchingProfiles();
+    } else {
+      const filtered = this.props.state.profileListReducer.profiles.filter(
+        profile => {
+          return profile.name
+            .trim()
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase().trim());
+        }
+      );
 
+      this.props.filteredProfiles(filtered);
+      let myrows = [];
+      filtered.map(candidate => {
+        myrows.push({
+          "Name, Surname": candidate.name || "-",
+          Phone: candidate.phone || "-",
+          "Current Position": candidate.phone || "-",
+          Profile: candidate.profile || "-",
+          Portfolio: candidate.portfolio || "-",
+          Technologies: "ver vipove",
+          English: candidate.english || "-",
+          "Salary Expectation": candidate.salary || "-",
+          Source: candidate.source || "-",
+          Status: candidate.status || "-",
+          Projects: "proeqtebi"
+        });
+      });
+      this.setState({ rows: myrows, currentPage: 1 });
+    }
+  };
+
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
   render() {
-    console.log(this.state.rows);
-    if(this.state.rows.length)
-    return (
-      <div className={styles.container}>
-        <div className={styles.search}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search..."
-          />
-          <button>
-            <img src={searchIcon} alt="search" />
-          </button>
-        </div>
-        <div className={styles.tableContainer}>
-          <SmartTable columnHeaders={this.state.columnHeaders} rows={this.state.rows}/>
-        </div>
-      </div>
+    const profiles = paginate(
+      this.state.rows,
+      this.state.currentPage,
+      this.state.pageSize
     );
-    return(
-      <div></div>
-    )
+    if (this.state.rows.length > 0) {
+      return (
+        <div className={styles.container}>
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search..."
+              onChange={e => this.profilesFilterer(e)}
+            />
+            <button>
+              <img src={searchIcon} alt="search" />
+            </button>
+          </div>
+          <SmartTable
+            columnHeaders={this.state.columnHeaders}
+            rows={profiles}
+          />
+          <Pagination
+            itemsCount={this.props.state.profileListReducer.profiles.length}
+            pageSize={this.state.pageSize}
+            currentPage={this.state.currentPage}
+            onPageChange={this.handlePageChange}
+          />
+          {this.state.creating && <Backdrop />}
+          {this.state.creating && (
+            <Modal
+              title="Add Candidate"
+              canCancel
+              canConfirm
+              onCancel={this.modalCancelHandler}
+              onConfirm={this.modalConfirmHandler}
+            >
+              <form>
+                <div className="form-control">
+                  <label htmlFor="name">Name,Surname</label>
+                  <input type="text" name="name" onChange={this.handleChange} />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    type="number"
+                    name="phone"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Current_position">Current Position</label>
+                  <input
+                    type="text"
+                    name="position"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="profile">Profile</label>
+                  <input
+                    type="email"
+                    name="profile"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="portfolio">Portfolio</label>
+                  <input
+                    type="text"
+                    name="portfolio"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Comment">Comment</label>
+                  <input
+                    type="text"
+                    name="Comment"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="English">English</label>
+                  <input type="text" name="English" />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Salary_Expectation">Salary Expectation</label>
+                  <input
+                    type="text"
+                    name="salary"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="source">Source</label>
+                  <input
+                    type="text"
+                    name="source"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="status">Status</label>
+                  <input
+                    type="text"
+                    name="status"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="projects">Projects</label>
+                  <input
+                    type="text"
+                    name="projects"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Technologies">Technologies</label>
+                  <input
+                    type="text"
+                    name="technologies"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </form>
+            </Modal>
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.container}>
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search..."
+              onChange={e => this.profilesFilterer(e)}
+            />
+            <button>
+              <img src={searchIcon} alt="search" />
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 }

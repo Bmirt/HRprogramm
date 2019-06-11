@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
 class SmartTable extends Component {
-    state = {
-        roughcolumns: [],
-        columnHeaders: this.props.columnHeaders,
-        rows: this.props.rows
-    }
+  state = {
+    roughcolumns: [],
+    columnHeaders: this.props.columnHeaders
+  };
 
     getElementCoords = (id) => {
         let coorX0 = document.getElementById(id).getBoundingClientRect().left;
@@ -52,48 +51,41 @@ class SmartTable extends Component {
             
         })
     }
-    headerRow = () => {
-        let headers = this.state.columnHeaders.map((header) => {
-            return(
-                <th id={header} draggable='true' onDrag={this.handleDragging} onDragEnd={()=>this.setState({columnHeaders: this.state.roughcolumns})}>{header}</th>
-                )
-            })
-        return(
-        <tr>
-            {headers}
-        </tr>
-        )
-    }
-    contentRows =() =>{
-        let rows = this.state.rows.map((row) => {
-            let currentrow = this.state.columnHeaders.map((header)=>{
-                return (
-                    <td>{row[header]}</td>
-                )
-            })
-            return (
-                <tr>{currentrow}</tr>
-            )
-        })
-        return (
-            <tbody>
-                {rows}
-            </tbody>
-        )
-    }    
-    render(){
-        return(
-            <table>
-                <tbody>
-                    {this.headerRow()}
-                </tbody>
-                    {this.contentRows()}
-
-            </table>
-        )
-    }
-    
-    
+  headerRow = () => {
+    let headers = this.state.columnHeaders.map(header => {
+      return (
+        <th
+          key={header}
+          id={header}
+          draggable="true"
+          onDrag={this.handleDragging}
+          onDragEnd={() =>
+            this.setState({ columnHeaders: this.state.roughcolumns })
+          }
+        >
+          {header}
+        </th>
+      );
+    });
+    return <tr>{headers}</tr>;
+  };
+  contentRows = () => {
+    let rows = this.props.rows.map(row => {
+      let currentrow = this.state.columnHeaders.map(header => {
+        return <td key={header}>{row[header]}</td>;
+      });
+      return <tr key={this.props.rows.indexOf(row)}>{currentrow}</tr>;
+    });
+    return <tbody>{rows}</tbody>;
+  };
+  render() {
+    return (
+      <table>
+        <tbody>{this.headerRow()}</tbody>
+        {this.contentRows()}
+      </table>
+    );
+  }
 }
 
-export default SmartTable
+export default SmartTable;

@@ -2,7 +2,8 @@ import {
   ADD_PROFILE,
   DELETE_PROFILE,
   CHANGE_PROFILE,
-  FETCH_PROFILES
+  FETCH_PROFILES,
+  FILTER_PROFILES
 } from "../constants/profileListConstants";
 
 export const addProfile = (newId, name) => ({
@@ -21,9 +22,13 @@ export const changeProfile = otherProfiles => ({
   otherProfiles
 });
 
+export const filteredProfiles = profiles => ({
+  type: FILTER_PROFILES,
+  profiles
+});
+
 export const fetchProfiles = profiles => {
   return (dispatch, getState) => {
-    // make async call to database
     dispatch({ type: FETCH_PROFILES, profiles });
   };
 };
