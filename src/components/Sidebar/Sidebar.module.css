@@ -4,7 +4,7 @@
   flex-direction: column; */
   width: 60px;
   background: #314455;
-  height: 100vh;
+  height: Calc(100vh - 90px);
   padding: 20px 0;
 }
 .menuBtn {

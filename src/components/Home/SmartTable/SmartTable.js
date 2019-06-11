@@ -8,12 +8,11 @@ class SmartTable extends Component {
     }
 
     getElementCoords = (id) => {
-        let coorX0 = document.getElementById(id).offsetLeft;
-        let coorX3 = coorX0 + document.getElementById(id).offsetWidth;
-        let coorX1 = coorX0 + document.getElementById(id).offsetWidth/5;
-        let coorX2 = coorX3 - document.getElementById(id).offsetWidth/5;
+        let coorX0 = document.getElementById(id).getBoundingClientRect().left;
+        let coorX2 = coorX0 + document.getElementById(id).offsetWidth;
+        let coorX1 = (coorX0 + coorX2)/2;
 
-        return [coorX0, coorX1, coorX2, coorX3]
+        return [coorX0, coorX1, coorX2]
     }
 
     placeBefore = (movingItem, origin) => {
@@ -41,20 +40,16 @@ class SmartTable extends Component {
         })
         coordinates.map((header) => {
             if(e.clientX===0){}
-            else if(e.clientX < header[4] && e.clientX > header[3]){
+            else if(e.clientX < header[3] && e.clientX > header[2]){
                 return this.placeAfter(e.target.id,coordinates[coordinates.indexOf(header)][0])
             }
             else if(e.clientX < header[2] && e.clientX > header[1]){
                 return this.placeBefore(e.target.id,coordinates[coordinates.indexOf(header)][0])
             }
-            else if(e.clientX < header[3] && e.clientX > header[2]){
-                if(coordinates.indexOf(header) < coordinates.indexOf(e.target.id)){
-                    return this.placeAfter(e.target.id,coordinates[coordinates.indexOf(header)][0])
-                }
-                else{
-                    return this.placeBefore(e.target.id,coordinates[coordinates.indexOf(header)][0])
-                }
+            else{
+                return
             }
+            
         })
     }
     headerRow = () => {

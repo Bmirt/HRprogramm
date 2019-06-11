@@ -67,7 +67,9 @@ export default class Home extends Component {
             <img src={searchIcon} alt="search" />
           </button>
         </div>
-        <SmartTable columnHeaders={this.state.columnHeaders} rows={this.state.rows}/>
+        <div className={styles.tableContainer}>
+          <SmartTable columnHeaders={this.state.columnHeaders} rows={this.state.rows}/>
+        </div>
       </div>
     );
     return(
