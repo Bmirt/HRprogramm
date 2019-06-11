@@ -51,6 +51,7 @@ class SmartTable extends Component {
             
         })
     }
+
   headerRow = () => {
     let headers = this.state.columnHeaders.map(header => {
       return (

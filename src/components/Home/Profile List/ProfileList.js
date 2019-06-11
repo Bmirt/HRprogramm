@@ -144,31 +144,37 @@ export default class Home extends Component {
     if (this.state.rows.length > 0) {
       return (
         <div className={styles.container}>
-          <div className={styles.search}>
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search..."
-              onChange={e => this.profilesFilterer(e)}
-            />
-            <button>
-              <img src={searchIcon} alt="search" />
+          <div className={styles.content}>
+            <div className={styles.search}>
+              <input
+                type="text"
+                className={styles.searchInput}
+                placeholder="Search..."
+                onChange={e => this.profilesFilterer(e)}
+              />
+              <button>
+                <img src={searchIcon} alt="search" />
+              </button>
+            </div>
+            <button
+              className={styles.addcandidate}
+              onClick={this.startCreateEventHandler}
+            >
+              Add a candidate
             </button>
+            <div className={styles.profilesTable}>
+              <SmartTable
+                columnHeaders={this.state.columnHeaders}
+                rows={profiles}
+              />
+            </div>
+            <Pagination
+              itemsCount={this.props.state.profileListReducer.profiles.length}
+              pageSize={this.state.pageSize}
+              currentPage={this.state.currentPage}
+              onPageChange={this.handlePageChange}
+            />
           </div>
-          <button 
-          className={styles.addcandidate}
-          onClick={this.startCreateEventHandler}
-          >Add a candidate</button>
-          <SmartTable
-            columnHeaders={this.state.columnHeaders}
-            rows={profiles}
-          />
-          <Pagination
-            itemsCount={this.props.state.profileListReducer.profiles.length}
-            pageSize={this.state.pageSize}
-            currentPage={this.state.currentPage}
-            onPageChange={this.handlePageChange}
-          />
           {this.state.creating && <Backdrop />}
           {this.state.creating && (
             <Modal
