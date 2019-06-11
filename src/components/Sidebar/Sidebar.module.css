@@ -27,9 +27,9 @@
   color: white;
   font-weight: bold;
   line-height: 60px;
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
-.sidebarOpen li {
+.sidebarOpen li a {
   width: 220px;
   list-style: none;
   display: flex;
@@ -43,8 +43,8 @@ span.versionText {
   color: white;
   display: block;
   width: 210px;
-  padding: 10px;
-  margin: 10px auto;
+  padding: 0 10px;
+  margin: auto;
   line-height: 40px;
   font-weight: 100;
 }
@@ -52,6 +52,7 @@ span.versionText {
   display: block;
   width: 90%;
   margin: 0 auto;
+  margin-top: 20px;
   background: grey;
   height: 1px;
 }
