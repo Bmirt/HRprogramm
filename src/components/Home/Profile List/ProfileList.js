@@ -4,10 +4,13 @@ import searchIcon from "../../../images/searchIcon.png";
 import SmartTable from "../SmartTable/SmartTable";
 
 import { fetchProfiles } from "../../../actions/profileListActions";
-// import { ClientHttp2Session } from "http2";
+import Pagination from "../../pagination/Pagination";
+import { paginate } from "../../../utils/paginate";
 
 export default class Home extends Component {
   state = {
+    pageSize: 2,
+    currentPage: 1,
     columnHeaders: [
       "Name, Surname",
       "Phone",
@@ -59,6 +62,7 @@ export default class Home extends Component {
           });
         });
         this.setState({ rows: myrows });
+        console.log(this.state.rows);
       })
       .catch(error => error);
   }
@@ -74,8 +78,16 @@ export default class Home extends Component {
     this.props.filteredProfiles(filtered);
   };
 
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
   render() {
-    console.log(this.state.rows);
+    const profiles = paginate(
+      this.state.rows,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+    console.log(this.state.rows, "rows", profiles);
     if (this.state.rows.length)
       return (
         <div className={styles.container}>
@@ -90,9 +102,51 @@ export default class Home extends Component {
               <img src={searchIcon} alt="search" />
             </button>
           </div>
+          {/* <table>
+          <tbody>
+            <tr>
+              <th>Name, Surname</th>
+              <th>Phone</th>
+              <th>Current Position</th>
+              <th>Profile</th>
+              <th>Portfolio</th>
+              <th>Technologies</th>
+              <th>English</th>
+              <th>Salary Expectation</th>
+              <th>Source</th>
+              <th>Status</th>
+              <th>Projects</th>
+            </tr>
+          </tbody>
+          {profiles.map(candidate => {
+            return (
+              <tbody key={candidate.id}>
+                <tr>
+                  <td>{candidate.name || "-"}</td>
+                  <td>{candidate.phone || "-"}</td>
+                  <td>{candidate.position || "-"}</td>
+                  <td>{candidate.profile || "-"}</td>
+                  <td>{candidate.portfolio || "-"}</td>
+                  <td>ver vipove</td>
+                  <td>{candidate.english || "-"}</td>
+                  <td>{candidate.salary || "-"}</td>
+                  <td>{candidate.source || "-"}</td>
+                  <td>{candidate.status || "-"}</td>
+                  <td>proeqtebi</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table> */}
           <SmartTable
             columnHeaders={this.state.columnHeaders}
-            rows={this.state.rows}
+            rows={profiles}
+          />
+          <Pagination
+            itemsCount={this.props.state.profileListReducer.profiles.length}
+            pageSize={this.state.pageSize}
+            currentPage={this.state.currentPage}
+            onPageChange={this.handlePageChange}
           />
         </div>
       );
