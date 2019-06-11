@@ -1,5 +1,5 @@
 .container {
-  padding: 40px;
+  padding: 40px 0;
   width: 100%;
 }
 .profilesTable {
@@ -7,7 +7,7 @@
   overflow-x: scroll;
 }
 .content {
-  width: Calc(100vw - 350px);
+  width: Calc(100vw - 250px);
   margin: auto;
 }
 .container th {
