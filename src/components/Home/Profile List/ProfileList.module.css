@@ -41,6 +41,7 @@
 button {
   outline: none;
 }
+<<<<<<< HEAD
 
 .addcandidate{
   width: 110px;
@@ -54,4 +55,8 @@ button {
 .addcandidate:hover {
   background: rgb(212, 203, 203);
   /* color: #737373; */
+=======
+.container th {
+  cursor: move;
+>>>>>>> 116c6f6d76771b7bc41861963ba7247a063fabc6
 }
