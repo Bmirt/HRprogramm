@@ -53,3 +53,13 @@ button {
 .container th {
   cursor: move;
 }
+.addcandidate{
+  width: 110px;
+  background-color:#8f848b;
+  border-radius: 15px;
+  height: 25px;
+}
+.addcandidate:hover{
+  background: rgb(156, 149, 149);
+  /* color: #737373; */
+}

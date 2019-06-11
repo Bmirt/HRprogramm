@@ -155,6 +155,10 @@ export default class Home extends Component {
               <img src={searchIcon} alt="search" />
             </button>
           </div>
+          <button 
+          className={styles.addcandidate}
+          onClick={this.startCreateEventHandler}
+          >Add a candidate</button>
           <SmartTable
             columnHeaders={this.state.columnHeaders}
             rows={profiles}
