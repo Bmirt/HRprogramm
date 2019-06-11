@@ -10,6 +10,42 @@
   width: Calc(100vw - 250px);
   margin: auto;
 }
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+}
+.profilesListBtnRight {
+  display: flex;
+}
+.profilesListBtn {
+  padding: 5px 20px;
+  background: transparent;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-weight: 600;
+  color: #575757;
+  cursor: pointer;
+  outline: none;
+  line-height: 24px;
+  min-height: 40px;
+}
+.profilesListBtn:hover {
+  background: #fefefe;
+}
+.profilesListBtn:active {
+  background: transparent;
+}
+.profilesListBtn span {
+  display: block;
+  float: right;
+}
+.btnIcon {
+  width: 24px;
+  float: left;
+  margin-right: 20px;
+}
 .container th {
   font-size: 16px;
   padding: 10px 40px;
