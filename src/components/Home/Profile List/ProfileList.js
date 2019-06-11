@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
 import searchIcon from "../../../images/searchIcon.png";
+import Modal from "../../Modal/Modal";
+import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
 
 import { fetchProfiles } from "../../../actions/profileListActions";
@@ -9,6 +11,19 @@ import { paginate } from "../../../utils/paginate";
 
 export default class Home extends Component {
   state = {
+    pageSize: 3,
+    creating: false,
+    name: "",
+    phone: "",
+    position: "",
+    profile: "",
+    portfolio: "",
+    comment: "",
+    english: "",
+    salary: "",
+    status: "",
+    projects: [],
+    technologies: "",
     pageSize: 2,
     currentPage: 1,
     columnHeaders: [
@@ -25,6 +40,20 @@ export default class Home extends Component {
       "Projects"
     ],
     rows: []
+  };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(this.state);
+  };
+
+  startCreateEventHandler = () => {
+    this.setState({ creating: true });
+  };
+  modalConfirmHandler = () => {
+    this.setState({ creating: false });
+  };
+  modalCancelHandler = () => {
+    this.setState({ creating: false });
   };
   fetchingProfiles = () => {
     let token = localStorage.getItem("token");
@@ -112,7 +141,7 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
-    if (this.state.rows.length)
+    if (this.state.rows.length > 0) {
       return (
         <div className={styles.container}>
           <div className={styles.search}>
@@ -126,42 +155,6 @@ export default class Home extends Component {
               <img src={searchIcon} alt="search" />
             </button>
           </div>
-          {/* <table>
-          <tbody>
-            <tr>
-              <th>Name, Surname</th>
-              <th>Phone</th>
-              <th>Current Position</th>
-              <th>Profile</th>
-              <th>Portfolio</th>
-              <th>Technologies</th>
-              <th>English</th>
-              <th>Salary Expectation</th>
-              <th>Source</th>
-              <th>Status</th>
-              <th>Projects</th>
-            </tr>
-          </tbody>
-          {profiles.map(candidate => {
-            return (
-              <tbody key={candidate.id}>
-                <tr>
-                  <td>{candidate.name || "-"}</td>
-                  <td>{candidate.phone || "-"}</td>
-                  <td>{candidate.position || "-"}</td>
-                  <td>{candidate.profile || "-"}</td>
-                  <td>{candidate.portfolio || "-"}</td>
-                  <td>ver vipove</td>
-                  <td>{candidate.english || "-"}</td>
-                  <td>{candidate.salary || "-"}</td>
-                  <td>{candidate.source || "-"}</td>
-                  <td>{candidate.status || "-"}</td>
-                  <td>proeqtebi</td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table> */}
           <SmartTable
             columnHeaders={this.state.columnHeaders}
             rows={profiles}
@@ -172,22 +165,125 @@ export default class Home extends Component {
             currentPage={this.state.currentPage}
             onPageChange={this.handlePageChange}
           />
+          {this.state.creating && <Backdrop />}
+          {this.state.creating && (
+            <Modal
+              title="Add Candidate"
+              canCancel
+              canConfirm
+              onCancel={this.modalCancelHandler}
+              onConfirm={this.modalConfirmHandler}
+            >
+              <form>
+                <div className="form-control">
+                  <label htmlFor="name">Name,Surname</label>
+                  <input type="text" name="name" onChange={this.handleChange} />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    type="number"
+                    name="phone"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Current_position">Current Position</label>
+                  <input
+                    type="text"
+                    name="position"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="profile">Profile</label>
+                  <input
+                    type="email"
+                    name="profile"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="portfolio">Portfolio</label>
+                  <input
+                    type="text"
+                    name="portfolio"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Comment">Comment</label>
+                  <input
+                    type="text"
+                    name="Comment"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="English">English</label>
+                  <input type="text" name="English" />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Salary_Expectation">Salary Expectation</label>
+                  <input
+                    type="text"
+                    name="salary"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="source">Source</label>
+                  <input
+                    type="text"
+                    name="source"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="status">Status</label>
+                  <input
+                    type="text"
+                    name="status"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="projects">Projects</label>
+                  <input
+                    type="text"
+                    name="projects"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-control">
+                  <label htmlFor="Technologies">Technologies</label>
+                  <input
+                    type="text"
+                    name="technologies"
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </form>
+            </Modal>
+          )}
         </div>
       );
-    return (
-      <div className={styles.container}>
-        <div className={styles.search}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search..."
-            onChange={e => this.profilesFilterer(e)}
-          />
-          <button>
-            <img src={searchIcon} alt="search" />
-          </button>
+    } else {
+      return (
+        <div className={styles.container}>
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search..."
+              onChange={e => this.profilesFilterer(e)}
+            />
+            <button>
+              <img src={searchIcon} alt="search" />
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
