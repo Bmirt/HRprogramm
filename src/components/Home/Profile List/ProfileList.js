@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
 import searchIcon from "../../../images/searchIcon.png";
+// import SmartTable from "../SmartTable/SmartTable"
 
 import { fetchProfiles } from "../../../actions/profileListActions";
 // import { ClientHttp2Session } from "http2";
@@ -33,6 +34,7 @@ export default class Home extends Component {
     console.log(this.props.state.profileListReducer.profiles);
     return (
       <div className={styles.container}>
+        {/* <SmartTable /> */}
         <div className={styles.search}>
           <input
             type="text"
