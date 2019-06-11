@@ -93,12 +93,17 @@ button {
   cursor: move;
 }
 .addcandidate {
-  width: 110px;
-  background-color: #8f848b;
-  border-radius: 15px;
-  height: 25px;
+  width: 160px;
+  background-color: rgb(204, 204, 204);
+  border-radius: 10px;
+  height: 40px;
+  font-size: 1.2rem;
+  color: #575757;
+  font-weight: 600;
+  line-height: 40px;
+  border: 2px solid #ccc;
 }
 .addcandidate:hover {
-  background: rgb(156, 149, 149);
+  background: #fefefe;
   /* color: #737373; */
 }

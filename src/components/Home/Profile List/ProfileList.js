@@ -164,7 +164,8 @@ export default class Home extends Component {
                   className={styles.addcandidate}
                   onClick={this.startCreateEventHandler}
                 >
-                  Add a candidate
+                  <img src="" />
+                  Create Profile
                 </button>
               </div>
               <div className={styles.profilesListBtnRight}>
