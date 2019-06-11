@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
 import searchIcon from "../../../images/searchIcon.png";
+import SmartTable from "../SmartTable/SmartTable";
+
 import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
@@ -8,7 +10,21 @@ import { paginate } from "../../../utils/paginate";
 export default class Home extends Component {
   state = {
     pageSize: 2,
-    currentPage: 1
+    currentPage: 1,
+    columnHeaders: [
+      "Name, Surname",
+      "Phone",
+      "Current Position",
+      "Profile",
+      "Portfolio",
+      "Technologies",
+      "English",
+      "Salary Expectation",
+      "Source",
+      "Status",
+      "Projects"
+    ],
+    rows: []
   };
 
   componentDidMount() {
@@ -26,11 +42,29 @@ export default class Home extends Component {
         if (res.error) {
           throw res.error;
         }
-        console.log("this is me", res.profiles);
         dispatch(fetchProfiles(res.profiles));
         return res.products;
       })
-      .then(() => {})
+      .then(() => {
+        let myrows = [];
+        this.props.state.profileListReducer.profiles.map(candidate => {
+          myrows.push({
+            "Name, Surname": candidate.name || "-",
+            Phone: candidate.phone || "-",
+            "Current Position": candidate.phone || "-",
+            Profile: candidate.profile || "-",
+            Portfolio: candidate.portfolio || "-",
+            Technologies: "ver vipove",
+            English: candidate.english || "-",
+            "Salary Expectation": candidate.salary || "-",
+            Source: candidate.source || "-",
+            Status: candidate.status || "-",
+            Projects: "proeqtebi"
+          });
+        });
+        this.setState({ rows: myrows });
+        console.log(this.state.rows);
+      })
       .catch(error => error);
   }
 
@@ -38,30 +72,26 @@ export default class Home extends Component {
     this.setState({ currentPage: page });
   };
   render() {
-    console.log(
-      this.props.state.profileListReducer.profiles,
-      this.state.currentPage,
-      this.state.pageSize
-    );
     const profiles = paginate(
-      this.props.state.profileListReducer.profiles,
+      this.state.rows,
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log("profiles", profiles);
-    return (
-      <div className={styles.container}>
-        <div className={styles.search}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search..."
-          />
-          <button>
-            <img src={searchIcon} alt="search" />
-          </button>
-        </div>
-        <table>
+    console.log(this.state.rows, "rows", profiles);
+    if (this.state.rows.length)
+      return (
+        <div className={styles.container}>
+          <div className={styles.search}>
+            <input
+              type="text"
+              className={styles.searchInput}
+              placeholder="Search..."
+            />
+            <button>
+              <img src={searchIcon} alt="search" />
+            </button>
+          </div>
+          {/* <table>
           <tbody>
             <tr>
               <th>Name, Surname</th>
@@ -96,14 +126,19 @@ export default class Home extends Component {
               </tbody>
             );
           })}
-        </table>
-        <Pagination
-          itemsCount={this.props.state.profileListReducer.profiles.length}
-          pageSize={this.state.pageSize}
-          currentPage={this.state.currentPage}
-          onPageChange={this.handlePageChange}
-        />
-      </div>
-    );
+        </table> */}
+          <SmartTable
+            columnHeaders={this.state.columnHeaders}
+            rows={profiles}
+          />
+          <Pagination
+            itemsCount={this.props.state.profileListReducer.profiles.length}
+            pageSize={this.state.pageSize}
+            currentPage={this.state.currentPage}
+            onPageChange={this.handlePageChange}
+          />
+        </div>
+      );
+    return <div />;
   }
 }
