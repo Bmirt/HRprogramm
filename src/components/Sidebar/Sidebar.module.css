@@ -19,7 +19,7 @@
 }
 .sidebarOpen {
   width: 220px;
-  height: 110vh;
+  height: calc(100vh - 90px);
   background: #314455;
   padding: 20px 0;
 }
