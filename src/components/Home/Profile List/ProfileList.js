@@ -91,42 +91,6 @@ export default class Home extends Component {
               <img src={searchIcon} alt="search" />
             </button>
           </div>
-          {/* <table>
-          <tbody>
-            <tr>
-              <th>Name, Surname</th>
-              <th>Phone</th>
-              <th>Current Position</th>
-              <th>Profile</th>
-              <th>Portfolio</th>
-              <th>Technologies</th>
-              <th>English</th>
-              <th>Salary Expectation</th>
-              <th>Source</th>
-              <th>Status</th>
-              <th>Projects</th>
-            </tr>
-          </tbody>
-          {profiles.map(candidate => {
-            return (
-              <tbody key={candidate.id}>
-                <tr>
-                  <td>{candidate.name || "-"}</td>
-                  <td>{candidate.phone || "-"}</td>
-                  <td>{candidate.position || "-"}</td>
-                  <td>{candidate.profile || "-"}</td>
-                  <td>{candidate.portfolio || "-"}</td>
-                  <td>ver vipove</td>
-                  <td>{candidate.english || "-"}</td>
-                  <td>{candidate.salary || "-"}</td>
-                  <td>{candidate.source || "-"}</td>
-                  <td>{candidate.status || "-"}</td>
-                  <td>proeqtebi</td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table> */}
           <SmartTable
             columnHeaders={this.state.columnHeaders}
             rows={profiles}
