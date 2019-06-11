@@ -9,7 +9,7 @@ import { paginate } from "../../../utils/paginate";
 
 export default class Home extends Component {
   state = {
-    pageSize: 2,
+    pageSize: 3,
     currentPage: 1,
     columnHeaders: [
       "Name, Surname",
