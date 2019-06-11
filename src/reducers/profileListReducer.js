@@ -13,7 +13,6 @@ const initialState = {
 const profileListReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PROFILES:
-      console.log("i was here", action);
       return {
         ...state,
         profiles: action.profiles
@@ -28,7 +27,6 @@ const profileListReducer = (state = initialState, action) => {
       console.log("change profile");
       return state;
     case FILTER_PROFILES:
-      console.log("FILTERED PROFILES", action.profiles);
       return {
         ...state,
         profiles: action.profiles

@@ -26,7 +26,7 @@ export default class Home extends Component {
     ],
     rows: []
   };
-  componentDidMount() {
+  fetchingProfiles = () => {
     let token = localStorage.getItem("token");
     const { dispatch } = this.props;
     fetch("http://laravel.local/api/all-profiles", {
@@ -62,20 +62,45 @@ export default class Home extends Component {
           });
         });
         this.setState({ rows: myrows });
-        console.log(this.state.rows);
       })
       .catch(error => error);
+  };
+  componentDidMount() {
+    this.fetchingProfiles();
   }
   profilesFilterer = e => {
-    const filtered = this.props.state.profileListReducer.profiles.filter(
-      profile => {
-        return profile.name
-          .trim()
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase().trim());
-      }
-    );
-    this.props.filteredProfiles(filtered);
+    console.log(e.target.value);
+    if (!e.target.value) {
+      this.fetchingProfiles();
+    } else {
+      const filtered = this.props.state.profileListReducer.profiles.filter(
+        profile => {
+          return profile.name
+            .trim()
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase().trim());
+        }
+      );
+
+      this.props.filteredProfiles(filtered);
+      let myrows = [];
+      filtered.map(candidate => {
+        myrows.push({
+          "Name, Surname": candidate.name || "-",
+          Phone: candidate.phone || "-",
+          "Current Position": candidate.phone || "-",
+          Profile: candidate.profile || "-",
+          Portfolio: candidate.portfolio || "-",
+          Technologies: "ver vipove",
+          English: candidate.english || "-",
+          "Salary Expectation": candidate.salary || "-",
+          Source: candidate.source || "-",
+          Status: candidate.status || "-",
+          Projects: "proeqtebi"
+        });
+      });
+      this.setState({ rows: myrows, currentPage: 1 });
+    }
   };
 
   handlePageChange = page => {
@@ -87,7 +112,6 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(this.state.rows, "rows", profiles);
     if (this.state.rows.length)
       return (
         <div className={styles.container}>
@@ -150,6 +174,20 @@ export default class Home extends Component {
           />
         </div>
       );
-    return <div />;
+    return (
+      <div className={styles.container}>
+        <div className={styles.search}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Search..."
+            onChange={e => this.profilesFilterer(e)}
+          />
+          <button>
+            <img src={searchIcon} alt="search" />
+          </button>
+        </div>
+      </div>
+    );
   }
 }
