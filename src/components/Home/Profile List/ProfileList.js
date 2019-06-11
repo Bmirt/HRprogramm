@@ -160,7 +160,8 @@ export default class Home extends Component {
               className={styles.addcandidate}
               onClick={this.startCreateEventHandler}
             >
-              Add a candidate
+              <img src="" />
+              CREATE PROFILE
             </button>
             <div className={styles.profilesTable}>
               <SmartTable
