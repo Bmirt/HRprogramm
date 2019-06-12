@@ -64,7 +64,7 @@ export default class Home extends Component {
   fetchingProfiles = () => {
     let token = localStorage.getItem("token");
     const { dispatch } = this.props;
-    fetch("http://laravel.local/api/all-profiless", {
+    fetch("http://laravel.local/api/all-profiles", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
