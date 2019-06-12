@@ -86,6 +86,15 @@ class SmartTable extends Component {
     return <tr>{headers}</tr>;
   };
   contentRows = () => {
+    if (!this.props.rows.length) {
+      return (
+        <tbody>
+          <tr>
+            <td colSpan={this.state.columnHeaders.length}>No Items</td>
+          </tr>
+        </tbody>
+      );
+    }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
         return <td key={header}>{row[header]}</td>;
@@ -97,7 +106,7 @@ class SmartTable extends Component {
   render() {
     return (
       <table id="html_to_excel">
-        <tbody>{this.headerRow()}</tbody>
+        <thead>{this.headerRow()}</thead>
         {this.contentRows()}
       </table>
     );
