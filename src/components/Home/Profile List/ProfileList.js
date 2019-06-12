@@ -10,10 +10,7 @@ import FilterIcon from "../../../images/filterIcon.png";
 import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
-import ReactToExcel from "react-html-table-to-excel";
-
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import ExportFile from "../../ExportFile/ExportFile";
 
 export default class Home extends Component {
   state = {
@@ -152,14 +149,6 @@ export default class Home extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleExport = e => {
-    console.log(e.target.value);
-    const doc = new jsPDF();
-    if (e.target.value === "1") {
-      doc.autoTable({ html: "#html_to_excel" });
-      doc.save("table.pdf");
-    }
-  };
   render() {
     const profiles = paginate(
       this.state.rows,
@@ -192,16 +181,16 @@ export default class Home extends Component {
               </button>
             </div>
             <div className={styles.profilesListBtnRight}>
-              <select
+              <ExportFile />
+              {/* <select
                 disabled={!this.state.rows.length}
                 onChange={this.handleExport}
                 className={styles.profilesListBtn}
               >
-                <img src={ExportFileIcon} className={styles.btnIcon} />
                 <option value="0">Export</option>
                 <option value="1">PDF</option>
                 <option value="2">Excel</option>
-              </select>
+              </select> */}
               <button
                 className={styles.profilesListBtn}
                 disabled={!this.state.rows.length}
@@ -215,12 +204,6 @@ export default class Home extends Component {
             <SmartTable
               columnHeaders={this.state.columnHeaders}
               rows={profiles}
-            />
-            <ReactToExcel
-              table="html_to_excel"
-              filename="candidates"
-              sheet="sheet 1"
-              buttonText="export"
             />
           </div>
           <Pagination
