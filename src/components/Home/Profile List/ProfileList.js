@@ -154,9 +154,15 @@ export default class Home extends Component {
 
   handleExport = e => {
     console.log(e.target.value);
-    const doc = new jsPDF();
+    const doc = new jsPDF({
+      orientation: "landscape"
+    });
     if (e.target.value === "1") {
-      doc.autoTable({ html: "#html_to_excel" });
+      doc.autoTable({
+        html: "#html_to_excel",
+        theme: "grid",
+        tableWidth: "wrap"
+      });
       doc.save("table.pdf");
     }
   };
