@@ -4,7 +4,6 @@
 }
 .profilesTable {
   width: 100%;
-  overflow-x: scroll;
 }
 .content {
   width: Calc(100vw - 250px);
@@ -45,26 +44,6 @@
   width: 24px;
   float: left;
   margin-right: 20px;
-}
-.container th {
-  font-size: 16px;
-  padding: 10px 40px;
-  background: #ccc;
-  border-radius: 10px 10px 0 0;
-  color: #575757;
-  cursor: pointer;
-}
-.container th:hover {
-  background: rgb(235, 233, 233);
-  color: #737373;
-}
-.container table {
-  min-width: 100%;
-}
-.container td {
-  font-size: 14px;
-  padding: 10px;
-  background: white;
 }
 .search {
   width: 100%;
