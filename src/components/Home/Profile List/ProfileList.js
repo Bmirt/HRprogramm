@@ -300,6 +300,12 @@ export default class Home extends Component {
     } else {
       return (
         <div className={styles.container}>
+          <button
+            className={styles.addcandidate}
+            onClick={this.startCreateEventHandler}
+          >
+            Add a candidate
+          </button>
           <div className={styles.search}>
             <input
               type="text"
