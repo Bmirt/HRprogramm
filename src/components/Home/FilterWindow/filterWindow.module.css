@@ -1,0 +1,32 @@
+.container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: auto;
+  background: #314455;
+  box-shadow: 0px 15px 20px rgba(155, 168, 188, 1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+}
+.secondaryContainer {
+  margin: 20px;
+}
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.inputContainer div input {
+  width: 85px;
+}
+
+.inputContainer div input:first-child {
+  margin-right: 5px;
+}
+
+.inputContainer span {
+  color: #fff;
+  margin-right: 1rem;
+}
