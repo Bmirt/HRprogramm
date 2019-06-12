@@ -10,6 +10,10 @@ import FilterIcon from "../../../images/filterIcon.png";
 import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
+import ReactToExcel from "react-html-table-to-excel";
+
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export default class Home extends Component {
   state = {
@@ -41,7 +45,21 @@ export default class Home extends Component {
       "Status",
       "Projects"
     ],
-    rows: []
+    rows: [
+      {
+        "Name, Surname": "sdfsdf",
+        Phone: 56465465,
+        "Current Position": "gdfg",
+        Profile: 54645,
+        Portfolio: "dfgdf",
+        Technologies: "",
+        English: "",
+        "Salary Expectation": 5000,
+        Source: "SDfsdf",
+        Status: "dsfsdf",
+        Projects: null
+      }
+    ]
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -137,6 +155,14 @@ export default class Home extends Component {
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
+
+  handleExport = e => {
+    console.log(e.target.value);
+    const doc = new jsPDF();
+
+    doc.autoTable({ html: "#html_to_excel" });
+    doc.save("table.pdf");
+  };
   render() {
     const profiles = paginate(
       this.state.rows,
@@ -169,11 +195,21 @@ export default class Home extends Component {
                 </button>
               </div>
               <div className={styles.profilesListBtnRight}>
-                <select className={styles.profilesListBtn}>
+                <select
+                  onChange={this.handleExport}
+                  className={styles.profilesListBtn}
+                >
                   <img src={ExportFileIcon} className={styles.btnIcon} />
                   <option value="0">Export</option>
                   <option value="1">PDF</option>
-                  <option value="2">Exel</option>
+                  <option value="2">
+                    <ReactToExcel
+                      table="html_to_excel"
+                      filename="candidates"
+                      sheet="sheet 1"
+                      buttonText="export"
+                    />
+                  </option>
                 </select>
                 <button className={styles.profilesListBtn}>
                   <img src={FilterIcon} className={styles.btnIcon} />
@@ -185,6 +221,12 @@ export default class Home extends Component {
               <SmartTable
                 columnHeaders={this.state.columnHeaders}
                 rows={profiles}
+              />
+              <ReactToExcel
+                table="html_to_excel"
+                filename="candidates"
+                sheet="sheet 1"
+                buttonText="export"
               />
             </div>
             <Pagination

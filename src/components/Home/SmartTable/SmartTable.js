@@ -6,51 +6,66 @@ class SmartTable extends Component {
     columnHeaders: this.props.columnHeaders
   };
 
-    getElementCoords = (id) => {
-        let coorX0 = document.getElementById(id).getBoundingClientRect().left;
-        let coorX2 = coorX0 + document.getElementById(id).offsetWidth;
-        let coorX1 = (coorX0 + coorX2)/2;
+  getElementCoords = id => {
+    let coorX0 = document.getElementById(id).getBoundingClientRect().left;
+    let coorX2 = coorX0 + document.getElementById(id).offsetWidth;
+    let coorX1 = (coorX0 + coorX2) / 2;
 
-        return [coorX0, coorX1, coorX2]
-    }
+    return [coorX0, coorX1, coorX2];
+  };
 
-    placeBefore = (movingItem, origin) => {
-        if(movingItem!==origin){
-            let currentArray = this.state.columnHeaders.filter(x=>x!==movingItem);
-            let filteredDown = currentArray.filter(x=>currentArray.indexOf(x)<currentArray.indexOf(origin));
-            let filteredUp = currentArray.filter(x=>currentArray.indexOf(x)>=currentArray.indexOf(origin));
-        
-            this.setState({roughcolumns: [...filteredDown, movingItem, ...filteredUp]});
-        }   
+  placeBefore = (movingItem, origin) => {
+    if (movingItem !== origin) {
+      let currentArray = this.state.columnHeaders.filter(x => x !== movingItem);
+      let filteredDown = currentArray.filter(
+        x => currentArray.indexOf(x) < currentArray.indexOf(origin)
+      );
+      let filteredUp = currentArray.filter(
+        x => currentArray.indexOf(x) >= currentArray.indexOf(origin)
+      );
+
+      this.setState({
+        roughcolumns: [...filteredDown, movingItem, ...filteredUp]
+      });
     }
-    placeAfter = (movingItem, origin) => {
-        if(movingItem!==origin){
-            let currentArray = this.state.columnHeaders.filter(x=>x!==movingItem);
-            let filteredDown = currentArray.filter(x=>currentArray.indexOf(x)<=currentArray.indexOf(origin));
-            let filteredUp = currentArray.filter(x=>currentArray.indexOf(x)>currentArray.indexOf(origin));
-        
-            this.setState({roughcolumns: [...filteredDown, movingItem, ...filteredUp]});
-        } 
+  };
+  placeAfter = (movingItem, origin) => {
+    if (movingItem !== origin) {
+      let currentArray = this.state.columnHeaders.filter(x => x !== movingItem);
+      let filteredDown = currentArray.filter(
+        x => currentArray.indexOf(x) <= currentArray.indexOf(origin)
+      );
+      let filteredUp = currentArray.filter(
+        x => currentArray.indexOf(x) > currentArray.indexOf(origin)
+      );
+
+      this.setState({
+        roughcolumns: [...filteredDown, movingItem, ...filteredUp]
+      });
     }
-    handleDragging = (e) => {
-        let coordinates=[]
-        this.state.columnHeaders.map((header) => {
-            coordinates.push([header, ...this.getElementCoords(header)])
-        })
-        coordinates.map((header) => {
-            if(e.clientX===0){}
-            else if(e.clientX < header[3] && e.clientX > header[2]){
-                return this.placeAfter(e.target.id,coordinates[coordinates.indexOf(header)][0])
-            }
-            else if(e.clientX < header[2] && e.clientX > header[1]){
-                return this.placeBefore(e.target.id,coordinates[coordinates.indexOf(header)][0])
-            }
-            else{
-                return
-            }
-            
-        })
-    }
+  };
+  handleDragging = e => {
+    let coordinates = [];
+    this.state.columnHeaders.map(header => {
+      coordinates.push([header, ...this.getElementCoords(header)]);
+    });
+    coordinates.map(header => {
+      if (e.clientX === 0) {
+      } else if (e.clientX < header[3] && e.clientX > header[2]) {
+        return this.placeAfter(
+          e.target.id,
+          coordinates[coordinates.indexOf(header)][0]
+        );
+      } else if (e.clientX < header[2] && e.clientX > header[1]) {
+        return this.placeBefore(
+          e.target.id,
+          coordinates[coordinates.indexOf(header)][0]
+        );
+      } else {
+        return;
+      }
+    });
+  };
 
   headerRow = () => {
     let headers = this.state.columnHeaders.map(header => {
@@ -81,7 +96,7 @@ class SmartTable extends Component {
   };
   render() {
     return (
-      <table>
+      <table id="html_to_excel">
         <tbody>{this.headerRow()}</tbody>
         {this.contentRows()}
       </table>
