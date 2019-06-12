@@ -3,15 +3,59 @@ import { withRouter, Link } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 import menuIcon from "../../images/menuIcon.png";
 import profilesIcon from "../../images/profilesIcon.png";
+import profilesIconBlue from "../../images/profilesIconBlue.png";
 import projectsIcon from "../../images/projectsIcon.png";
+import projectsIconBlue from "../../images/projectsIconBlue.png";
 import analyticsIcon from "../../images/analyticsIcon.png";
+import analyticsIconBlue from "../../images/analyticsIconBlue.png";
 import calendarIcon from "../../images/calendarIcon.png";
+import calendarIconBlue from "../../images/calendarIconBlue.png";
 import blackListIcon from "../../images/blackListIcon.png";
-import userManagmentIcon from "../../images/userManagmentIcon.png";
+import blackListIconBlue from "../../images/blackListIconBlue.png";
+import userManagementIcon from "../../images/userManagementIcon.png";
+import userManagementIconBlue from "../../images/userManagementIconBlue.png";
 
 export class Sidebar extends Component {
   state = {
-    open: JSON.parse(localStorage.getItem("sidebarState"))
+    open: JSON.parse(localStorage.getItem("sidebarState")),
+    sidebarItems: [
+      {
+        title: "Profile List",
+        path: "profile_list",
+        icon: profilesIcon,
+        iconBlue: profilesIconBlue
+      },
+      {
+        title: "Projects",
+        path: "projects",
+        icon: projectsIcon,
+        iconBlue: projectsIconBlue
+      },
+      {
+        title: "analytics",
+        path: "analytics",
+        icon: analyticsIcon,
+        iconBlue: analyticsIconBlue
+      },
+      {
+        title: "Calendar",
+        path: "calendar",
+        icon: calendarIcon,
+        iconBlue: calendarIconBlue
+      },
+      {
+        title: "Black List",
+        path: "black_list",
+        icon: blackListIcon,
+        iconBlue: blackListIconBlue
+      },
+      {
+        title: "User Management",
+        path: "user_management",
+        icon: userManagementIcon,
+        iconBlue: userManagementIconBlue
+      }
+    ]
   };
   handleClick = () => {
     this.setState({ open: !this.state.open });
@@ -21,8 +65,33 @@ export class Sidebar extends Component {
     this.props.history.push(`/home/${link}`);
   };
   generateContent() {
+    const currentUrl = window.location.pathname;
+    console.log(currentUrl);
     const sidebarStyles = this.state.open ? styles.sidebarOpen : styles.sidebar;
     const isVisible = this.state.open ? styles.visible : styles.invisible;
+
+    let sidebarItems = this.state.sidebarItems.map(item => {
+      let itemClass = styles.smth;
+      let itemIcon = item.icon;
+      if (window.location.pathname === "/home/" + item.path) {
+        itemClass = styles.chosen;
+        itemIcon = item.iconBlue;
+      }
+      return (
+        <li className={itemClass}>
+          <Link to={item.path}>
+            <button className={styles.menuBtn}>
+              <img
+                src={itemIcon}
+                className={styles.sidebarIcon}
+                alt={item.title}
+              />
+            </button>
+            <span className={isVisible}>{item.title}</span>
+          </Link>
+        </li>
+      );
+    });
     return (
       <div className={sidebarStyles}>
         <ul>
@@ -34,78 +103,8 @@ export class Sidebar extends Component {
               <img src={menuIcon} className={styles.sidebarIcon} alt="menu" />
             </button>
           </li>
-          <li>
-            <Link to="profile_list">
-              <button className={styles.menuBtn}>
-                <img
-                  src={profilesIcon}
-                  className={styles.sidebarIcon}
-                  alt="profile list"
-                />
-              </button>
-              <span className={isVisible}>Profile List</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="projects">
-              <button className={styles.menuBtn}>
-                <img
-                  src={projectsIcon}
-                  className={styles.sidebarIcon}
-                  alt="projects"
-                />
-              </button>
-              <span className={isVisible}>Projects</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="analytics">
-              <button className={styles.menuBtn}>
-                <img
-                  src={analyticsIcon}
-                  className={styles.sidebarIcon}
-                  alt="analytics"
-                />
-              </button>
-              <span className={isVisible}>Analytics</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="calendar">
-              <button className={styles.menuBtn}>
-                <img
-                  src={calendarIcon}
-                  className={styles.sidebarIcon}
-                  alt="calendar"
-                />
-              </button>
-              <span className={isVisible}>Calendar</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="black_list">
-              <button className={styles.menuBtn}>
-                <img
-                  src={blackListIcon}
-                  className={styles.sidebarIcon}
-                  alt="black list"
-                />
-              </button>
-              <span className={isVisible}>Black List</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="user_management">
-              <button className={styles.menuBtn}>
-                <img
-                  src={userManagmentIcon}
-                  className={styles.sidebarIcon}
-                  alt="user managment"
-                />
-              </button>
-              <span className={isVisible}>User Managment</span>
-            </Link>
-          </li>
+          {sidebarItems}
+
           <span className={styles.divider} />
           <span className={styles.versionText}>V.1.0.1</span>
         </ul>

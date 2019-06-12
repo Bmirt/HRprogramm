@@ -170,10 +170,9 @@ export default class Home extends Component {
               </div>
               <div className={styles.profilesListBtnRight}>
                 <select className={styles.profilesListBtn}>
-                  <img src={ExportFileIcon} className={styles.btnIcon} />
                   <option value="0">Export</option>
                   <option value="1">PDF</option>
-                  <option value="2">Exel</option>
+                  <option value="2">Excel</option>
                 </select>
                 <button className={styles.profilesListBtn}>
                   <img src={FilterIcon} className={styles.btnIcon} />
@@ -323,10 +322,9 @@ export default class Home extends Component {
             </div>
             <div className={styles.profilesListBtnRight}>
               <select className={styles.profilesListBtn}>
-                <img src={ExportFileIcon} className={styles.btnIcon} />
                 <option value="0">Export</option>
                 <option value="1">PDF</option>
-                <option value="2">Exel</option>
+                <option value="2">Excel</option>
               </select>
               <button className={styles.profilesListBtn}>
                 <img src={FilterIcon} className={styles.btnIcon} />
