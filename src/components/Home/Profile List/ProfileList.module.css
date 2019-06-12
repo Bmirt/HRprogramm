@@ -8,7 +8,7 @@
 }
 .content {
   width: Calc(100vw - 250px);
-  margin: auto;
+  margin: 30px auto;
 }
 .buttonContainer {
   display: flex;
