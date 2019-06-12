@@ -310,6 +310,29 @@ export default class Home extends Component {
             <button>
               <img src={searchIcon} alt="search" />
             </button>
+            <div className={styles.buttonContainer}>
+              <div>
+                <button
+                  className={styles.addcandidate}
+                  onClick={this.startCreateEventHandler}
+                >
+                  <img src="" />
+                  Create Profile
+                </button>
+              </div>
+              <div className={styles.profilesListBtnRight}>
+                <select className={styles.profilesListBtn}>
+                  <img src={ExportFileIcon} className={styles.btnIcon} />
+                  <option value="0">Export</option>
+                  <option value="1">PDF</option>
+                  <option value="2">Exel</option>
+                </select>
+                <button className={styles.profilesListBtn}>
+                  <img src={FilterIcon} className={styles.btnIcon} />
+                  <span>Filter</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       );
