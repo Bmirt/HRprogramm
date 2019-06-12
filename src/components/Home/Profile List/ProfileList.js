@@ -6,12 +6,11 @@ import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
 import ExportFileIcon from "../../../images/exportFile.png";
 import FilterIcon from "../../../images/filterIcon.png";
-
+import FilterWindow from "../FilterWindow/filterWindow";
 import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ReactToExcel from "react-html-table-to-excel";
-
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
@@ -19,6 +18,7 @@ export default class Home extends Component {
   state = {
     pageSize: 3,
     creating: false,
+    drawFilter: false,
     name: "",
     phone: "",
     position: "",
@@ -74,6 +74,11 @@ export default class Home extends Component {
   };
   modalCancelHandler = () => {
     this.setState({ creating: false });
+  };
+  drawFilter = () => {
+    this.setState({ drawFilter: !this.state.drawFilter }, () =>
+      console.log(this.state.drawFilter)
+    );
   };
   fetchingProfiles = () => {
     let token = localStorage.getItem("token");
@@ -171,7 +176,13 @@ export default class Home extends Component {
     );
     if (this.state.rows.length > 0) {
       return (
-        <div className={styles.container}>
+        <div
+          className={styles.container}
+          // onClick={() =>
+          //   this.state.drawFilter ? this.setState({ drawFilter: false }) : null
+          // }
+        >
+          <FilterWindow display={this.state.drawFilter ? "" : "none"} />
           <div className={styles.content}>
             <div className={styles.search}>
               <input
@@ -211,7 +222,10 @@ export default class Home extends Component {
                     />
                   </option>
                 </select>
-                <button className={styles.profilesListBtn}>
+                <button
+                  className={styles.profilesListBtn}
+                  onClick={() => this.drawFilter()}
+                >
                   <img src={FilterIcon} className={styles.btnIcon} />
                   <span>Filter</span>
                 </button>
