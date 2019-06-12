@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./SmartTable.module.css";
 
 class SmartTable extends Component {
   state = {
@@ -86,6 +87,20 @@ class SmartTable extends Component {
     return <tr>{headers}</tr>;
   };
   contentRows = () => {
+    if (!this.props.rows.length) {
+      return (
+        <tbody>
+          <tr>
+            <td
+              colSpan={this.state.columnHeaders.length}
+              className={styles.noItemsAlert}
+            >
+              No Items To Show
+            </td>
+          </tr>
+        </tbody>
+      );
+    }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
         return <td key={header}>{row[header]}</td>;
@@ -96,10 +111,12 @@ class SmartTable extends Component {
   };
   render() {
     return (
-      <table id="html_to_excel">
-        <tbody>{this.headerRow()}</tbody>
-        {this.contentRows()}
-      </table>
+      <div className={styles.container}>
+        <table id="html_to_excel">
+          <thead>{this.headerRow()}</thead>
+          {this.contentRows()}
+        </table>
+      </div>
     );
   }
 }
