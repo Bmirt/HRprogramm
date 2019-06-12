@@ -336,16 +336,6 @@ export default class Home extends Component {
                 </button>
               </div>
               <div className={styles.profilesListBtnRight}>
-                <select
-                  disabled={!this.state.rows.length}
-                  onChange={this.handleExport}
-                  className={styles.profilesListBtn}
-                >
-                  <img src={ExportFileIcon} className={styles.btnIcon} />
-                  <option value="0">Export</option>
-                  <option value="1">PDF</option>
-                  <option value="2">Excel</option>
-                </select>
                 <button
                   className={styles.profilesListBtn}
                   disabled={!this.state.rows.length}
@@ -359,12 +349,6 @@ export default class Home extends Component {
               <SmartTable
                 columnHeaders={this.state.columnHeaders}
                 rows={profiles}
-              />
-              <ReactToExcel
-                table="html_to_excel"
-                filename="candidates"
-                sheet="sheet 1"
-                buttonText="export"
               />
             </div>
             <Pagination
