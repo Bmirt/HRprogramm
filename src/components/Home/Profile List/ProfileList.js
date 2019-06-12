@@ -4,7 +4,6 @@ import searchIcon from "../../../images/searchIcon.png";
 import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
-import ExportFileIcon from "../../../images/exportFile.png";
 import FilterIcon from "../../../images/filterIcon.png";
 
 import { fetchProfiles } from "../../../actions/profileListActions";
@@ -148,7 +147,6 @@ export default class Home extends Component {
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
-
   render() {
     const profiles = paginate(
       this.state.rows,

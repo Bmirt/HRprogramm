@@ -3,6 +3,7 @@ import styles from "./ExportFile.module.css";
 import ReactToExcel from "react-html-table-to-excel";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import ExportFileIcon from "../../images/exportFile.png";
 
 class ExportFile extends Component {
   state = {
@@ -10,10 +11,15 @@ class ExportFile extends Component {
   };
 
   handlePdf = () => {
-    console.log("pdf");
-    const doc = new jsPDF();
+    const doc = new jsPDF({
+      orientation: "landscape"
+    });
 
-    doc.autoTable({ html: "#html_to_excel" });
+    doc.autoTable({
+      html: "#html_to_excel",
+      theme: "grid",
+      tableWidth: "wrap"
+    });
     doc.save("table.pdf");
 
     this.setState({ open: false });
@@ -25,17 +31,15 @@ class ExportFile extends Component {
         <button onClick={this.handlePdf} className={styles.optionBtn}>
           PDF
         </button>
-        <button
-          onClick={() => this.setState({ open: false })}
-          className={styles.optionBtn}
-        >
+        <div onClick={() => this.setState({ open: false })}>
           <ReactToExcel
+            className={styles.optionBtn}
             table="html_to_excel"
             filename="candidates"
             sheet="sheet 1"
-            buttonText="export"
+            buttonText="Excel"
           />
-        </button>
+        </div>
       </div>
     ) : null;
     let buttonClass = this.state.open ? styles.openBtn : styles.exportBtn;
@@ -48,7 +52,8 @@ class ExportFile extends Component {
             console.log(this.state.open);
           }}
         >
-          Export button
+          <span className={styles.btnSpan}>Export</span>
+          <img src={ExportFileIcon} alt="export" className={styles.btnIcon} />
         </button>
         {content}
       </div>

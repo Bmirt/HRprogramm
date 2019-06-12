@@ -1,6 +1,6 @@
 .exportBtn,
 .openBtn {
-  padding: 5px 20px;
+  padding: 5px 10px 5px 20px;
   background: transparent;
   border: 2px solid #ccc;
   border-radius: 5px;
@@ -44,4 +44,12 @@
 }
 .optionBtn:hover {
   background: rgb(238, 162, 21);
+}
+span.btnSpan {
+  float: left;
+}
+.btnIcon {
+  width: 24px;
+  float: right;
+  margin-left: 10px;
 }

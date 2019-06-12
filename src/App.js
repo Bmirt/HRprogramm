@@ -8,6 +8,10 @@ import ProfileList from "./containers/ProfileListContainer";
 import Header from "./components/Header/Header";
 import Sidebar from "./containers/SidebarContainer";
 import Projects from "./components/Home/Projects/Projects";
+import Analytics from "./components/Analytics/Analytics";
+import Calendar from "./components/Calendar/Calendar";
+import BlackList from "./components/BlackList/BlackList";
+import UserManagement from "./components/UserManagement/UserManagement";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
@@ -42,6 +46,56 @@ function App() {
               </div>
             )}
           />
+          <ProtectedRoute
+            path="/home/analytics"
+            component={() => (
+              <div>
+                <Header />
+                <div className="mainContent">
+                  <Sidebar />
+                  <Analytics />
+                </div>
+              </div>
+            )}
+          />
+          <ProtectedRoute
+            path="/home/calendar"
+            component={() => (
+              <div>
+                <Header />
+                <div className="mainContent">
+                  <Sidebar />
+                  <Calendar />
+                </div>
+              </div>
+            )}
+          />
+
+          <ProtectedRoute
+            path="/home/black_list"
+            component={() => (
+              <div>
+                <Header />
+                <div className="mainContent">
+                  <Sidebar />
+                  <BlackList />
+                </div>
+              </div>
+            )}
+          />
+          <ProtectedRoute
+            path="/home/user_management"
+            component={() => (
+              <div>
+                <Header />
+                <div className="mainContent">
+                  <Sidebar />
+                  <UserManagement />
+                </div>
+              </div>
+            )}
+          />
+
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>

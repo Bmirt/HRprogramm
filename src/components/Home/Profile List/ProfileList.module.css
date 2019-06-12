@@ -22,13 +22,13 @@
   background: transparent;
   border: 2px solid #ccc;
   border-radius: 5px;
-  margin-left: 10px;
   font-weight: 600;
   color: #575757;
   cursor: pointer;
   outline: none;
   line-height: 24px;
   min-height: 40px;
+  margin-left: 10px;
 }
 .profilesListBtn:hover {
   background: #fefefe;
@@ -42,8 +42,8 @@
 }
 .btnIcon {
   width: 24px;
-  float: left;
-  margin-right: 20px;
+  float: right;
+  margin-left: 20px;
 }
 .search {
   width: 100%;
