@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
-// import UserProfile from "./UserProfile/Userprofile";
 import ProtectedContainer from "./components/container/protectedContainer";
 
 
@@ -14,11 +13,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <ProtectedRoute path="/home" component={ProtectedContainer} />
           <Route exact path="/" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password/:token_id" component={PasswordReset} />
-          {/* <Route path="/reset-password/:_id" component={UserProfile} /> */}
-          <ProtectedRoute path="/home" component={ProtectedContainer} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>

@@ -28,3 +28,15 @@ td.noItemsAlert {
   color: #575757;
   font-weight: bold;
 }
+.hoverUser {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 400px;
+  background: rgba(0, 0, 0, 0.3);
+  height: 350px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
