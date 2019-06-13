@@ -61,12 +61,6 @@ export class Sidebar extends Component {
     this.setState({ open: !this.state.open });
     localStorage.setItem("sidebarState", !this.state.open);
   };
-<<<<<<< HEAD
-  // changeActiveFunction = link => {
-  //   this.props.history.push(`/home/${link}`);
-  // };
-=======
->>>>>>> 7c21d5a6515878805bf7cfca7be1ce9a28ed5424
   generateContent() {
     const currentUrl = window.location.pathname;
     const sidebarStyles = this.state.open ? styles.sidebarOpen : styles.sidebar;

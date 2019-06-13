@@ -43,7 +43,8 @@ export default class Home extends Component {
       "Projects"
     ],
     rows: [],
-    technologies: []
+    technologies: [],
+    projects: []
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -132,6 +133,21 @@ export default class Home extends Component {
           })
         })
       );
+
+    fetch("http://laravel.local/api/get-projects", {
+      headers: {
+        "Content-Type": "applcation/json",
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          projects: res.projects.map(item => {
+            return { value: item.title, label: item.title };
+          })
+        })
+      );
   }
   profilesFilterer = e => {
     console.log(e.target.value);
@@ -178,7 +194,7 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(this.state.technologies, " technilogies");
+    console.log(this.state.projects, " technilogies");
     return (
       <div className={styles.container}>
         <FilterWindow display={this.state.drawFilter ? "" : "none"} />
@@ -268,7 +284,12 @@ export default class Home extends Component {
                 label: "Technologies",
                 options: this.state.technologies
               },
-              { name: "projects", type: "dropdown", label: "Projects" }
+              {
+                name: "projects",
+                type: "dropdown",
+                label: "Projects",
+                options: this.state.projects
+              }
             ]}
             onChange={this.handleChange}
             profile={profiles[0]}
