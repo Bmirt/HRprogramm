@@ -24,6 +24,7 @@ export default class Home extends Component {
     english: "",
     salary: "",
     status: "",
+    black_list: false,
     projects: [],
     technologies: "",
     pageSize: 2,
@@ -90,7 +91,7 @@ export default class Home extends Component {
           myrows.push({
             "Name, Surname": candidate.name || "-",
             Phone: candidate.phone || "-",
-            "Current Position": candidate.phone || "-",
+            Position: candidate.position || "-",
             Profile: candidate.profile || "-",
             Portfolio: candidate.portfolio || "-",
             Technologies: candidate.technologies.reduce(
@@ -104,7 +105,9 @@ export default class Home extends Component {
             Projects: candidate.projects.reduce(
               (acc, project) => acc + "#" + project.title + " ",
               ""
-            )
+            ),
+            BlackList: candidate.black_list || 0,
+            id: candidate.id || ""
           });
         });
         this.setState({ rows: myrows });
