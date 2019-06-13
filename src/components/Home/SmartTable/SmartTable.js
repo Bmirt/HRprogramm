@@ -7,6 +7,10 @@ class SmartTable extends Component {
     columnHeaders: this.props.columnHeaders
   };
 
+  trclick=(a)=>{
+    console.log("clicking header", a)
+  }
+
   getElementCoords = id => {
     let coorX0 = document.getElementById(id).getBoundingClientRect().left;
     let coorX2 = coorX0 + document.getElementById(id).offsetWidth;
@@ -94,6 +98,7 @@ class SmartTable extends Component {
             <td
               colSpan={this.state.columnHeaders.length}
               className={styles.noItemsAlert}
+              
             >
               No Items To Show
             </td>
@@ -105,14 +110,14 @@ class SmartTable extends Component {
       let currentrow = this.state.columnHeaders.map(header => {
         return <td key={header}>{row[header]}</td>;
       });
-      return <tr key={this.props.rows.indexOf(row)}>{currentrow}</tr>;
+      return <tr key={this.props.rows.indexOf(row)} onClick={()=>this.trclick(row)}>{currentrow}</tr>;
     });
     return <tbody>{rows}</tbody>;
   };
   render() {
     return (
       <div className={styles.container}>
-        <table id="html_to_excel">
+        <table id="html_to_excel" >
           <thead>{this.headerRow()}</thead>
           {this.contentRows()}
         </table>
