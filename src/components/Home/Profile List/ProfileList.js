@@ -9,10 +9,9 @@ import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
-import FilterWindow from "../FilterWindow/filterWindow";
 export default class Home extends Component {
   state = {
-    pageSize: 3,
+    pageSize: 2,
     creating: false,
     drawFilter: false,
     name: "",
@@ -26,12 +25,11 @@ export default class Home extends Component {
     status: "",
     projects: [],
     technologies: "",
-    pageSize: 2,
     currentPage: 1,
     columnHeaders: [
-      "Name, Surname",
+      "Name",
       "Phone",
-      "Current Position",
+      "Position",
       "Profile",
       "Portfolio",
       "Technologies",
@@ -74,7 +72,6 @@ export default class Home extends Component {
     })
       .then(response => response.json())
       .then(res => {
-        console.log(res);
         if (res.error) {
           throw res.error;
         }
@@ -83,14 +80,11 @@ export default class Home extends Component {
       })
       .then(() => {
         let myrows = [];
-        console.log(
-          this.props.state.profileListReducer.profiles[0].technologies
-        );
         this.props.state.profileListReducer.profiles.map(candidate => {
           myrows.push({
-            "Name, Surname": candidate.name || "-",
+            Name: candidate.name || "-",
             Phone: candidate.phone || "-",
-            "Current Position": candidate.phone || "-",
+            Position: candidate.phone || "-",
             Profile: candidate.profile || "-",
             Portfolio: candidate.portfolio || "-",
             Technologies: candidate.technologies.reduce(
@@ -106,48 +100,16 @@ export default class Home extends Component {
               ""
             )
           });
+          return 0;
         });
         this.setState({ rows: myrows });
+        console.log(myrows);
       })
       .catch(error => error);
   };
   componentDidMount() {
     this.fetchingProfiles();
   }
-  profilesFilterer = e => {
-    console.log(e.target.value);
-    if (!e.target.value) {
-      this.fetchingProfiles();
-    } else {
-      const filtered = this.props.state.profileListReducer.profiles.filter(
-        profile => {
-          return profile.name
-            .trim()
-            .toLowerCase()
-            .includes(e.target.value.toLowerCase().trim());
-        }
-      );
-
-      this.props.filteredProfiles(filtered);
-      let myrows = [];
-      filtered.map(candidate => {
-        myrows.push({
-          "Name, Surname": candidate.name || "-",
-          Phone: candidate.phone || "-",
-          "Current Position": candidate.phone || "-",
-          Profile: candidate.profile || "-",
-          Portfolio: candidate.portfolio || "-",
-          Technologies: "ver vipove",
-          English: candidate.english || "-",
-          "Salary Expectation": candidate.salary || "-",
-          Source: candidate.source || "-",
-          Status: candidate.status || "-",
-          Projects: "proeqtebi"
-        });
-      });
-      this.setState({ rows: myrows, currentPage: 1 });
-    }
-  };
 
   handlePageChange = page => {
     this.setState({ currentPage: page });
@@ -161,7 +123,6 @@ export default class Home extends Component {
     );
     return (
       <div className={styles.container}>
-        <FilterWindow display={this.state.drawFilter ? "" : "none"} />
         <div className={styles.content}>
           <div className={styles.search}>
             <input

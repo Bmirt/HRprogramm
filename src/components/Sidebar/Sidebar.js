@@ -65,8 +65,6 @@ export class Sidebar extends Component {
     this.props.history.push(`/home/${link}`);
   };
   generateContent() {
-    const currentUrl = window.location.pathname;
-    console.log(currentUrl);
     const sidebarStyles = this.state.open ? styles.sidebarOpen : styles.sidebar;
     const isVisible = this.state.open ? styles.visible : styles.invisible;
 
@@ -78,7 +76,7 @@ export class Sidebar extends Component {
         itemIcon = item.iconBlue;
       }
       return (
-        <li className={itemClass}>
+        <li className={itemClass} key={item.title}>
           <Link to={item.path}>
             <button className={styles.menuBtn}>
               <img

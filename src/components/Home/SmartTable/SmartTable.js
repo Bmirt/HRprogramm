@@ -49,6 +49,7 @@ class SmartTable extends Component {
     let coordinates = [];
     this.state.columnHeaders.map(header => {
       coordinates.push([header, ...this.getElementCoords(header)]);
+      return 0;
     });
     coordinates.map(header => {
       if (e.clientX === 0) {
@@ -62,9 +63,8 @@ class SmartTable extends Component {
           e.target.id,
           coordinates[coordinates.indexOf(header)][0]
         );
-      } else {
-        return;
       }
+      return 0;
     });
   };
 
