@@ -19,7 +19,7 @@
 .container td {
   font-size: 14px;
   padding: 10px;
-  background: white;
+  /* background: white; */
 }
 td.noItemsAlert {
   padding: 30px;
