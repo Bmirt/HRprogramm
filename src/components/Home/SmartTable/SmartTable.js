@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./SmartTable.module.css";
+import { Link } from 'react-router-dom';
 
 class SmartTable extends Component {
   state = {
@@ -7,9 +8,6 @@ class SmartTable extends Component {
     columnHeaders: this.props.columnHeaders
   };
 
-  trclick = a => {
-    console.log("clicking header", a);
-  };
 
   getElementCoords = id => {
     let coorX0 = document.getElementById(id).getBoundingClientRect().left;
@@ -107,16 +105,20 @@ class SmartTable extends Component {
     }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
-        return <td key={header}>{row[header]}</td>;
+        return <td key={header}><Link to={`profile_list/${row.id}`}>{row[header]}</Link></td>;
       });
+
+      
+
       return (
+        
         <tr
           key={this.props.rows.indexOf(row)}
           bgcolor={row.BlackList ? "#dc3545" : "white"}
-          onClick={() => this.trclick(row.id)}
         >
-          {currentrow}
+       {currentrow}
         </tr>
+        
       );
     });
     return <tbody>{rows}</tbody>;

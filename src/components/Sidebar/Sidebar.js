@@ -66,7 +66,6 @@ export class Sidebar extends Component {
   };
   generateContent() {
     const currentUrl = window.location.pathname;
-    console.log(currentUrl);
     const sidebarStyles = this.state.open ? styles.sidebarOpen : styles.sidebar;
     const isVisible = this.state.open ? styles.visible : styles.invisible;
 
