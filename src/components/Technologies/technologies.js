@@ -1,0 +1,54 @@
+import React, { Component } from 'react'
+import styles from "./Technologies.module.css";
+class Technologies extends Component {
+    state={
+        technologies:[]
+    }
+    generateContent = (<div>not found</div>)
+    componentDidMount(){
+        const token = localStorage.getItem("token");
+        fetch("http://laravel.local/api/get-technologies", {
+     headers: {
+       "Content-Type": "applcation/json",
+       Authorization: token
+     }
+   })
+     .then(res => res.json())
+     .then(res =>this.setState({
+        technologies:res.technologies
+    }))
+    }
+    remtech=()=>{
+        console.log('Removing');
+    }
+    edittech=()=>{
+        const input=prompt('Please enter a title')
+        console.log(input);
+        // console.log(name);
+        console.log('edit')
+    }
+    render() {
+        console.log(this.state)
+        let generateContent = this.state.technologies.map((item)=>{
+            return(
+                <div className={styles.techlist}>
+                    <span className={styles.techitem}>{item.title}</span>
+                    <span className={styles.techitem}>{item.profiles.length}</span>
+                    <button onClick={this.edittech}>Edit</button>
+                    <button onClick={this.remtech}>Remove</button>
+                </div>
+            )
+        })
+        console.log(this.state)
+        return (
+            <div>
+                <div>
+                    {generateContent}
+                </div>
+            </div>
+        )
+    }
+}
+
+export default Technologies
+

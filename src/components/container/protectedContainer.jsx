@@ -8,6 +8,7 @@ import Analytics from "../Analytics/Analytics";
 import Calendar from "../Calendar/Calendar";
 import BlackList from "../BlackList/BlackList";
 import UserManagement from "../UserManagement/UserManagement";
+import Technologies from "../Technologies/technologies";
 
 class ProtectedContainer extends Component {
   state = {};
@@ -22,6 +23,7 @@ class ProtectedContainer extends Component {
           <Route path="/home/analytics" exact component={Analytics} />
           <Route path="/home/calendar" exact component={Calendar} />
           <Route path="/home/black_list" exact component={BlackList} />
+          <Route path="/home/technologies" exact component={Technologies} />
           <Route
             path="/home/user_management"
             exact

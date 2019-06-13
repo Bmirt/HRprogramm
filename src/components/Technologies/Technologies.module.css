@@ -1,0 +1,13 @@
+.techlist{
+    width: 500px;
+    background-color: brown;
+    height: 40px;
+    display: flex;
+    border: 1px solid black;
+    margin-top: 5px;
+    justify-content: space-between;
+}
+.techitem{
+    font-size: 20px;
+    text-align: center;
+}

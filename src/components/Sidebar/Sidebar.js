@@ -14,6 +14,8 @@ import blackListIcon from "../../images/blackListIcon.png";
 import blackListIconBlue from "../../images/blackListIconBlue.png";
 import userManagementIcon from "../../images/userManagementIcon.png";
 import userManagementIconBlue from "../../images/userManagementIconBlue.png";
+import technologiesIcon from "../../images/technologiesIcon.png";
+import technologiesIconBlue from "../../images/technologiesIconBlue.png";
 
 export class Sidebar extends Component {
   state = {
@@ -54,6 +56,12 @@ export class Sidebar extends Component {
         path: "user_management",
         icon: userManagementIcon,
         iconBlue: userManagementIconBlue
+      },
+      {
+        title: "Technologies",
+        path: "technologies",
+        icon: technologiesIcon,
+        iconBlue: technologiesIconBlue
       }
     ]
   };
