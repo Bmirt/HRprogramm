@@ -61,9 +61,6 @@ export class Sidebar extends Component {
     this.setState({ open: !this.state.open });
     localStorage.setItem("sidebarState", !this.state.open);
   };
-  changeActiveFunction = link => {
-    this.props.history.push(`/home/${link}`);
-  };
   generateContent() {
     const currentUrl = window.location.pathname;
     const sidebarStyles = this.state.open ? styles.sidebarOpen : styles.sidebar;
@@ -77,7 +74,7 @@ export class Sidebar extends Component {
         itemIcon = item.iconBlue;
       }
       return (
-        <li className={itemClass}>
+        <li key={item.path} className={itemClass}>
           <Link to={item.path}>
             <button className={styles.menuBtn}>
               <img
