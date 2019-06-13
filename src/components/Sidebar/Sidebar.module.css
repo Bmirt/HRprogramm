@@ -6,6 +6,7 @@
   background: #314455;
   height: Calc(100vh - 90px);
   padding: 20px 0;
+  transition: 0.6s ease-in-out;
 }
 .sidebarComponent li {
   height: 60px;
@@ -25,17 +26,20 @@
   height: calc(100vh - 90px);
   background: #314455;
   padding: 20px 0;
+  transition: 0.6s ease-in-out;
 }
 .sidebarComponent span {
   color: white;
   font-weight: bold;
   line-height: 60px;
   font-size: 1.1em;
+  transition: 0.6s ease-in-out;
 }
 .sidebarOpen li a {
   width: 220px;
   list-style: none;
   display: flex;
+  transition: 0.6s ease-in-out;
 }
 .sidebarIcon {
   width: 24px;
