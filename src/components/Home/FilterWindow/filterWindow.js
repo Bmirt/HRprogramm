@@ -1,52 +1,58 @@
 import React, { Component } from "react";
 
+// fields={[
+//   {
+//     name: "name",
+//     type: "text",
+//     label: "Name,Surname"
+//   },
+//   { name: "phone", type: "number", label: "Phone" },
+//   { name: "position", type: "text", label: "Position" },
+//   { name: "profile", type: "text", label: "Profile" },
+//   { name: "portfolio", type: "text", label: "Portfolio" },
+//   { name: "comment", type: "text", label: "Comment" },
+//   { name: "english", type: "dropdown", label: "English" },
+//   { name: "salary", type: "text", label: "Salary Expectation" },
+//   { name: "source", type: "dropdown", label: "Source" },
+//   { name: "profile", type: "text", label: "Profile" },
+//   { name: "technologies", type: "dropdown", label: "Technologies" },
+//   { name: "projects", type: "dropdown", label: "Projects" }
+// ]}
+
 class FilterWindow extends Component {
-  state = {
-    people: [
-      {
-        English: "good",
-        Name: "Giorgi Parunov",
-        Phone: "55992994",
-        Portfolio: "-",
-        Position: "55992994",
-        Profile: "@parunchika",
-        Projects: "#PayLix ",
-        "Salary Expectation": "1500$",
-        Source: "refference",
-        Status: "interested",
-        Technologies: "#CSS "
-      },
-      {
-        English: "good",
-        Name: "Lasha Sumbadze",
-        Phone: "666",
-        Portfolio: "-",
-        Position: "666",
-        Profile: "@lashaia",
-        Projects: "#DropShip ",
-        "Salary Expectation": "0$",
-        Source: "refference",
-        Status: "interested",
-        Technologies: ""
-      },
-      {
-        English: "good",
-        Name: "Liko Gabadadze",
-        Phone: "578544",
-        Portfolio: "-",
-        Position: "578544",
-        Profile: "@liliko",
-        Projects: "#DropShip #Some Project ",
-        "Salary Expectation": "100000$",
-        Source: "refference",
-        Status: "interested",
-        Technologies: "#html #CSS "
+  filter = () => {
+    let filtered = [];
+    this.props.currentRows.map(row => {
+      if (row.Name.includes("bad")) {
+        if (row.Phone.includes("5")) {
+          if (row.Position.includes("ont")) {
+            if (row.Profile.includes("")) {
+              if (row.Portfolio.includes("")) {
+                if (row.Technologies.includes("")) {
+                  if (row.English.includes("")) {
+                    if (row["Salary Expectation"].includes("")) {
+                      if (row.Source.includes("")) {
+                        if (row.Status.includes("")) {
+                          if (row.Projects.includes("")) {
+                            filtered.push(row);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      } else {
+        return;
       }
-    ]
+    });
+    this.props.filteredRows(filtered);
   };
-  filter = () => {};
   render() {
-    return <button onClick={this.filter} />;
+    return <button onClick={this.filter}>filter</button>;
   }
 }
 

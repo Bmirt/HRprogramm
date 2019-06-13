@@ -13,6 +13,7 @@ import Calendar from "./components/Calendar/Calendar";
 import BlackList from "./components/BlackList/BlackList";
 import UserManagement from "./components/UserManagement/UserManagement";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import UserProfile from "./UserProfile/Userprofile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password/:token_id" component={PasswordReset} />
+          <Route path="/reset-password/:_id" component={UserProfile} />
           <ProtectedRoute
             path="/home/profile_list"
             component={() => (
