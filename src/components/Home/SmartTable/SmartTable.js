@@ -143,7 +143,12 @@ class SmartTable extends Component {
       let currentrow = this.state.columnHeaders.map(header => {
         return (
           <td key={header}>
-            <Link to={`${row.id}`}>{row[header]}</Link>
+            <Link
+              to={`profile/${row.id}`}
+              style={{ color: row.BlackList ? "#fff" : "#000" }}
+            >
+              {row[header]}
+            </Link>
           </td>
         );
       });

@@ -26,3 +26,21 @@
   padding: 10px;
   background: white;
 }
+
+.projecthlist{
+  width: 500px;
+  height: 100px;
+  background-color: brown;
+  border: 1px black solid;
+  display: flex;
+  align-content: center;
+}
+.projectitem{
+ width: 150px;
+ height: 50px;
+ /* background-color: red; */
+ display: flex;
+ /* justify-content: center; */
+ align-items: center;
+ font-size: 20px;
+}
