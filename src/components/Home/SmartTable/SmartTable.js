@@ -2,6 +2,23 @@ import React, { Component } from "react";
 import styles from "./SmartTable.module.css";
 import { Link } from "react-router-dom";
 
+// function hoverView(props) {
+//   if (props) {
+//     console.log(props.Profile);
+//   }
+//   return (
+//     <>
+//       {props ? (
+//         <div>
+//           <h1>Hello {props.Profile}</h1>
+//         </div>
+//       ) : (
+//         <h1>no props</h1>
+//       )}
+//     </>
+//   );
+// }
+
 class SmartTable extends Component {
   state = {
     roughcolumns: [],
@@ -69,6 +86,26 @@ class SmartTable extends Component {
     });
   };
 
+  hoverBox = () => {
+    return (
+      <>
+        {this.state.hoveruser ? (
+          <div className={styles.hoverUser}>
+            <h1>Hello {this.state.hoveruser.Profile}</h1>
+          </div>
+        ) : null}
+      </>
+    );
+  };
+
+  hoverModal = id => {
+    const FiltUser = this.props.rows.filter(row => row.id == id);
+    this.setState({ hoveruser: FiltUser[0] });
+  };
+  hoverLeave = () => {
+    this.setState({ hoveruser: false });
+  };
+
   headerRow = () => {
     let headers = this.state.columnHeaders.map(header => {
       return (
@@ -114,6 +151,8 @@ class SmartTable extends Component {
       return (
         <tr
           key={this.props.rows.indexOf(row)}
+          onMouseEnter={() => this.hoverModal(row.id)}
+          onMouseLeave={this.hoverLeave}
           bgcolor={row.BlackList ? "#dc3545" : "white"}
         >
           {currentrow}
@@ -123,9 +162,9 @@ class SmartTable extends Component {
     return <tbody>{rows}</tbody>;
   };
   render() {
-    // console.log(this.props, "props");
     return (
       <div className={styles.container}>
+        {this.hoverBox()}
         <table id="html_to_excel">
           <thead>{this.headerRow()}</thead>
           {this.contentRows()}
