@@ -1,8 +1,8 @@
 import React from "react";
 import Classes from "./Modal.module.css";
+import MultiSelect from "../MultiSelect/MultiSelect";
 
 const modal = props => {
-  console.log(props.profile, "profile");
   return (
     <div className={Classes.modal}>
       <header className={Classes.modal_header}>
@@ -10,6 +10,19 @@ const modal = props => {
       </header>
       <section className={Classes.modal_content}>
         {props.fields.map(item => {
+          if (item.type === "dropdown") {
+            return (
+              <div className="form-control">
+                <label htmlFor={item.name}>{item.label}</label>
+                <div style={{ display: "inline-block", width: 300 }}>
+                  <MultiSelect
+                    options={item.options}
+                    onChangeCallback={response => console.log(response)}
+                  />
+                </div>
+              </div>
+            );
+          }
           return (
             <div className="form-control">
               <label htmlFor={item.name}>{item.label}</label>

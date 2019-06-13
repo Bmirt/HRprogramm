@@ -42,7 +42,9 @@ export default class Home extends Component {
       "Status",
       "Projects"
     ],
-    rows: []
+    rows: [],
+    technologies: [],
+    projects: []
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -115,7 +117,37 @@ export default class Home extends Component {
       .catch(error => error);
   };
   componentDidMount() {
+    const token = localStorage.getItem("token");
     this.fetchingProfiles();
+    fetch("http://laravel.local/api/get-technologies", {
+      headers: {
+        "Content-Type": "applcation/json",
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          technologies: res.technologies.map(item => {
+            return { value: item.title, label: item.title };
+          })
+        })
+      );
+
+    fetch("http://laravel.local/api/get-projects", {
+      headers: {
+        "Content-Type": "applcation/json",
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          projects: res.projects.map(item => {
+            return { value: item.title, label: item.title };
+          })
+        })
+      );
   }
   profilesFilterer = e => {
     console.log(e.target.value);
@@ -162,6 +194,7 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
+    console.log(this.state.projects, " technilogies");
     return (
       <div className={styles.container}>
         <FilterWindow display={this.state.drawFilter ? "" : "none"} />
@@ -232,15 +265,34 @@ export default class Home extends Component {
               { name: "profile", type: "text", label: "Profile" },
               { name: "portfolio", type: "text", label: "Portfolio" },
               { name: "comment", type: "text", label: "Comment" },
-              { name: "english", type: "dropdown", label: "English" },
+              {
+                name: "english",
+                type: "dropdown",
+                label: "English",
+                options: [
+                  { value: "no english", label: "no english" },
+                  { value: "good", label: "good" },
+                  { value: "fluent", label: "fluent" }
+                ]
+              },
               { name: "salary", type: "text", label: "Salary Expectation" },
               { name: "source", type: "dropdown", label: "Source" },
               { name: "profile", type: "text", label: "Profile" },
-              { name: "technologies", type: "dropdown", label: "Technologies" },
-              { name: "projects", type: "dropdown", label: "Projects" }
+              {
+                name: "technologies",
+                type: "dropdown",
+                label: "Technologies",
+                options: this.state.technologies
+              },
+              {
+                name: "projects",
+                type: "dropdown",
+                label: "Projects",
+                options: this.state.projects
+              }
             ]}
             onChange={this.handleChange}
-            // profile={profiles[0]}
+            profile={profiles[0]}
           />
         )}
       </div>
