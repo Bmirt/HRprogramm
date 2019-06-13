@@ -105,11 +105,19 @@ class SmartTable extends Component {
       let currentrow = this.state.columnHeaders.map(header => {
         return <td key={header}>{row[header]}</td>;
       });
-      return <tr key={this.props.rows.indexOf(row)}>{currentrow}</tr>;
+      return (
+        <tr
+          key={this.props.rows.indexOf(row)}
+          bgcolor={row.BlackList ? "#dc3545" : "white"}
+        >
+          {currentrow}
+        </tr>
+      );
     });
     return <tbody>{rows}</tbody>;
   };
   render() {
+    console.log(this.props, "props");
     return (
       <div className={styles.container}>
         <table id="html_to_excel">
