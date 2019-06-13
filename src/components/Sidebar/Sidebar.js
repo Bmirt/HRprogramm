@@ -61,9 +61,9 @@ export class Sidebar extends Component {
     this.setState({ open: !this.state.open });
     localStorage.setItem("sidebarState", !this.state.open);
   };
-  changeActiveFunction = link => {
-    this.props.history.push(`/home/${link}`);
-  };
+  // changeActiveFunction = link => {
+  //   this.props.history.push(`/home/${link}`);
+  // };
   generateContent() {
     const currentUrl = window.location.pathname;
     const sidebarStyles = this.state.open ? styles.sidebarOpen : styles.sidebar;
@@ -72,7 +72,7 @@ export class Sidebar extends Component {
     let sidebarItems = this.state.sidebarItems.map(item => {
       let itemClass = styles.smth;
       let itemIcon = item.icon;
-      if (window.location.pathname === "/home/" + item.path) {
+      if (window.location.pathname === "/home/profile_list" + item.path) {
         itemClass = styles.chosen;
         itemIcon = item.iconBlue;
       }
