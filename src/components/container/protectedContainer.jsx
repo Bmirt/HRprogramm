@@ -8,6 +8,8 @@ import Analytics from "../Analytics/Analytics";
 import Calendar from "../Calendar/Calendar";
 import BlackList from "../BlackList/BlackList";
 import UserManagement from "../UserManagement/UserManagement";
+import UserProfile from "../UserProfile/Userprofile";
+import SingleProfileContainer from "../../containers/SingleProfile";
 
 class ProtectedContainer extends Component {
   state = {};
@@ -27,6 +29,7 @@ class ProtectedContainer extends Component {
             exact
             component={UserManagement}
           />
+          <Route path="/home/:id" exact component={SingleProfileContainer} />
         </div>
       </div>
     );
