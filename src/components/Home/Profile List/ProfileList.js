@@ -221,86 +221,27 @@ export default class Home extends Component {
             canConfirm
             onCancel={this.modalCancelHandler}
             onConfirm={this.modalConfirmHandler}
-          >
-            <form>
-              <div className="form-control">
-                <label htmlFor="name">Name,Surname</label>
-                <input type="text" name="name" onChange={this.handleChange} />
-              </div>
-              <div className="form-control">
-                <label htmlFor="phone">Phone</label>
-                <input
-                  type="number"
-                  name="phone"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="Current_position">Current Position</label>
-                <input
-                  type="text"
-                  name="position"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="profile">Profile</label>
-                <input
-                  type="email"
-                  name="profile"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="portfolio">Portfolio</label>
-                <input
-                  type="text"
-                  name="portfolio"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="Comment">Comment</label>
-                <input
-                  type="text"
-                  name="Comment"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="English">English</label>
-                <input type="text" name="English" />
-              </div>
-              <div className="form-control">
-                <label htmlFor="Salary_Expectation">Salary Expectation</label>
-                <input type="text" name="salary" onChange={this.handleChange} />
-              </div>
-              <div className="form-control">
-                <label htmlFor="source">Source</label>
-                <input type="text" name="source" onChange={this.handleChange} />
-              </div>
-              <div className="form-control">
-                <label htmlFor="status">Status</label>
-                <input type="text" name="status" onChange={this.handleChange} />
-              </div>
-              <div className="form-control">
-                <label htmlFor="projects">Projects</label>
-                <input
-                  type="text"
-                  name="projects"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="Technologies">Technologies</label>
-                <input
-                  type="text"
-                  name="technologies"
-                  onChange={this.handleChange}
-                />
-              </div>
-            </form>
-          </Modal>
+            fields={[
+              {
+                name: "name",
+                type: "text",
+                label: "Name,Surname"
+              },
+              { name: "phone", type: "number", label: "Phone" },
+              { name: "position", type: "text", label: "Position" },
+              { name: "profile", type: "text", label: "Profile" },
+              { name: "portfolio", type: "text", label: "Portfolio" },
+              { name: "comment", type: "text", label: "Comment" },
+              { name: "english", type: "dropdown", label: "English" },
+              { name: "salary", type: "text", label: "Salary Expectation" },
+              { name: "source", type: "dropdown", label: "Source" },
+              { name: "profile", type: "text", label: "Profile" },
+              { name: "technologies", type: "dropdown", label: "Technologies" },
+              { name: "projects", type: "dropdown", label: "Projects" }
+            ]}
+            onChange={this.handleChange}
+            // profile={profiles[0]}
+          />
         )}
       </div>
     );
