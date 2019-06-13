@@ -13,7 +13,7 @@ import Calendar from "./components/Calendar/Calendar";
 import BlackList from "./components/BlackList/BlackList";
 import UserManagement from "./components/UserManagement/UserManagement";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
-import UserProfile from "./UserProfile/Userprofile";
+import UserProfile from "./components/UserProfile/Userprofile";
 
 function App() {
   return (
@@ -23,9 +23,10 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password/:token_id" component={PasswordReset} />
-          <Route path="/reset-password/:_id" component={UserProfile} />
+    
           <ProtectedRoute
-            path="/home/profile_list"
+            path="/profile_list"
+            exact
             component={() => (
               <div>
                 <Header />
@@ -37,7 +38,7 @@ function App() {
             )}
           />
           <ProtectedRoute
-            path="/home/projects"
+            path="/projects"
             component={() => (
               <div>
                 <Header />
@@ -49,7 +50,7 @@ function App() {
             )}
           />
           <ProtectedRoute
-            path="/home/analytics"
+            path="/analytics"
             component={() => (
               <div>
                 <Header />
@@ -61,7 +62,7 @@ function App() {
             )}
           />
           <ProtectedRoute
-            path="/home/calendar"
+            path="/calendar"
             component={() => (
               <div>
                 <Header />
@@ -74,7 +75,7 @@ function App() {
           />
 
           <ProtectedRoute
-            path="/home/black_list"
+            path="/black_list"
             component={() => (
               <div>
                 <Header />
@@ -86,7 +87,7 @@ function App() {
             )}
           />
           <ProtectedRoute
-            path="/home/user_management"
+            path="/user_management"
             component={() => (
               <div>
                 <Header />
@@ -97,7 +98,23 @@ function App() {
               </div>
             )}
           />
+          <ProtectedRoute
+            path="/profile_list/:id"
+            exact
+            component={() => (
+              <div>
+              <Header />
+              <div className="mainContent">
+                <Sidebar />
+                <UserProfile />
+              </div>
+            </div>
+                  
+               
+            )}
+          />
 
+          
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>
