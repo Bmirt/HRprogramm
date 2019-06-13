@@ -11,6 +11,7 @@ import UserManagement from "../UserManagement/UserManagement";
 import Technologies from "../Technologies/technologies";
 import SingleProfileContainer from "../../containers/SingleProfile";
 import SingleTechnology from "../Technologies/single";
+import SingleProject from "../Home/Projects/single";
 
 class ProtectedContainer extends Component {
   state = {};
@@ -26,6 +27,7 @@ class ProtectedContainer extends Component {
           <Route path="/home/calendar" exact component={Calendar} />
           <Route path="/home/black_list" exact component={BlackList} />
           <Route path="/home/technologies" exact component={Technologies} />
+          <Route path="/home/projects/:id" exact component={SingleProject} />
           <Route
             path="/home/technologies/:id"
             exact
