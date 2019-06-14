@@ -108,14 +108,22 @@ span.versionText {
   background: #000;
   padding: 5px;
   display: inline-block;
-  width: 130px;
+  width: auto;
   text-align: center;
   word-wrap: normal;
   z-index: 100;
-  left: 65px;
+  left: 5px;
   color: #fff;
   position: absolute;
   border-radius: 5px;
-  top: 20px;
+  top: 40px;
   text-decoration: none;
+  transform: rotate(180deg);
+  animation: tooltipmove 0.3s forwards;
+}
+@keyframes tooltipmove {
+  to {
+    top: -10px;
+    transform: rotate(0deg);
+  }
 }
