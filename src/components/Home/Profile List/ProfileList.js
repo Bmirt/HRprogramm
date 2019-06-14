@@ -5,7 +5,6 @@ import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
 import FilterIcon from "../../../images/filterIcon.png";
-import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
@@ -73,51 +72,56 @@ export default class ProfileList extends Component {
       console.log(this.state.drawFilter)
     );
   };
-  componentDidMount() {
-    this.props.dispatch(fetchProfiles());
-  }
+  componentDidMount = () => {
+    this.props.getProfiles();
+    this.props.getTechnologies();
+    this.props.getProjects();
+  };
 
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
 
   createPrfile = () => {
-    const token = localStorage.getItem("token");
-    fetch("http://laravel.local/api/store-profile", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: token
-      },
-      body: JSON.stringify({
-        author_id: 1,
-        status: "interested",
-        name: this.state.name,
-        phone: this.state.phone,
-        position: this.state.position,
-        profile: this.state.profile,
-        portfolio: this.state.portfolio,
-        comment: this.state.comment,
-        english: this.state.english,
-        salary: this.state.salary,
-        // status: this.state.status,
-        source: this.state.source,
-        projects: this.state.chosenProjects,
-        technologies: this.state.chosenTechnologies
-      })
-    })
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    const {
+      name,
+      phone,
+      position,
+      portfolio,
+      profile,
+      comment,
+      english,
+      salary,
+      source,
+      chosenProjects: projects,
+      chosenTechnologies: technologies
+    } = this.state;
+    const userprofile = {
+      author_id: 1,
+      status: "interested",
+      name,
+      phone,
+      position,
+      portfolio,
+      profile,
+      comment,
+      english,
+      salary,
+      source,
+      projects,
+      technologies
+    };
+    this.props.createProfile(userprofile);
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     const profiles = paginate(
       this.props.profiles,
       this.state.currentPage,
       this.state.pageSize
     );
+    console.log(this.state);
     return (
       <div className={styles.container}>
         <FilterWindow display={this.state.drawFilter ? "" : "none"} />
@@ -250,13 +254,17 @@ export default class ProfileList extends Component {
                 name: "technologies",
                 type: "multiSelect",
                 label: "Technologies",
-                options: this.state.technologies
+                options: this.props.technologies.map(item => {
+                  return { value: item.id, label: item.title };
+                })
               },
               {
                 name: "projects",
                 type: "multiSelect",
                 label: "Projects",
-                options: this.state.projects
+                options: this.props.projects.map(item => {
+                  return { value: item.id, label: item.title };
+                })
               }
             ]}
             onChange={this.handleChange}

@@ -143,7 +143,7 @@ class SmartTable extends Component {
     }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
-        console.log(row[header.name]);
+        // console.log(row[header.name]);
         return (
           <td key={header.name}>
             <Link
