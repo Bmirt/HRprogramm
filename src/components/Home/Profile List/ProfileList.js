@@ -12,7 +12,6 @@ import ExportFile from "../../ExportFile/ExportFile";
 import FilterWindow from "../FilterWindow/filterWindow";
 export default class Home extends Component {
   state = {
-    pageSize: 3,
     creating: false,
     drawFilter: false,
     name: "",
@@ -27,7 +26,7 @@ export default class Home extends Component {
     black_list: false,
     projects: [],
     technologies: "",
-    pageSize: 10,
+    pageSize: 20,
     currentPage: 1,
     columnHeaders: [
       "Name, Surname",
@@ -193,7 +192,6 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
-    // console.log(this.state.projects, " technilogies");
     return (
       <div className={styles.container}>
         <FilterWindow display={this.state.drawFilter ? "" : "none"} />
@@ -257,16 +255,42 @@ export default class Home extends Component {
               {
                 name: "name",
                 type: "text",
-                label: "Name,Surname"
+                label: "Name,Surname",
+                value: this.state.name
               },
-              { name: "phone", type: "number", label: "Phone" },
-              { name: "position", type: "text", label: "Position" },
-              { name: "profile", type: "text", label: "Profile" },
-              { name: "portfolio", type: "text", label: "Portfolio" },
-              { name: "comment", type: "text", label: "Comment" },
+              {
+                name: "phone",
+                type: "number",
+                label: "Phone",
+                value: this.state.phone
+              },
+              {
+                name: "position",
+                type: "text",
+                label: "Position",
+                value: this.state.position
+              },
+              {
+                name: "profile",
+                type: "text",
+                label: "Profile",
+                value: this.state.profile
+              },
+              {
+                name: "portfolio",
+                type: "text",
+                label: "Portfolio",
+                value: this.state.portfolio
+              },
+              {
+                name: "comment",
+                type: "text",
+                label: "Comment",
+                value: this.state.comment
+              },
               {
                 name: "english",
-                type: "dropdown",
+                type: "select",
                 label: "English",
                 options: [
                   { value: "no english", label: "no english" },
@@ -274,24 +298,42 @@ export default class Home extends Component {
                   { value: "fluent", label: "fluent" }
                 ]
               },
-              { name: "salary", type: "text", label: "Salary Expectation" },
-              { name: "source", type: "dropdown", label: "Source" },
-              { name: "profile", type: "text", label: "Profile" },
+              {
+                name: "salary",
+                type: "text",
+                label: "Salary Expectation",
+                value: this.state.salary
+              },
+              {
+                name: "source",
+                type: "select",
+                label: "Source",
+                options: [
+                  { value: "LinkedIn", label: "LinkedIn" },
+                  { value: "Refference", label: "Refference" },
+                  { value: "Job Post", label: "Job Post" }
+                ]
+              },
+              {
+                name: "profile",
+                type: "text",
+                label: "Profile",
+                value: this.state.profile
+              },
               {
                 name: "technologies",
-                type: "dropdown",
+                type: "multiSelect",
                 label: "Technologies",
                 options: this.state.technologies
               },
               {
                 name: "projects",
-                type: "dropdown",
+                type: "multiSelect",
                 label: "Projects",
                 options: this.state.projects
               }
             ]}
             onChange={this.handleChange}
-            profile={profiles[0]}
           />
         )}
       </div>
