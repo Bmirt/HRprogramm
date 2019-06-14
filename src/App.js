@@ -7,7 +7,6 @@ import PasswordReset from "./components/PasswordReset/PasswordReset";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import ProtectedContainer from "./components/container/protectedContainer";
 
-
 function App() {
   return (
     <div className="App">

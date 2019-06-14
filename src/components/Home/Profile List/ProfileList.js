@@ -27,7 +27,7 @@ export default class Home extends Component {
     black_list: false,
     projects: [],
     technologies: "",
-    pageSize: 2,
+    pageSize: 10,
     currentPage: 1,
     columnHeaders: [
       "Name, Surname",
@@ -77,7 +77,6 @@ export default class Home extends Component {
     })
       .then(response => response.json())
       .then(res => {
-        console.log(res);
         if (res.error) {
           throw res.error;
         }
@@ -86,9 +85,9 @@ export default class Home extends Component {
       })
       .then(() => {
         let myrows = [];
-        console.log(
-          this.props.state.profileListReducer.profiles[0].technologies
-        );
+        // console.log(
+        //   this.props.state.profileListReducer.profiles[0].technologies
+        // );
         this.props.state.profileListReducer.profiles.map(candidate => {
           myrows.push({
             "Name, Surname": candidate.name || "-",
@@ -150,7 +149,7 @@ export default class Home extends Component {
       );
   }
   profilesFilterer = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (!e.target.value) {
       this.fetchingProfiles();
     } else {
@@ -194,7 +193,7 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(this.state.projects, " technilogies");
+    // console.log(this.state.projects, " technilogies");
     return (
       <div className={styles.container}>
         <FilterWindow display={this.state.drawFilter ? "" : "none"} />

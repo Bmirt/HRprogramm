@@ -83,7 +83,7 @@ export class Sidebar extends Component {
       }
       return (
         <li key={item.path} className={itemClass}>
-          <Link to={item.path}>
+          <Link to={`/home/${item.path}`}>
             <button className={styles.menuBtn}>
               <img
                 src={itemIcon}

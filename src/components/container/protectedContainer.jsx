@@ -8,9 +8,11 @@ import Analytics from "../Analytics/Analytics";
 import Calendar from "../Calendar/Calendar";
 import BlackList from "../BlackList/BlackList";
 import UserManagement from "../UserManagement/UserManagement";
-import UserProfile from "../UserProfile/Userprofile";
+import Technologies from "../Technologies/technologies";
 import SingleProfileContainer from "../../containers/SingleProfile";
-import Technologies from "../Technologies/technologies"
+import SingleTechnology from "../Technologies/single";
+import SingleProject from "../Home/Projects/single";
+
 class ProtectedContainer extends Component {
   state = {};
   render() {
@@ -25,12 +27,22 @@ class ProtectedContainer extends Component {
           <Route path="/home/calendar" exact component={Calendar} />
           <Route path="/home/black_list" exact component={BlackList} />
           <Route path="/home/technologies" exact component={Technologies} />
+          <Route path="/home/projects/:id" exact component={SingleProject} />
+          <Route
+            path="/home/technologies/:id"
+            exact
+            component={SingleTechnology}
+          />
           <Route
             path="/home/user_management"
             exact
             component={UserManagement}
           />
-          <Route path="/home/:id" exact component={SingleProfileContainer} />
+          <Route
+            path="/home/profile/:id"
+            exact
+            component={SingleProfileContainer}
+          />
         </div>
       </div>
     );
