@@ -10,7 +10,7 @@ import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
 import FilterWindow from "../FilterWindow/filterWindow";
-
+import { throwStatement } from "@babel/types";
 export default class Home extends Component {
   state = {
     creating: false,
@@ -24,9 +24,8 @@ export default class Home extends Component {
     english: "",
     salary: "",
     status: "",
+    source: "",
     black_list: false,
-    projects: [],
-    technologies: "",
     pageSize: 20,
     currentPage: 1,
     columnHeaders: [
@@ -44,11 +43,20 @@ export default class Home extends Component {
     ],
     rows: [],
     technologies: [],
-    projects: []
+    projects: [],
+    chosenTechnologies: [],
+    chosenProjects: []
+  };
+  handleMultiSelect = (category, data) => {
+    if (category === "technologies") {
+      this.setState({ chosenTechnologies: data });
+    }
+    if (category === "projects") {
+      this.setState({ chosenProjects: data });
+    }
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(this.state);
   };
 
   startCreateEventHandler = () => {
@@ -62,6 +70,9 @@ export default class Home extends Component {
   };
   drawFilter = () => {
     this.setState({ drawFilter: !this.state.drawFilter });
+  };
+  filteredRows = a => {
+    this.setState({ rows: a });
   };
   fetchingProfiles = () => {
     let token = localStorage.getItem("token");
@@ -127,7 +138,7 @@ export default class Home extends Component {
       .then(res =>
         this.setState({
           technologies: res.technologies.map(item => {
-            return { value: item.title, label: item.title };
+            return { value: item.id, label: item.title };
           })
         })
       );
@@ -142,7 +153,7 @@ export default class Home extends Component {
       .then(res =>
         this.setState({
           projects: res.projects.map(item => {
-            return { value: item.title, label: item.title };
+            return { value: item.id, label: item.title };
           })
         })
       );
@@ -186,12 +197,38 @@ export default class Home extends Component {
     this.setState({ currentPage: page });
   };
 
-  filteredRows = a => {
-    console.log(a);
-    this.setState({ rows: a });
+  createPrfile = () => {
+    const token = localStorage.getItem("token");
+    fetch("http://laravel.local/api/store-profile", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify({
+        author_id: 1,
+        status: "interested",
+        name: this.state.name,
+        phone: this.state.phone,
+        position: this.state.position,
+        profile: this.state.profile,
+        portfolio: this.state.portfolio,
+        comment: this.state.comment,
+        english: this.state.english,
+        salary: this.state.salary,
+        // status: this.state.status,
+        source: this.state.source,
+        projects: this.state.chosenProjects,
+        technologies: this.state.chosenTechnologies
+      })
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   };
 
   render() {
+    console.log(this.props.state.profileListReducer.profiles);
     const profiles = paginate(
       this.state.rows,
       this.state.currentPage,
@@ -346,6 +383,8 @@ export default class Home extends Component {
               }
             ]}
             onChange={this.handleChange}
+            handleMultiSelect={this.handleMultiSelect}
+            createProfile={this.createPrfile}
           />
         )}
       </div>

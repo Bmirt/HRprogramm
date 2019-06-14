@@ -22,6 +22,7 @@ import Modal from "../../Modal/Modal";
 
 class FilterWindow extends Component {
   state = {
+    english: "",
     filterWindowValues: {
       name: "",
       phone: "",
@@ -40,10 +41,38 @@ class FilterWindow extends Component {
     technologies: this.props.technologies
   };
   handleChange = e => {
-    this.setState({ [e.target.name]: "" + e.target.value.toLowerCase() });
-    console.log(e.target.name, e.target.value, this.state);
+    this.setState({
+      [e.target.name]: e.target.value.toLowerCase()
+    });
+
+    // this.setState({
+    //   filterWindowValues: {
+    //     ...this.state.filterWindowValues,
+    //     [e.target.name]: e.target.value.toLowerCase()
+    //   }
+    // });
   };
-  filter = e => {
+  handleMultiSelect = (category, data) => {
+    let dataStringified = [];
+    data.map(item => {
+      dataStringified.push(
+        this.state[category].find(x => x.value == item).label
+      );
+    });
+    if (category === "technologies") {
+      this.setState({
+        filterWindowValues: {
+          technologies: dataStringified
+        }
+      });
+    }
+    if (category === "projects") {
+      this.setState({
+        filterWindowValues: { ...this.state.filterWindowValues, projects: data }
+      });
+    }
+  };
+  filter = () => {
     let filtered = [];
     this.props.currentRows.map(row => {
       if (row.Name.toLowerCase().includes(this.state.filterWindowValues.name)) {
@@ -127,7 +156,7 @@ class FilterWindow extends Component {
         canCancel
         canConfirm
         onCancel={this.modalCancelHandler}
-        onConfirm={this.filter}
+        createProfile={this.filter}
         fields={[
           {
             name: "name",
@@ -176,6 +205,7 @@ class FilterWindow extends Component {
           }
         ]}
         onChange={this.handleChange}
+        handleMultiSelect={this.handleMultiSelect}
       />
     );
   }
