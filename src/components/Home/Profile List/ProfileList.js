@@ -13,7 +13,6 @@ import FilterWindow from "../FilterWindow/filterWindow";
 
 export default class Home extends Component {
   state = {
-    pageSize: 10,
     creating: false,
     drawFilter: false,
     name: "",
@@ -28,6 +27,7 @@ export default class Home extends Component {
     black_list: false,
     projects: [],
     technologies: "",
+    pageSize: 20,
     currentPage: 1,
     columnHeaders: [
       "Name",
@@ -83,6 +83,9 @@ export default class Home extends Component {
       })
       .then(() => {
         let myrows = [];
+        // console.log(
+        //   this.props.state.profileListReducer.profiles[0].technologies
+        // );
         this.props.state.profileListReducer.profiles.map(candidate => {
           myrows.push({
             Name: candidate.name || "-",
@@ -144,6 +147,40 @@ export default class Home extends Component {
         })
       );
   }
+  profilesFilterer = e => {
+    // console.log(e.target.value);
+    if (!e.target.value) {
+      this.fetchingProfiles();
+    } else {
+      const filtered = this.props.state.profileListReducer.profiles.filter(
+        profile => {
+          return profile.name
+            .trim()
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase().trim());
+        }
+      );
+
+      this.props.filteredProfiles(filtered);
+      let myrows = [];
+      filtered.map(candidate => {
+        myrows.push({
+          "Name, Surname": candidate.name || "-",
+          Phone: candidate.phone || "-",
+          "Current Position": candidate.phone || "-",
+          Profile: candidate.profile || "-",
+          Portfolio: candidate.portfolio || "-",
+          Technologies: "ver vipove",
+          English: candidate.english || "-",
+          "Salary Expectation": candidate.salary || "-",
+          Source: candidate.source || "-",
+          Status: candidate.status || "-",
+          Projects: "proeqtebi"
+        });
+      });
+      this.setState({ rows: myrows, currentPage: 1 });
+    }
+  };
 
   handlePageChange = page => {
     this.setState({ currentPage: page });
@@ -160,7 +197,6 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(this.state.projects, " technilogies");
     return (
       <div className={styles.container}>
         <div className={styles.content}>
@@ -231,16 +267,42 @@ export default class Home extends Component {
               {
                 name: "name",
                 type: "text",
-                label: "Name,Surname"
+                label: "Name,Surname",
+                value: this.state.name
               },
-              { name: "phone", type: "number", label: "Phone" },
-              { name: "position", type: "text", label: "Position" },
-              { name: "profile", type: "text", label: "Profile" },
-              { name: "portfolio", type: "text", label: "Portfolio" },
-              { name: "comment", type: "text", label: "Comment" },
+              {
+                name: "phone",
+                type: "number",
+                label: "Phone",
+                value: this.state.phone
+              },
+              {
+                name: "position",
+                type: "text",
+                label: "Position",
+                value: this.state.position
+              },
+              {
+                name: "profile",
+                type: "text",
+                label: "Profile",
+                value: this.state.profile
+              },
+              {
+                name: "portfolio",
+                type: "text",
+                label: "Portfolio",
+                value: this.state.portfolio
+              },
+              {
+                name: "comment",
+                type: "text",
+                label: "Comment",
+                value: this.state.comment
+              },
               {
                 name: "english",
-                type: "dropdown",
+                type: "select",
                 label: "English",
                 options: [
                   { value: "no english", label: "no english" },
@@ -248,24 +310,42 @@ export default class Home extends Component {
                   { value: "fluent", label: "fluent" }
                 ]
               },
-              { name: "salary", type: "text", label: "Salary Expectation" },
-              { name: "source", type: "dropdown", label: "Source" },
-              { name: "profile", type: "text", label: "Profile" },
+              {
+                name: "salary",
+                type: "text",
+                label: "Salary Expectation",
+                value: this.state.salary
+              },
+              {
+                name: "source",
+                type: "select",
+                label: "Source",
+                options: [
+                  { value: "LinkedIn", label: "LinkedIn" },
+                  { value: "Refference", label: "Refference" },
+                  { value: "Job Post", label: "Job Post" }
+                ]
+              },
+              {
+                name: "profile",
+                type: "text",
+                label: "Profile",
+                value: this.state.profile
+              },
               {
                 name: "technologies",
-                type: "dropdown",
+                type: "multiSelect",
                 label: "Technologies",
                 options: this.state.technologies
               },
               {
                 name: "projects",
-                type: "dropdown",
+                type: "multiSelect",
                 label: "Projects",
                 options: this.state.projects
               }
             ]}
             onChange={this.handleChange}
-            profile={profiles[0]}
           />
         )}
       </div>

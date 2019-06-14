@@ -81,13 +81,11 @@ class FilterWindow extends Component {
                   console.log("tech");
                   console.log(
                     "english:",
-                    row.English,
                     this.state.filterWindowValues.english
                   );
                   if (
-                    row.English.toLowerCase().includes(
-                      this.state.filterWindowValues.english
-                    )
+                    row.English.toLowerCase() ===
+                    this.state.filterWindowValues.english
                   ) {
                     if (
                       row.Source.toLowerCase().includes(
@@ -143,25 +141,36 @@ class FilterWindow extends Component {
           { name: "comment", type: "text", label: "Comment" },
           {
             name: "english",
-            type: "dropdown",
+            type: "select",
             label: "English",
             options: [
+              { value: "any", label: "any" },
               { value: "no english", label: "no english" },
               { value: "good", label: "good" },
               { value: "fluent", label: "fluent" }
             ]
           },
-          { name: "source", type: "dropdown", label: "Source" },
+          {
+            name: "source",
+            type: "select",
+            label: "Source",
+            options: [
+              { value: "any", label: "any" },
+              { value: "Linkedin", label: "Linkedin" },
+              { value: "Refference", label: "Refference" },
+              { value: "Job Post", label: "Job Post" }
+            ]
+          },
           { name: "profile", type: "text", label: "Profile" },
           {
             name: "technologies",
-            type: "dropdown",
+            type: "multiSelect",
             label: "Technologies",
             options: this.state.technologies
           },
           {
             name: "projects",
-            type: "dropdown",
+            type: "multiSelect",
             label: "Projects",
             options: this.state.projects
           }

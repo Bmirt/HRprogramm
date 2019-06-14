@@ -10,7 +10,19 @@ const modal = props => {
       </header>
       <section className={Classes.modal_content}>
         {props.fields.map(item => {
-          if (item.type === "dropdown") {
+          if (item.type === "select") {
+            const content = item.options ? (
+              <div className="form-control">
+                <label htmlFor={item.name}>{item.label}</label>
+                <select>
+                  {item.options.map(itm => {
+                    return <option>{itm.value}</option>;
+                  })}
+                </select>
+              </div>
+            ) : null;
+            return <options>{content}</options>;
+          } else if (item.type === "multiSelect") {
             return (
               <div className="form-control">
                 <label htmlFor={item.name}>{item.label}</label>
@@ -22,18 +34,19 @@ const modal = props => {
                 </div>
               </div>
             );
-          }
-          return (
-            <div className="form-control">
-              <label htmlFor={item.name}>{item.label}</label>
-              <input
-                type={item.type}
-                name={item.name}
-                // value={props.profile ? props.profile.Phone : " "}
-                onChange={props.onChange}
-              />
-            </div>
-          );
+          } else
+            return (
+              <div className="form-control">
+                <label htmlFor={item.name}>{item.label}</label>
+                <input
+                  // placeholder={item.name}
+                  type={item.type}
+                  name={item.name}
+                  // value={props.profile ? props.profile.Phone : props.value}
+                  onChange={props.onChange}
+                />
+              </div>
+            );
         })}
       </section>
       <section className={Classes.modal_actions}>

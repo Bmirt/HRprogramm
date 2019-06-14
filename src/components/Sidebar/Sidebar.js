@@ -14,6 +14,8 @@ import blackListIcon from "../../images/blackListIcon.png";
 import blackListIconBlue from "../../images/blackListIconBlue.png";
 import userManagementIcon from "../../images/userManagementIcon.png";
 import userManagementIconBlue from "../../images/userManagementIconBlue.png";
+import technologiesIcon from "../../images/technologiesIcon.png";
+import technologiesIconBlue from "../../images/technologiesIconBlue.png";
 
 export class Sidebar extends Component {
   state = {
@@ -54,6 +56,12 @@ export class Sidebar extends Component {
         path: "user_management",
         icon: userManagementIcon,
         iconBlue: userManagementIconBlue
+      },
+      {
+        title: "Technologies",
+        path: "technologies",
+        icon: technologiesIcon,
+        iconBlue: technologiesIconBlue
       }
     ]
   };
@@ -69,13 +77,13 @@ export class Sidebar extends Component {
     let sidebarItems = this.state.sidebarItems.map(item => {
       let itemClass = styles.smth;
       let itemIcon = item.icon;
-      if (window.location.pathname === "/home/profile_list" + item.path) {
+      if (window.location.pathname === "/home/" + item.path) {
         itemClass = styles.chosen;
         itemIcon = item.iconBlue;
       }
       return (
         <li key={item.path} className={itemClass}>
-          <Link to={item.path}>
+          <Link to={`/home/${item.path}`}>
             <button className={styles.menuBtn}>
               <img
                 src={itemIcon}
