@@ -292,7 +292,7 @@ export default class Home extends Component {
               }
             ]}
             onChange={this.handleChange}
-            profile={profiles[0]}
+            // profile={profiles[0]}
           />
         )}
       </div>

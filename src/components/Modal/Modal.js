@@ -27,9 +27,10 @@ const modal = props => {
             <div className="form-control">
               <label htmlFor={item.name}>{item.label}</label>
               <input
+                // placeholder={item.name}
                 type={item.type}
                 name={item.name}
-                value={props.profile ? props.profile.Phone : " "}
+                // value={props.profile ? props.profile : ""}
                 onChange={props.onChange}
               />
             </div>
