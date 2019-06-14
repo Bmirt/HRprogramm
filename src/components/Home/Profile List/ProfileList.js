@@ -10,9 +10,9 @@ import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
 import FilterWindow from "../FilterWindow/filterWindow";
-import { throwStatement } from "@babel/types";
-export default class Home extends Component {
+export default class ProfileList extends Component {
   state = {
+    filtered: "",
     creating: false,
     drawFilter: false,
     name: "",
@@ -26,20 +26,22 @@ export default class Home extends Component {
     status: "",
     source: "",
     black_list: false,
-    pageSize: 20,
+    pageSize: 10,
     currentPage: 1,
     columnHeaders: [
-      "Name",
-      "Phone",
-      "Position",
-      "Profile",
-      "Portfolio",
-      "Technologies",
-      "English",
-      "Salary Expectation",
-      "Source",
-      "Status",
-      "Projects"
+      { title: "Name", name: "name" },
+      { title: "Phone", name: "phone" },
+      { title: "Current Position", name: "position" },
+      { title: "Profile", name: "profile" },
+      { title: "Portfolio", name: "portfolio" },
+      { title: "Technologies", name: "technologies" },
+      { title: "English", name: "english" },
+      { title: "Salary Expectation", name: "salary" },
+      { title: "Source", name: "source" },
+      { title: "Status", name: "status" },
+      { title: "Projects", name: "projects" },
+      { title: "Comment", name: "comment" },
+      { title: "Date", name: "created_at" }
     ],
     rows: [],
     technologies: [],
@@ -72,126 +74,11 @@ export default class Home extends Component {
     this.setState({ drawFilter: !this.state.drawFilter });
   };
   filteredRows = a => {
-    this.setState({ rows: a });
-  };
-  fetchingProfiles = () => {
-    let token = localStorage.getItem("token");
-    const { dispatch } = this.props;
-    fetch("http://laravel.local/api/all-profiles", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token
-      }
-    })
-      .then(response => response.json())
-      .then(res => {
-        if (res.error) {
-          throw res.error;
-        }
-        dispatch(fetchProfiles(res.profiles));
-        return res.products;
-      })
-      .then(() => {
-        let myrows = [];
-        // console.log(
-        //   this.props.state.profileListReducer.profiles[0].technologies
-        // );
-        this.props.state.profileListReducer.profiles.map(candidate => {
-          myrows.push({
-            Name: candidate.name || "-",
-            Phone: candidate.phone || "-",
-            Position: candidate.position || "-",
-            Profile: candidate.profile || "-",
-            Portfolio: candidate.portfolio || "-",
-            Technologies: candidate.technologies.reduce(
-              (acc, technology) => acc + "#" + technology.title + " ",
-              ""
-            ),
-            English: candidate.english || "-",
-            "Salary Expectation": candidate.salary || "-",
-            Source: candidate.source || "-",
-            Status: candidate.status || "-",
-            Projects: candidate.projects.reduce(
-              (acc, project) => acc + "#" + project.title + " ",
-              ""
-            ),
-            BlackList: candidate.black_list || 0,
-            id: candidate.id || ""
-          });
-          return 0;
-        });
-        this.setState({ rows: myrows });
-      })
-      .catch(error => error);
+    this.setState({ filtered: a });
   };
   componentDidMount() {
-    const token = localStorage.getItem("token");
-    this.fetchingProfiles();
-    fetch("http://laravel.local/api/get-technologies", {
-      headers: {
-        "Content-Type": "applcation/json",
-        Authorization: token
-      }
-    })
-      .then(res => res.json())
-      .then(res =>
-        this.setState({
-          technologies: res.technologies.map(item => {
-            return { value: item.id, label: item.title };
-          })
-        })
-      );
-
-    fetch("http://laravel.local/api/get-projects", {
-      headers: {
-        "Content-Type": "applcation/json",
-        Authorization: token
-      }
-    })
-      .then(res => res.json())
-      .then(res =>
-        this.setState({
-          projects: res.projects.map(item => {
-            return { value: item.id, label: item.title };
-          })
-        })
-      );
+    this.props.dispatch(fetchProfiles());
   }
-  profilesFilterer = e => {
-    // console.log(e.target.value);
-    if (!e.target.value) {
-      this.fetchingProfiles();
-    } else {
-      const filtered = this.props.state.profileListReducer.profiles.filter(
-        profile => {
-          return profile.name
-            .trim()
-            .toLowerCase()
-            .includes(e.target.value.toLowerCase().trim());
-        }
-      );
-
-      this.props.filteredProfiles(filtered);
-      let myrows = [];
-      filtered.map(candidate => {
-        myrows.push({
-          "Name, Surname": candidate.name || "-",
-          Phone: candidate.phone || "-",
-          "Current Position": candidate.phone || "-",
-          Profile: candidate.profile || "-",
-          Portfolio: candidate.portfolio || "-",
-          Technologies: "ver vipove",
-          English: candidate.english || "-",
-          "Salary Expectation": candidate.salary || "-",
-          Source: candidate.source || "-",
-          Status: candidate.status || "-",
-          Projects: "proeqtebi"
-        });
-      });
-      this.setState({ rows: myrows, currentPage: 1 });
-    }
-  };
 
   handlePageChange = page => {
     this.setState({ currentPage: page });
@@ -228,27 +115,14 @@ export default class Home extends Component {
   };
 
   render() {
-    console.log(this.props.state.profileListReducer.profiles);
     const profiles = paginate(
-      this.state.rows,
+      this.props.profiles,
       this.state.currentPage,
       this.state.pageSize
     );
     return (
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.search}>
-            <input
-              disabled={!this.state.rows.length}
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search..."
-              onChange={e => this.profilesFilterer(e)}
-            />
-            <button>
-              <img src={searchIcon} alt="search" />
-            </button>
-          </div>
           <div className={styles.buttonContainer}>
             <div>
               <button
@@ -264,7 +138,7 @@ export default class Home extends Component {
               <button
                 onClick={this.drawFilter}
                 className={styles.profilesListBtn}
-                disabled={!this.state.rows.length}
+                disabled={!this.props.profiles.length}
               >
                 <img src={FilterIcon} className={styles.btnIcon} />
                 <span>Filter</span>
@@ -278,7 +152,7 @@ export default class Home extends Component {
             />
           </div>
           <Pagination
-            itemsCount={this.props.state.profileListReducer.profiles.length}
+            itemsCount={this.props.profiles.length}
             pageSize={this.state.pageSize}
             currentPage={this.state.currentPage}
             onPageChange={this.handlePageChange}
@@ -286,10 +160,10 @@ export default class Home extends Component {
         </div>
         {this.state.drawFilter && (
           <FilterWindow
-            currentRows={this.state.rows}
+            currentRows={this.props.profiles}
             projects={this.state.projects}
             technologies={this.state.technologies}
-            filteredRows={this.filteredRows}
+            // filteredRows={this.filteredRows}
           />
         )}
         {this.state.creating && <Backdrop />}

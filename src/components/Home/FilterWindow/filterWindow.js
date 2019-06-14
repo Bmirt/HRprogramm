@@ -1,28 +1,8 @@
 import React, { Component } from "react";
 import Modal from "../../Modal/Modal";
 
-// fields={[
-//   {
-//     name: "name",
-//     type: "text",
-//     label: "Name,Surname"
-//   },
-//   { name: "phone", type: "number", label: "Phone" },
-//   { name: "position", type: "text", label: "Position" },
-//   { name: "profile", type: "text", label: "Profile" },
-//   { name: "portfolio", type: "text", label: "Portfolio" },
-//   { name: "comment", type: "text", label: "Comment" },
-//   { name: "english", type: "dropdown", label: "English" },
-//   { name: "salary", type: "text", label: "Salary Expectation" },
-//   { name: "source", type: "dropdown", label: "Source" },
-//   { name: "profile", type: "text", label: "Profile" },
-//   { name: "technologies", type: "dropdown", label: "Technologies" },
-//   { name: "projects", type: "dropdown", label: "Projects" }
-// ]}
-
 class FilterWindow extends Component {
   state = {
-    english: "",
     filterWindowValues: {
       name: "",
       phone: "",
@@ -34,6 +14,7 @@ class FilterWindow extends Component {
       source: "",
       status: "",
       projects: [""],
+      comment: "",
       startDate: "",
       endDate: ""
     },
@@ -42,15 +23,11 @@ class FilterWindow extends Component {
   };
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value.toLowerCase()
+      filterWindowValues: {
+        ...this.state.filterWindowValues,
+        [e.target.name]: e.target.value.toLowerCase()
+      }
     });
-
-    // this.setState({
-    //   filterWindowValues: {
-    //     ...this.state.filterWindowValues,
-    //     [e.target.name]: e.target.value.toLowerCase()
-    //   }
-    // });
   };
   handleMultiSelect = (category, data) => {
     let dataStringified = [];
@@ -72,83 +49,33 @@ class FilterWindow extends Component {
       });
     }
   };
+
   filter = () => {
     let filtered = [];
     this.props.currentRows.map(row => {
-      if (row.Name.toLowerCase().includes(this.state.filterWindowValues.name)) {
-        console.log("name");
-        if (
-          row.Phone.toLowerCase().includes(this.state.filterWindowValues.phone)
-        ) {
-          console.log("phone");
-          if (
-            row.Position.toLowerCase().includes(
-              this.state.filterWindowValues.position
-            )
-          ) {
-            console.log("position");
-            if (
-              row.Profile.toLowerCase().includes(
-                this.state.filterWindowValues.profile
-              )
-            ) {
-              console.log("profile");
-              if (
-                row.Portfolio.toLowerCase().includes(
-                  this.state.filterWindowValues.portfolio
-                )
-              ) {
-                console.log("portfolio");
-                let found = false;
-                this.state.filterWindowValues.technologies.map(tech => {
-                  if (row.Projects.toLowerCase().includes(tech)) {
-                    found = true;
-                    return;
-                  }
-                });
-                if (found) {
-                  console.log("tech");
-                  console.log(
-                    "english:",
-                    this.state.filterWindowValues.english
-                  );
-                  if (
-                    row.English.toLowerCase() ===
-                    this.state.filterWindowValues.english
-                  ) {
-                    if (
-                      row.Source.toLowerCase().includes(
-                        this.state.filterWindowValues.source
-                      )
-                    ) {
-                      if (
-                        row.Status.toLowerCase().includes(
-                          this.state.filterWindowValues.status
-                        )
-                      ) {
-                        let found = false;
-                        this.state.filterWindowValues.projects.map(project => {
-                          if (row.Projects.toLowerCase().includes(project)) {
-                            found = true;
-                            return;
-                          }
-                        });
-                        if (found) {
-                          filtered.push(row);
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      if (
+        row.name.includes(this.state.filterWindowValues.name.toLowerCase()) &&
+        row.phone.includes(this.state.filterWindowValues.phone.toLowerCase()) &&
+        row.position.includes(
+          this.state.filterWindowValues.position.toLowerCase()
+        ) &&
+        row.profile.includes(
+          this.state.filterWindowValues.profile.toLowerCase()
+        ) &&
+        row.portfolio.includes(
+          this.state.filterWindowValues.portfolio.toLowerCase()
+        ) &&
+        row.comment.includes(
+          this.state.filterWindowValues.comment.toLocaleLowerCase()
+        ) &&
+        row.english.includes
+      )
+        return;
     });
     this.props.filteredRows(filtered);
     console.log(filtered);
   };
+
   render() {
     return (
       <Modal
@@ -156,13 +83,9 @@ class FilterWindow extends Component {
         canCancel
         canConfirm
         onCancel={this.modalCancelHandler}
-        createProfile={this.filter}
+        // createProfile={this.filter}
         fields={[
-          {
-            name: "name",
-            type: "text",
-            label: "Name,Surname"
-          },
+          { name: "name", type: "text", label: "Name,Surname" },
           { name: "phone", type: "number", label: "Phone" },
           { name: "position", type: "text", label: "Position" },
           { name: "profile", type: "text", label: "Profile" },
@@ -202,7 +125,9 @@ class FilterWindow extends Component {
             type: "multiSelect",
             label: "Projects",
             options: this.state.projects
-          }
+          },
+          { name: "startDate", type: "date", label: "From" },
+          { name: "endDate", type: "date", label: "To" }
         ]}
         onChange={this.handleChange}
         handleMultiSelect={this.handleMultiSelect}
