@@ -91,31 +91,31 @@ span.versionText {
   right: -4px;
 }
 
-.itemClass{
+.itemClass {
   border-bottom: 1px dashed;
   text-decoration: none;
-  position: relative
+  position: relative;
 }
-.itemClass:hover{
+.itemClass:hover {
   cursor: pointer;
-  
 }
 
 .itemClass .tooltip {
-  display: none
+  display: none;
 }
-.itemClass:hover  .tooltip{
+.itemClass:hover .tooltip {
   line-height: 10px;
   background: #000;
   padding: 5px;
   display: inline-block;
-  width: auto;
-  word-wrap: none;
+  width: 130px;
+  text-align: center;
+  word-wrap: normal;
   z-index: 100;
-  right: -60px;
+  left: 65px;
   color: #fff;
   position: absolute;
   border-radius: 5px;
-  top: 10px;
+  top: 20px;
   text-decoration: none;
 }
