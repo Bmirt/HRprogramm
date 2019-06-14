@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <div className={styles.logoWrapper}>
-          <img src={logo} className={styles.logo} alt="logo" />
+          <img src={logo} className={styles.logo} title="logo" alt="logo" />
         </div>
         <div className={styles.headerLists}>
           <ul>

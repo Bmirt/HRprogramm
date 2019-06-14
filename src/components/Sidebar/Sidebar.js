@@ -82,16 +82,19 @@ export class Sidebar extends Component {
         itemIcon = item.iconBlue;
       }
       return (
-        <li key={item.path} className={itemClass}>
+        <li key={item.path} className={styles.itemClass} title={item.title}>
+          <span className={styles.tooltip}>{item.title}</span>
           <Link to={`/home/${item.path}`}>
-            <button className={styles.menuBtn}>
+            <button className={styles.menuBtn} 
+            >
               <img
                 src={itemIcon}
                 className={styles.sidebarIcon}
                 alt={item.title}
+                
               />
             </button>
-            <span className={isVisible}>{item.title}</span>
+            <span  className={isVisible}>{item.title}</span>
           </Link>
         </li>
       );
