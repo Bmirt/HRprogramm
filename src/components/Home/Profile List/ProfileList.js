@@ -9,12 +9,11 @@ import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
-import FIlterWindow from "../FilterWindow/filterWindow";
 import FilterWindow from "../FilterWindow/filterWindow";
 
 export default class Home extends Component {
   state = {
-    pageSize: 2,
+    pageSize: 10,
     creating: false,
     drawFilter: false,
     name: "",
@@ -43,7 +42,9 @@ export default class Home extends Component {
       "Status",
       "Projects"
     ],
-    rows: []
+    rows: [],
+    technologies: [],
+    projects: []
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -60,9 +61,7 @@ export default class Home extends Component {
     this.setState({ creating: false });
   };
   drawFilter = () => {
-    this.setState({ drawFilter: !this.state.drawFilter }, () =>
-      console.log(this.state.drawFilter)
-    );
+    this.setState({ drawFilter: !this.state.drawFilter });
   };
   fetchingProfiles = () => {
     let token = localStorage.getItem("token");
@@ -113,7 +112,37 @@ export default class Home extends Component {
       .catch(error => error);
   };
   componentDidMount() {
+    const token = localStorage.getItem("token");
     this.fetchingProfiles();
+    fetch("http://laravel.local/api/get-technologies", {
+      headers: {
+        "Content-Type": "applcation/json",
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          technologies: res.technologies.map(item => {
+            return { value: item.title, label: item.title };
+          })
+        })
+      );
+
+    fetch("http://laravel.local/api/get-projects", {
+      headers: {
+        "Content-Type": "applcation/json",
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(res =>
+        this.setState({
+          projects: res.projects.map(item => {
+            return { value: item.title, label: item.title };
+          })
+        })
+      );
   }
 
   handlePageChange = page => {
@@ -122,6 +151,7 @@ export default class Home extends Component {
 
   filteredRows = a => {
     console.log(a);
+    this.setState({ rows: a });
   };
 
   render() {
@@ -130,13 +160,10 @@ export default class Home extends Component {
       this.state.currentPage,
       this.state.pageSize
     );
+    console.log(this.state.projects, " technilogies");
     return (
       <div className={styles.container}>
         <div className={styles.content}>
-          <FilterWindow
-            currentRows={this.state.rows}
-            filteredRows={this.filteredRows}
-          />
           <div className={styles.search}>
             <input
               disabled={!this.state.rows.length}
@@ -184,6 +211,14 @@ export default class Home extends Component {
             onPageChange={this.handlePageChange}
           />
         </div>
+        {this.state.drawFilter && (
+          <FilterWindow
+            currentRows={this.state.rows}
+            projects={this.state.projects}
+            technologies={this.state.technologies}
+            filteredRows={this.filteredRows}
+          />
+        )}
         {this.state.creating && <Backdrop />}
         {this.state.creating && (
           <Modal
@@ -203,15 +238,34 @@ export default class Home extends Component {
               { name: "profile", type: "text", label: "Profile" },
               { name: "portfolio", type: "text", label: "Portfolio" },
               { name: "comment", type: "text", label: "Comment" },
-              { name: "english", type: "dropdown", label: "English" },
+              {
+                name: "english",
+                type: "dropdown",
+                label: "English",
+                options: [
+                  { value: "no english", label: "no english" },
+                  { value: "good", label: "good" },
+                  { value: "fluent", label: "fluent" }
+                ]
+              },
               { name: "salary", type: "text", label: "Salary Expectation" },
               { name: "source", type: "dropdown", label: "Source" },
               { name: "profile", type: "text", label: "Profile" },
-              { name: "technologies", type: "dropdown", label: "Technologies" },
-              { name: "projects", type: "dropdown", label: "Projects" }
+              {
+                name: "technologies",
+                type: "dropdown",
+                label: "Technologies",
+                options: this.state.technologies
+              },
+              {
+                name: "projects",
+                type: "dropdown",
+                label: "Projects",
+                options: this.state.projects
+              }
             ]}
             onChange={this.handleChange}
-            // profile={profiles[0]}
+            profile={profiles[0]}
           />
         )}
       </div>

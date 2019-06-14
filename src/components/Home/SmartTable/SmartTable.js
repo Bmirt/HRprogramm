@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import styles from "./SmartTable.module.css";
+import { Link } from "react-router-dom";
 
 class SmartTable extends Component {
   state = {
     roughcolumns: [],
     columnHeaders: this.props.columnHeaders
-  };
-
-  trclick = a => {
-    console.log("clicking header", a);
   };
 
   getElementCoords = id => {
@@ -107,13 +104,17 @@ class SmartTable extends Component {
     }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
-        return <td key={header}>{row[header]}</td>;
+        return (
+          <td key={header}>
+            <Link to={`${row.id}`}>{row[header]}</Link>
+          </td>
+        );
       });
+
       return (
         <tr
           key={this.props.rows.indexOf(row)}
           bgcolor={row.BlackList ? "#dc3545" : "white"}
-          onClick={() => this.trclick(row.id)}
         >
           {currentrow}
         </tr>
@@ -122,7 +123,7 @@ class SmartTable extends Component {
     return <tbody>{rows}</tbody>;
   };
   render() {
-    console.log(this.props, "props");
+    // console.log(this.props, "props");
     return (
       <div className={styles.container}>
         <table id="html_to_excel">

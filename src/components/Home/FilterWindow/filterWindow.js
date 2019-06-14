@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Modal from "../../Modal/Modal";
 
 // fields={[
 //   {
@@ -20,22 +21,93 @@ import React, { Component } from "react";
 // ]}
 
 class FilterWindow extends Component {
-  filter = () => {
+  state = {
+    filterWindowValues: {
+      name: "",
+      phone: "",
+      position: "",
+      portfolio: "",
+      profile: "",
+      technologies: [""],
+      english: "",
+      source: "",
+      status: "",
+      projects: [""],
+      startDate: "",
+      endDate: ""
+    },
+    projects: this.props.projects,
+    technologies: this.props.technologies
+  };
+  handleChange = e => {
+    this.setState({ [e.target.name]: "" + e.target.value.toLowerCase() });
+    console.log(e.target.name, e.target.value, this.state);
+  };
+  filter = e => {
     let filtered = [];
     this.props.currentRows.map(row => {
-      if (row.Name.includes("bad")) {
-        if (row.Phone.includes("5")) {
-          if (row.Position.includes("ont")) {
-            if (row.Profile.includes("")) {
-              if (row.Portfolio.includes("")) {
-                if (row.Technologies.includes("")) {
-                  if (row.English.includes("")) {
-                    if (row["Salary Expectation"].includes("")) {
-                      if (row.Source.includes("")) {
-                        if (row.Status.includes("")) {
-                          if (row.Projects.includes("")) {
-                            filtered.push(row);
+      if (row.Name.toLowerCase().includes(this.state.filterWindowValues.name)) {
+        console.log("name");
+        if (
+          row.Phone.toLowerCase().includes(this.state.filterWindowValues.phone)
+        ) {
+          console.log("phone");
+          if (
+            row.Position.toLowerCase().includes(
+              this.state.filterWindowValues.position
+            )
+          ) {
+            console.log("position");
+            if (
+              row.Profile.toLowerCase().includes(
+                this.state.filterWindowValues.profile
+              )
+            ) {
+              console.log("profile");
+              if (
+                row.Portfolio.toLowerCase().includes(
+                  this.state.filterWindowValues.portfolio
+                )
+              ) {
+                console.log("portfolio");
+                let found = false;
+                this.state.filterWindowValues.technologies.map(tech => {
+                  if (row.Projects.toLowerCase().includes(tech)) {
+                    found = true;
+                    return;
+                  }
+                });
+                if (found) {
+                  console.log("tech");
+                  console.log(
+                    "english:",
+                    row.English,
+                    this.state.filterWindowValues.english
+                  );
+                  if (
+                    row.English.toLowerCase().includes(
+                      this.state.filterWindowValues.english
+                    )
+                  ) {
+                    if (
+                      row.Source.toLowerCase().includes(
+                        this.state.filterWindowValues.source
+                      )
+                    ) {
+                      if (
+                        row.Status.toLowerCase().includes(
+                          this.state.filterWindowValues.status
+                        )
+                      ) {
+                        let found = false;
+                        this.state.filterWindowValues.projects.map(project => {
+                          if (row.Projects.toLowerCase().includes(project)) {
+                            found = true;
+                            return;
                           }
+                        });
+                        if (found) {
+                          filtered.push(row);
                         }
                       }
                     }
@@ -45,14 +117,58 @@ class FilterWindow extends Component {
             }
           }
         }
-      } else {
-        return;
       }
     });
     this.props.filteredRows(filtered);
+    console.log(filtered);
   };
   render() {
-    return <button onClick={this.filter}>filter</button>;
+    return (
+      <Modal
+        title="Add Candidate"
+        canCancel
+        canConfirm
+        onCancel={this.modalCancelHandler}
+        onConfirm={this.filter}
+        fields={[
+          {
+            name: "name",
+            type: "text",
+            label: "Name,Surname"
+          },
+          { name: "phone", type: "number", label: "Phone" },
+          { name: "position", type: "text", label: "Position" },
+          { name: "profile", type: "text", label: "Profile" },
+          { name: "portfolio", type: "text", label: "Portfolio" },
+          { name: "comment", type: "text", label: "Comment" },
+          {
+            name: "english",
+            type: "dropdown",
+            label: "English",
+            options: [
+              { value: "no english", label: "no english" },
+              { value: "good", label: "good" },
+              { value: "fluent", label: "fluent" }
+            ]
+          },
+          { name: "source", type: "dropdown", label: "Source" },
+          { name: "profile", type: "text", label: "Profile" },
+          {
+            name: "technologies",
+            type: "dropdown",
+            label: "Technologies",
+            options: this.state.technologies
+          },
+          {
+            name: "projects",
+            type: "dropdown",
+            label: "Projects",
+            options: this.state.projects
+          }
+        ]}
+        onChange={this.handleChange}
+      />
+    );
   }
 }
 
