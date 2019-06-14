@@ -16,11 +16,12 @@ class Technologies extends Component {
       }
     })
       .then(res => res.json())
-      .then(res =>
+      .then(res => {
+        console.log(res);
         this.setState({
           technologies: res.technologies
-        })
-      );
+        });
+      });
   }
   remtech = () => {
     console.log("Removing");

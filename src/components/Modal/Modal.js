@@ -12,16 +12,19 @@ const modal = props => {
         {props.fields.map(item => {
           if (item.type === "select") {
             const content = item.options ? (
+              <select name={item.name} onChange={props.onChange}>
+                <option value="">Choose</option>
+                {item.options.map(itm => {
+                  return <option value={itm.value}>{itm.value}</option>;
+                })}
+              </select>
+            ) : null;
+            return (
               <div className="form-control">
                 <label htmlFor={item.name}>{item.label}</label>
-                <select>
-                  {item.options.map(itm => {
-                    return <option>{itm.value}</option>;
-                  })}
-                </select>
+                {content}
               </div>
-            ) : null;
-            return <options>{content}</options>;
+            );
           } else if (item.type === "multiSelect") {
             return (
               <div className="form-control">
@@ -29,7 +32,12 @@ const modal = props => {
                 <div style={{ display: "inline-block", width: 300 }}>
                   <MultiSelect
                     options={item.options}
-                    onChangeCallback={response => console.log(response)}
+                    onChangeCallback={response =>
+                      props.handleMultiSelect(
+                        item.name,
+                        response.map(item => item.value)
+                      )
+                    }
                   />
                 </div>
               </div>
@@ -56,7 +64,7 @@ const modal = props => {
           </button>
         )}
         {props.canConfirm && (
-          <button className={Classes.modal_btn} onClick={props.onConfirm}>
+          <button className={Classes.modal_btn} onClick={props.createProfile}>
             Add
           </button>
         )}
