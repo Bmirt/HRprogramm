@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "../Header/Header";
 import Sidebar from "../../containers/SidebarContainer";
-import ProfileList from "../../containers/ProfileListContainer";
+// import ProfileList from "../../containers/ProfileListContainer";
 import { Route } from "react-router-dom";
 import Projects from "../Home/Projects/Projects";
 import Analytics from "../Analytics/Analytics";
@@ -12,6 +12,7 @@ import Technologies from "../Technologies/technologies";
 import SingleProfileContainer from "../../containers/SingleProfile";
 import SingleTechnology from "../Technologies/single";
 import SingleProject from "../Home/Projects/single";
+import ProfileListContainer from "../../containers/ProfileListContainer";
 
 class ProtectedContainer extends Component {
   state = {};
@@ -21,7 +22,11 @@ class ProtectedContainer extends Component {
         <Header />
         <div className="mainContent">
           <Sidebar />
-          <Route path="/home/profile_list" exact component={ProfileList} />
+          <Route
+            path="/home/profile_list"
+            exact
+            component={ProfileListContainer}
+          />
           <Route path="/home/projects" exact component={Projects} />
           <Route path="/home/analytics" exact component={Analytics} />
           <Route path="/home/calendar" exact component={Calendar} />

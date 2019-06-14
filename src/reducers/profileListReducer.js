@@ -15,7 +15,7 @@ const profileListReducer = (state = initialState, action) => {
     case FETCH_PROFILES:
       return {
         ...state,
-        profiles: action.profiles
+        profiles: action.payload.profiles
       };
     case ADD_PROFILE:
       console.log("add profile");

@@ -35,7 +35,9 @@ class SmartTable extends Component {
 
   placeBefore = (movingItem, origin) => {
     if (movingItem !== origin) {
-      let currentArray = this.state.columnHeaders.filter(x => x !== movingItem);
+      let currentArray = this.state.columnHeaders.filter(
+        x => x.name !== movingItem
+      );
       let filteredDown = currentArray.filter(
         x => currentArray.indexOf(x) < currentArray.indexOf(origin)
       );
@@ -110,15 +112,15 @@ class SmartTable extends Component {
     let headers = this.state.columnHeaders.map(header => {
       return (
         <th
-          key={header}
-          id={header}
+          key={header.title}
+          id={header.name}
           draggable="true"
           onDrag={this.handleDragging}
           onDragEnd={() =>
             this.setState({ columnHeaders: this.state.roughcolumns })
           }
         >
-          {header}
+          {header.title}
         </th>
       );
     });
@@ -141,13 +143,14 @@ class SmartTable extends Component {
     }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
+        console.log(row[header.name]);
         return (
-          <td key={header}>
+          <td key={header.name}>
             <Link
               to={`profile/${row.id}`}
-              style={{ color: row.BlackList ? "#fff" : "#000" }}
+              style={{ color: row.black_list ? "#fff" : "#000" }}
             >
-              {row[header]}
+              {row[header.name]}
             </Link>
           </td>
         );
@@ -158,7 +161,7 @@ class SmartTable extends Component {
           key={this.props.rows.indexOf(row)}
           onMouseEnter={() => this.hoverModal(row.id)}
           onMouseLeave={this.hoverLeave}
-          bgcolor={row.BlackList ? "#dc3545" : "white"}
+          bgcolor={row.black_list ? "#dc3545" : "white"}
         >
           {currentrow}
         </tr>
