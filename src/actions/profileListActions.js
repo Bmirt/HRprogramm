@@ -5,7 +5,8 @@ import {
   FETCH_PROFILES,
   FILTER_PROFILES,
   FETCH_TECHNOLOGIES,
-  FETCH_PROJECTS
+  FETCH_PROJECTS,
+  FETCH_PROJECT
 } from "../constants/profileListConstants";
 
 import axios from "axios";
@@ -58,6 +59,16 @@ export const fetchProjects = token => {
         headers: { "Content-Type": "application/json", Authorization: token }
       })
       .then(res => dispatch({ type: FETCH_PROJECTS, payload: res.data }));
+  };
+};
+
+export const fetchProject = (token, id) => {
+  return dispatch => {
+    axios
+      .get(`http://laravel.local/api/project/${id}`, {
+        headers: { "Content-Type": "application/json", Authorization: token }
+      })
+      .then(res => dispatch({ type: FETCH_PROJECT, payload: res.data }));
   };
 };
 

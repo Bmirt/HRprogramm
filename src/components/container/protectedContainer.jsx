@@ -8,7 +8,6 @@ import BlackList from "../BlackList/BlackList";
 import UserManagement from "../UserManagement/UserManagement";
 import SingleProfileContainer from "../../containers/SingleProfile";
 import SingleTechnology from "../Technologies/single";
-import SingleProject from "../Home/Projects/single";
 import ProfileListContainer from "../../containers/ProfileListContainer";
 import TechnologyContainer from "../../containers/TechnologyContainer";
 import { connect } from "react-redux";
@@ -17,7 +16,11 @@ import {
   fetchTechnologies,
   fetchProjects
 } from "../../actions/profileListActions";
+<<<<<<< HEAD
+import SingleProjectContainer from "../../containers/SingleProjectContainer";
+=======
 import AnalyticsContainer from "../../containers/AnalyticsContainer";
+>>>>>>> 880993d9ce6676d7977dfc7d714a91fb36e76c9a
 
 class ProtectedContainer extends Component {
   state = {};
@@ -47,7 +50,11 @@ class ProtectedContainer extends Component {
             exact
             component={TechnologyContainer}
           />
-          <Route path="/home/projects/:id" exact component={SingleProject} />
+          <Route
+            path="/home/projects/:id"
+            exact
+            component={SingleProjectContainer}
+          />
           <Route
             path="/home/technologies/:id"
             exact
