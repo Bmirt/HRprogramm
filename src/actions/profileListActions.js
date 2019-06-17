@@ -5,8 +5,7 @@ import {
   FETCH_PROFILES,
   FILTER_PROFILES,
   FETCH_TECHNOLOGIES,
-  FETCH_PROJECTS,
-  CREATE_PROFILE
+  FETCH_PROJECTS
 } from "../constants/profileListConstants";
 
 import axios from "axios";
@@ -80,6 +79,6 @@ export const createProfile = profile => {
       body: JSON.stringify(profile)
     })
       .then(res => res.json())
-      .then(res => dispatch({ type: CREATE_PROFILE, payload: res }));
+      .then(res => dispatch({ type: ADD_PROFILE, payload: res }));
   };
 };

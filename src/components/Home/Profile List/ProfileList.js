@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
-import searchIcon from "../../../images/searchIcon.png";
 import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
@@ -80,7 +79,7 @@ export default class ProfileList extends Component {
     this.setState({ currentPage: page });
   };
 
-  createPrfile = () => {
+  createProfile = () => {
     const {
       name,
       phone,
@@ -113,13 +112,11 @@ export default class ProfileList extends Component {
   };
 
   render() {
-    console.log(this.props);
     const profiles = paginate(
       this.props.profiles,
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(this.state);
     return (
       <div className={styles.container}>
         <div className={styles.content}>
@@ -262,7 +259,7 @@ export default class ProfileList extends Component {
             ]}
             onChange={this.handleChange}
             handleMultiSelect={this.handleMultiSelect}
-            createProfile={this.createPrfile}
+            createProfile={this.createProfile}
           />
         )}
       </div>
