@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
-import searchIcon from "../../../images/searchIcon.png";
 import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
 import FilterIcon from "../../../images/filterIcon.png";
-import { fetchProfiles } from "../../../actions/profileListActions";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
 import FilterWindow from "../FilterWindow/filterWindow";
 export default class ProfileList extends Component {
   state = {
+    filtered: "",
     creating: false,
     drawFilter: false,
     name: "",
@@ -33,12 +32,13 @@ export default class ProfileList extends Component {
       { title: "Current Position", name: "position" },
       { title: "Profile", name: "profile" },
       { title: "Portfolio", name: "portfolio" },
-      // { title: "Technologies", name: "technologies" },
+      { title: "Technologies", name: "technologies" },
       { title: "English", name: "english" },
       { title: "Salary Expectation", name: "salary" },
       { title: "Source", name: "source" },
       { title: "Status", name: "status" },
-      // { title: "Projects", name: "projects" },
+      { title: "Projects", name: "projects" },
+      { title: "Comment", name: "comment" },
       { title: "Date", name: "created_at" }
     ],
     rows: [],
@@ -69,50 +69,49 @@ export default class ProfileList extends Component {
     this.setState({ creating: false });
   };
   drawFilter = () => {
-    this.setState({ drawFilter: !this.state.drawFilter }, () =>
-      console.log(this.state.drawFilter)
-    );
+    this.setState({ drawFilter: !this.state.drawFilter });
   };
-  componentDidMount() {
-    this.props.dispatch(fetchProfiles());
-  }
+  filteredRows = a => {
+    this.setState({ filtered: a });
+  };
 
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
 
-  createPrfile = () => {
-    const token = localStorage.getItem("token");
-    fetch("http://laravel.local/api/store-profile", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: token
-      },
-      body: JSON.stringify({
-        author_id: 1,
-        status: "interested",
-        name: this.state.name,
-        phone: this.state.phone,
-        position: this.state.position,
-        profile: this.state.profile,
-        portfolio: this.state.portfolio,
-        comment: this.state.comment,
-        english: this.state.english,
-        salary: this.state.salary,
-        // status: this.state.status,
-        source: this.state.source,
-        projects: this.state.chosenProjects,
-        technologies: this.state.chosenTechnologies
-      })
-    })
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+  createProfile = () => {
+    const {
+      name,
+      phone,
+      position,
+      portfolio,
+      profile,
+      comment,
+      english,
+      salary,
+      source,
+      chosenProjects: projects,
+      chosenTechnologies: technologies
+    } = this.state;
+    const userprofile = {
+      author_id: 1,
+      status: "interested",
+      name,
+      phone,
+      position,
+      portfolio,
+      profile,
+      comment,
+      english,
+      salary,
+      source,
+      projects,
+      technologies
+    };
+    this.props.createProfile(userprofile);
   };
 
   render() {
-    console.log(this.state);
     const profiles = paginate(
       this.props.profiles,
       this.state.currentPage,
@@ -120,20 +119,7 @@ export default class ProfileList extends Component {
     );
     return (
       <div className={styles.container}>
-        <FilterWindow display={this.state.drawFilter ? "" : "none"} />
         <div className={styles.content}>
-          <div className={styles.search}>
-            <input
-              disabled={!this.state.rows.length}
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search..."
-              onChange={e => this.profilesFilterer(e)}
-            />
-            <button>
-              <img src={searchIcon} alt="search" />
-            </button>
-          </div>
           <div className={styles.buttonContainer}>
             <div>
               <button
@@ -149,7 +135,7 @@ export default class ProfileList extends Component {
               <button
                 onClick={this.drawFilter}
                 className={styles.profilesListBtn}
-                disabled={!this.state.rows.length}
+                disabled={!this.props.profiles.length}
               >
                 <img src={FilterIcon} className={styles.btnIcon} />
                 <span>Filter</span>
@@ -169,6 +155,14 @@ export default class ProfileList extends Component {
             onPageChange={this.handlePageChange}
           />
         </div>
+        {this.state.drawFilter && (
+          <FilterWindow
+            currentRows={this.props.profiles}
+            projects={this.state.projects}
+            technologies={this.state.technologies}
+            // filteredRows={this.filteredRows}
+          />
+        )}
         {this.state.creating && <Backdrop />}
         {this.state.creating && (
           <Modal
@@ -250,18 +244,22 @@ export default class ProfileList extends Component {
                 name: "technologies",
                 type: "multiSelect",
                 label: "Technologies",
-                options: this.state.technologies
+                options: this.props.technologies.map(item => {
+                  return { value: item.id, label: item.title };
+                })
               },
               {
                 name: "projects",
                 type: "multiSelect",
                 label: "Projects",
-                options: this.state.projects
+                options: this.props.projects.map(item => {
+                  return { value: item.id, label: item.title };
+                })
               }
             ]}
             onChange={this.handleChange}
             handleMultiSelect={this.handleMultiSelect}
-            createProfile={this.createPrfile}
+            createProfile={this.createProfile}
           />
         )}
       </div>

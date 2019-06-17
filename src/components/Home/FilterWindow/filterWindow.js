@@ -1,194 +1,139 @@
 import React, { Component } from "react";
-import styles from "./filterWindow.module.css";
-import { connect } from "react-redux";
-import { filteredProfiles } from "../../../actions/profileListActions";
+import Modal from "../../Modal/Modal";
 
-class filterWindow extends Component {
+class FilterWindow extends Component {
   state = {
-    project: "",
-    profile: "",
-    phone: "",
-    technicalSkills: "react",
-    englishSkills: "none",
-    minSalary: "",
-    maxSalary: "",
-    status: "blacklisted",
-    source: "linkedin",
-    minData: "",
-    maxData: ""
+    filterWindowValues: {
+      name: "",
+      phone: "",
+      position: "",
+      portfolio: "",
+      profile: "",
+      technologies: [""],
+      english: "",
+      source: "",
+      status: "",
+      projects: [""],
+      comment: "",
+      startDate: "",
+      endDate: ""
+    },
+    projects: this.props.projects,
+    technologies: this.props.technologies
   };
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      filterWindowValues: {
+        ...this.state.filterWindowValues,
+        [e.target.name]: e.target.value.toLowerCase()
+      }
     });
   };
-  profilesFilterer = e => {
-    e.preventDefault();
-    console.log("i was here", this.state);
-    // if (!e.target.value) {
-    //   this.fetchingProfiles();
-    // } else {
-    //   const filtered = this.props.state.profileListReducer.profiles.filter(
-    //     profile => {
-    //       return profile.name
-    // .trim()
-    // .toLowerCase()
-    // .includes(e.target.value.toLowerCase().trim())
-    //     }
-    //   );
-    const filtered = this.props.state.profileListReducer.profiles.filter(
-      profile => {
-        if (
-          profile.project === this.state.project &&
-          profile.profile === this.state.profile &&
-          profile.phone === this.state.phone &&
-          profile.technicalSkills === this.state.technicalSkills &&
-          profile.englishSkills === this.state.englishSkills &&
-          profile.salary >= this.state.minSalary &&
-          profile.salary <= this.state.maxSalary &&
-          profile.status === this.state.blacklisted &&
-          profile.source === this.state.source
-        ) {
+  handleMultiSelect = (category, data) => {
+    let dataStringified = [];
+    data.map(item => {
+      dataStringified.push(
+        this.state[category].find(x => x.value == item).label
+      );
+    });
+    if (category === "technologies") {
+      this.setState({
+        filterWindowValues: {
+          technologies: dataStringified
         }
-      }
-    );
+      });
+    }
+    if (category === "projects") {
+      this.setState({
+        filterWindowValues: { ...this.state.filterWindowValues, projects: data }
+      });
+    }
+  };
 
-    // this.props.filteredProfiles(filtered);
-    // let myrows = [];
-    // filtered.map(candidate => {
-    //   myrows.push({
-    //     "Name, Surname": candidate.name || "-",
-    //     Phone: candidate.phone || "-",
-    //     "Current Position": candidate.phone || "-",
-    //     Profile: candidate.profile || "-",
-    //     Portfolio: candidate.portfolio || "-",
-    //     Technologies: "ver vipove",
-    //     English: candidate.english || "-",
-    //     "Salary Expectation": candidate.salary || "-",
-    //     Source: candidate.source || "-",
-    //     Status: candidate.status || "-",
-    //     Projects: "proeqtebi"
-    //   });
-    // });
-    // this.setState({ rows: myrows, currentPage: 1 });
-    // }
+  filter = () => {
+    let filtered = [];
+    this.props.currentRows.map(row => {
+      if (
+        row.name.includes(this.state.filterWindowValues.name.toLowerCase()) &&
+        row.phone.includes(this.state.filterWindowValues.phone.toLowerCase()) &&
+        row.position.includes(
+          this.state.filterWindowValues.position.toLowerCase()
+        ) &&
+        row.profile.includes(
+          this.state.filterWindowValues.profile.toLowerCase()
+        ) &&
+        row.portfolio.includes(
+          this.state.filterWindowValues.portfolio.toLowerCase()
+        ) &&
+        row.comment.includes(
+          this.state.filterWindowValues.comment.toLocaleLowerCase()
+        ) &&
+        row.english.includes
+      )
+        return;
+    });
+    this.props.filteredRows(filtered);
+    console.log(filtered);
   };
 
   render() {
     return (
-      <form onSubmit={e => this.profilesFilterer(e)}>
-        <div
-          className={styles.container}
-          style={{ display: this.props.display }}
-        >
-          <div className={styles.secondaryContainer}>
-            <div className={styles.inputContainer}>
-              <span>Project</span>
-              <input
-                name="project"
-                onChange={e => this.handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Profile</span>
-              <input
-                name="profile"
-                onChange={e => this.handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Phone</span>
-              <input
-                name="phone"
-                onChange={e => this.handleChange(e)}
-                type="text"
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Technical Skills</span>
-              <select
-                name="technicalSkills"
-                onChange={e => this.handleChange(e)}
-              >
-                <option value="react">React</option>
-                <option value="angular">Angular</option>
-                <option value="node">Node.js</option>
-                <option value="php">Php</option>
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <span>English</span>
-              <select name="englishSkills" onChange={e => this.handleChange(e)}>
-                <option value="none">none</option>
-                <option value="basic">Basic</option>
-                <option value="fluent">Fluent</option>
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Salary Range</span>
-              <div>
-                <input
-                  type="text"
-                  name="minSalary"
-                  onChange={e => this.handleChange(e)}
-                  placeholder="min"
-                />
-                <input
-                  type="text"
-                  name="maxSalary"
-                  onChange={e => this.handleChange(e)}
-                  placeholder="max"
-                />
-              </div>
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Status</span>
-              <select name="status" onChange={e => this.handleChange(e)}>
-                <option value="blacklisted">Blacklisted</option>
-                <option value="white">White</option>
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Source</span>
-              <select name="source" onChange={e => this.handleChange(e)}>
-                <option value="linkedin">Linkedin</option>
-                <option value="referee">Referee</option>
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <span>Date Range</span>
-              <div>
-                <input
-                  name="minData"
-                  onChange={e => this.handleChange(e)}
-                  type="date"
-                />
-                <input
-                  name="maxData"
-                  onChange={e => this.handleChange(e)}
-                  type="date"
-                />
-              </div>
-            </div>
-          </div>
-          <button type="submit">submit</button>
-        </div>
-      </form>
+      <Modal
+        title="Add Candidate"
+        canCancel
+        canConfirm
+        onCancel={this.modalCancelHandler}
+        // createProfile={this.filter}
+        fields={[
+          { name: "name", type: "text", label: "Name,Surname" },
+          { name: "phone", type: "number", label: "Phone" },
+          { name: "position", type: "text", label: "Position" },
+          { name: "profile", type: "text", label: "Profile" },
+          { name: "portfolio", type: "text", label: "Portfolio" },
+          { name: "comment", type: "text", label: "Comment" },
+          {
+            name: "english",
+            type: "select",
+            label: "English",
+            options: [
+              { value: "any", label: "any" },
+              { value: "no english", label: "no english" },
+              { value: "good", label: "good" },
+              { value: "fluent", label: "fluent" }
+            ]
+          },
+          {
+            name: "source",
+            type: "select",
+            label: "Source",
+            options: [
+              { value: "any", label: "any" },
+              { value: "Linkedin", label: "Linkedin" },
+              { value: "Refference", label: "Refference" },
+              { value: "Job Post", label: "Job Post" }
+            ]
+          },
+          { name: "profile", type: "text", label: "Profile" },
+          {
+            name: "technologies",
+            type: "multiSelect",
+            label: "Technologies",
+            options: this.state.technologies
+          },
+          {
+            name: "projects",
+            type: "multiSelect",
+            label: "Projects",
+            options: this.state.projects
+          },
+          { name: "startDate", type: "date", label: "From" },
+          { name: "endDate", type: "date", label: "To" }
+        ]}
+        onChange={this.handleChange}
+        handleMultiSelect={this.handleMultiSelect}
+      />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  state: state
-});
-
-const mapDispatchToProps = dispatch => ({
-  filteredProfiles: profiles => dispatch(filteredProfiles(profiles))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(filterWindow);
+export default FilterWindow;

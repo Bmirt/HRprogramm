@@ -49,7 +49,6 @@ class ExportFile extends Component {
           className={buttonClass}
           onClick={() => {
             this.setState({ open: !this.state.open });
-            console.log(this.state.open);
           }}
         >
           <span className={styles.btnSpan}>Export</span>

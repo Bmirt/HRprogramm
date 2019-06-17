@@ -3,12 +3,12 @@ import {
   DELETE_PROFILE,
   CHANGE_PROFILE,
   FETCH_PROFILES,
-  FILTER_PROFILES
+  FILTER_PROFILES,
+  FETCH_TECHNOLOGIES,
+  FETCH_PROJECTS
 } from "../constants/profileListConstants";
 
 import axios from "axios";
-
-const token = localStorage.getItem("token");
 
 export const addProfile = (newId, name) => ({
   type: ADD_PROFILE,
@@ -31,12 +31,52 @@ export const filteredProfiles = profiles => ({
   profiles
 });
 
-export const fetchProfiles = () => {
+export const fetchProfiles = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/all-profiles", {
         headers: { "Content-Type": "application/json", Authorization: token }
       })
       .then(res => dispatch({ type: FETCH_PROFILES, payload: res.data }));
+  };
+};
+
+export const fetchTechnologies = token => {
+  return dispatch => {
+    axios
+      .get("http://laravel.local/api/get-technologies", {
+        headers: { "Content-Type": "application/json", Authorization: token }
+      })
+      .then(res => dispatch({ type: FETCH_TECHNOLOGIES, payload: res.data }));
+  };
+};
+
+export const fetchProjects = token => {
+  return dispatch => {
+    axios
+      .get("http://laravel.local/api/get-projects", {
+        headers: { "Content-Type": "application/json", Authorization: token }
+      })
+      .then(res => dispatch({ type: FETCH_PROJECTS, payload: res.data }));
+  };
+};
+
+export const createProfile = (profile, token) => {
+  return dispatch => {
+    // axios
+    //   .post("http://laravel.local/api/store-profile", {
+    //     headers: { "Content-Type": "application/json", Authorization: token },
+    //     data: profile
+    //   })
+    fetch("http://laravel.local/api/store-profile", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(profile)
+    })
+      .then(res => res.json())
+      .then(res => dispatch({ type: ADD_PROFILE, payload: res }));
   };
 };

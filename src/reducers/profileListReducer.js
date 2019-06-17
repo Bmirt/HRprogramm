@@ -3,10 +3,14 @@ import {
   ADD_PROFILE,
   CHANGE_PROFILE,
   FETCH_PROFILES,
-  FILTER_PROFILES
+  FILTER_PROFILES,
+  FETCH_PROJECTS,
+  FETCH_TECHNOLOGIES
 } from "../constants/profileListConstants";
 const initialState = {
   profiles: [],
+  technologies: [],
+  projects: [],
   error: null
 };
 
@@ -18,8 +22,18 @@ const profileListReducer = (state = initialState, action) => {
         profiles: action.payload.profiles
       };
     case ADD_PROFILE:
-      console.log("add profile");
-      return state;
+      console.log(action.payload);
+      return {
+        ...state,
+        profiles: [
+          ...state.profiles,
+          {
+            ...action.payload.profile,
+            technologies: [...action.payload.technologies],
+            projects: [...action.payload.projects]
+          }
+        ]
+      };
     case DELETE_PROFILE:
       console.log("delete profile");
       return state;
@@ -30,6 +44,22 @@ const profileListReducer = (state = initialState, action) => {
       return {
         ...state,
         profiles: action.profiles
+      };
+    case FETCH_TECHNOLOGIES:
+      return {
+        ...state,
+        technologies: action.payload.technologies
+      };
+    case FETCH_PROJECTS:
+      return {
+        ...state,
+        projects: action.payload.projects
+      };
+    case CHANGE_PROFILE:
+      console.log(action.payload);
+      return {
+        ...state,
+        profiles: [...state.profiles, action.payload.profile]
       };
     default:
       return state;

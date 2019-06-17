@@ -1,23 +1,7 @@
 import React, { Component } from "react";
 import styles from "./SmartTable.module.css";
 import { Link } from "react-router-dom";
-
-// function hoverView(props) {
-//   if (props) {
-//     console.log(props.Profile);
-//   }
-//   return (
-//     <>
-//       {props ? (
-//         <div>
-//           <h1>Hello {props.Profile}</h1>
-//         </div>
-//       ) : (
-//         <h1>no props</h1>
-//       )}
-//     </>
-//   );
-// }
+import { isArray } from "util";
 
 class SmartTable extends Component {
   state = {
@@ -34,41 +18,55 @@ class SmartTable extends Component {
   };
 
   placeBefore = (movingItem, origin) => {
+    let movingObject = this.state.columnHeaders.find(x => x.name == movingItem);
     if (movingItem !== origin) {
       let currentArray = this.state.columnHeaders.filter(
         x => x.name !== movingItem
       );
       let filteredDown = currentArray.filter(
-        x => currentArray.indexOf(x) < currentArray.indexOf(origin)
+        x =>
+          currentArray.indexOf(x) <
+          currentArray.indexOf(currentArray.find(x => x.name == origin))
       );
       let filteredUp = currentArray.filter(
-        x => currentArray.indexOf(x) >= currentArray.indexOf(origin)
+        x =>
+          currentArray.indexOf(x) >=
+          currentArray.indexOf(currentArray.find(x => x.name == origin))
       );
 
       this.setState({
-        roughcolumns: [...filteredDown, movingItem, ...filteredUp]
+        roughcolumns: [...filteredDown, movingObject, ...filteredUp]
       });
     }
   };
   placeAfter = (movingItem, origin) => {
+    let movingObject = this.state.columnHeaders.find(x => x.name == movingItem);
     if (movingItem !== origin) {
-      let currentArray = this.state.columnHeaders.filter(x => x !== movingItem);
+      let currentArray = this.state.columnHeaders.filter(
+        x => x.name !== movingItem
+      );
       let filteredDown = currentArray.filter(
-        x => currentArray.indexOf(x) <= currentArray.indexOf(origin)
+        x =>
+          currentArray.indexOf(x) <=
+          currentArray.indexOf(currentArray.find(x => x.name == origin))
       );
       let filteredUp = currentArray.filter(
-        x => currentArray.indexOf(x) > currentArray.indexOf(origin)
+        x =>
+          currentArray.indexOf(x) >
+          currentArray.indexOf(currentArray.find(x => x.name == origin))
       );
 
       this.setState({
-        roughcolumns: [...filteredDown, movingItem, ...filteredUp]
+        roughcolumns: [...filteredDown, movingObject, ...filteredUp]
       });
     }
   };
+
   handleDragging = e => {
     let coordinates = [];
     this.state.columnHeaders.map(header => {
-      coordinates.push([header, ...this.getElementCoords(header)]);
+      coordinates.push([header.name, ...this.getElementCoords(header.name)]);
+      return 0;
     });
     coordinates.map(header => {
       if (e.clientX === 0) {
@@ -82,9 +80,8 @@ class SmartTable extends Component {
           e.target.id,
           coordinates[coordinates.indexOf(header)][0]
         );
-      } else {
-        return;
       }
+      return 0;
     });
   };
 
@@ -98,6 +95,14 @@ class SmartTable extends Component {
         ) : null}
       </>
     );
+  };
+  makeItString = a => {
+    if (isArray(a)) {
+      return a.map(item => {
+        return "#" + item.title + " ";
+      });
+    }
+    return a;
   };
 
   hoverModal = id => {
@@ -143,14 +148,13 @@ class SmartTable extends Component {
     }
     let rows = this.props.rows.map(row => {
       let currentrow = this.state.columnHeaders.map(header => {
-        console.log(row[header.name]);
         return (
           <td key={header.name}>
             <Link
               to={`profile/${row.id}`}
               style={{ color: row.black_list ? "#fff" : "#000" }}
             >
-              {row[header.name]}
+              {this.makeItString(row[header.name])}
             </Link>
           </td>
         );
