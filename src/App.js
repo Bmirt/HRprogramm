@@ -6,21 +6,44 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import ProtectedContainer from "./components/container/protectedContainer";
+import { connect } from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <ProtectedRoute path="/home" component={ProtectedContainer} />
-          <Route exact path="/" component={Login} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route path="/reset-password/:token_id" component={PasswordReset} />
-          <Route path="*" component={() => "404 NOT FOUND"} />
-        </Switch>
-      </Router>
-    </div>
-  );
+import {
+  fetchProfiles,
+  fetchTechnologies,
+  fetchProjects
+} from "./actions/profileListActions";
+
+class App extends React.Component {
+  componentDidMount() {
+    this.props.getProfiles();
+    this.props.getTechnologies();
+    this.props.getProjects();
+  }
+  render() {
+    console.log(this.props);
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <ProtectedRoute path="/home" component={ProtectedContainer} />
+            <Route exact path="/" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/reset-password/:token_id" component={PasswordReset} />
+            <Route path="*" component={() => "404 NOT FOUND"} />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
+const mapDispatchToProps = dispatch => ({
+  getProfiles: () => dispatch(fetchProfiles()),
+  getTechnologies: () => dispatch(fetchTechnologies()),
+  getProjects: () => dispatch(fetchProjects())
+});
 
-export default App;
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

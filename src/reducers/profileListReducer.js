@@ -3,10 +3,14 @@ import {
   ADD_PROFILE,
   CHANGE_PROFILE,
   FETCH_PROFILES,
-  FILTER_PROFILES
+  FILTER_PROFILES,
+  FETCH_PROJECTS,
+  FETCH_TECHNOLOGIES
 } from "../constants/profileListConstants";
 const initialState = {
   profiles: [],
+  technologies: [],
+  projects: [],
   error: null
 };
 
@@ -30,6 +34,21 @@ const profileListReducer = (state = initialState, action) => {
       return {
         ...state,
         profiles: action.profiles
+      };
+    case FETCH_TECHNOLOGIES:
+      return {
+        ...state,
+        technologies: action.payload.technologies
+      };
+    case FETCH_PROJECTS:
+      return {
+        ...state,
+        projects: action.payload.projects
+      };
+    case CHANGE_PROFILE:
+      return {
+        ...state,
+        profiles: [...state.profiles, action.payload.profile]
       };
     default:
       return state;

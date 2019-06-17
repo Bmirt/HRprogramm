@@ -1,17 +1,17 @@
 import { connect } from "react-redux";
 import ProfileList from "../components/Home/Profile List/ProfileList";
-import { filteredProfiles } from "../actions/profileListActions";
+import { createProfile } from "../actions/profileListActions";
 
 const mapStateToProps = state => {
-  console.log(state.profileListReducer.profiles, "redux state");
   return {
-    profiles: state.profileListReducer.profiles
+    profiles: state.profileListReducer.profiles,
+    technologies: state.profileListReducer.technologies,
+    projects: state.profileListReducer.projects
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  filteredProfiles: profiles => dispatch(filteredProfiles(profiles)),
-  dispatch: dispatch
+  createProfile: profile => dispatch(createProfile(profile))
 });
 
 export default connect(
