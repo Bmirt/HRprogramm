@@ -11,6 +11,7 @@ import ExportFile from "../../ExportFile/ExportFile";
 import FilterWindow from "../FilterWindow/filterWindow";
 export default class ProfileList extends Component {
   state = {
+    filtered: "",
     creating: false,
     drawFilter: false,
     name: "",
@@ -32,12 +33,13 @@ export default class ProfileList extends Component {
       { title: "Current Position", name: "position" },
       { title: "Profile", name: "profile" },
       { title: "Portfolio", name: "portfolio" },
-      // { title: "Technologies", name: "technologies" },
+      { title: "Technologies", name: "technologies" },
       { title: "English", name: "english" },
       { title: "Salary Expectation", name: "salary" },
       { title: "Source", name: "source" },
       { title: "Status", name: "status" },
-      // { title: "Projects", name: "projects" },
+      { title: "Projects", name: "projects" },
+      { title: "Comment", name: "comment" },
       { title: "Date", name: "created_at" }
     ],
     rows: [],
@@ -68,14 +70,10 @@ export default class ProfileList extends Component {
     this.setState({ creating: false });
   };
   drawFilter = () => {
-    this.setState({ drawFilter: !this.state.drawFilter }, () =>
-      console.log(this.state.drawFilter)
-    );
+    this.setState({ drawFilter: !this.state.drawFilter });
   };
-  componentDidMount = () => {
-    this.props.getProfiles();
-    this.props.getTechnologies();
-    this.props.getProjects();
+  filteredRows = a => {
+    this.setState({ filtered: a });
   };
 
   handlePageChange = page => {
@@ -124,20 +122,7 @@ export default class ProfileList extends Component {
     console.log(this.state);
     return (
       <div className={styles.container}>
-        <FilterWindow display={this.state.drawFilter ? "" : "none"} />
         <div className={styles.content}>
-          <div className={styles.search}>
-            <input
-              disabled={!this.state.rows.length}
-              type="text"
-              className={styles.searchInput}
-              placeholder="Search..."
-              onChange={e => this.profilesFilterer(e)}
-            />
-            <button>
-              <img src={searchIcon} alt="search" />
-            </button>
-          </div>
           <div className={styles.buttonContainer}>
             <div>
               <button
@@ -153,7 +138,7 @@ export default class ProfileList extends Component {
               <button
                 onClick={this.drawFilter}
                 className={styles.profilesListBtn}
-                disabled={!this.state.rows.length}
+                disabled={!this.props.profiles.length}
               >
                 <img src={FilterIcon} className={styles.btnIcon} />
                 <span>Filter</span>
@@ -173,6 +158,14 @@ export default class ProfileList extends Component {
             onPageChange={this.handlePageChange}
           />
         </div>
+        {this.state.drawFilter && (
+          <FilterWindow
+            currentRows={this.props.profiles}
+            projects={this.state.projects}
+            technologies={this.state.technologies}
+            // filteredRows={this.filteredRows}
+          />
+        )}
         {this.state.creating && <Backdrop />}
         {this.state.creating && (
           <Modal

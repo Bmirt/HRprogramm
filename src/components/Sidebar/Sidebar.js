@@ -77,7 +77,7 @@ export class Sidebar extends Component {
     let sidebarItems = this.state.sidebarItems.map(item => {
       let itemClass = styles.smth;
       let itemIcon = item.icon;
-      if (window.location.pathname === "/home/profile_list" + item.path) {
+      if (window.location.pathname === "/home/" + item.path) {
         itemClass = styles.chosen;
         itemIcon = item.iconBlue;
       }
