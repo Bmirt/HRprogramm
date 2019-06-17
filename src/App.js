@@ -6,20 +6,8 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import ProtectedContainer from "./components/container/protectedContainer";
-import { connect } from "react-redux";
-
-import {
-  fetchProfiles,
-  fetchTechnologies,
-  fetchProjects
-} from "./actions/profileListActions";
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.getProfiles();
-    this.props.getTechnologies();
-    this.props.getProjects();
-  }
   render() {
     console.log(this.props);
     return (
@@ -37,13 +25,5 @@ class App extends React.Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  getProfiles: () => dispatch(fetchProfiles()),
-  getTechnologies: () => dispatch(fetchTechnologies()),
-  getProjects: () => dispatch(fetchProjects())
-});
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default App;

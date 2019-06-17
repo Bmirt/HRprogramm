@@ -25,7 +25,6 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("signup", this.state);
     let newErrors = {};
     if (this.state.username.length <= 0) {
       newErrors.username = "username field is empty";
@@ -56,16 +55,12 @@ class Login extends Component {
         .then(res => res.json())
         .then(res => {
           if (res.errors) {
-            console.log(res.errors);
             newErrors.error = res.errors;
             this.setState({ errors: {} });
             this.setState({ errors: newErrors });
           } else if (res.success) {
-            console.log("this is res", res);
-
             auth.login("Bearer " + res.success.token);
             this.props.history.push("/home/profile_list");
-            alert("Welcome " + res.user.name);
           }
         });
     }

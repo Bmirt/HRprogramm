@@ -5,13 +5,10 @@ import {
   FETCH_PROFILES,
   FILTER_PROFILES,
   FETCH_TECHNOLOGIES,
-  FETCH_PROJECTS,
-  CREATE_PROFILE
+  FETCH_PROJECTS
 } from "../constants/profileListConstants";
 
 import axios from "axios";
-
-const token = localStorage.getItem("token");
 
 export const addProfile = (newId, name) => ({
   type: ADD_PROFILE,
@@ -34,7 +31,7 @@ export const filteredProfiles = profiles => ({
   profiles
 });
 
-export const fetchProfiles = () => {
+export const fetchProfiles = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/all-profiles", {
@@ -44,7 +41,7 @@ export const fetchProfiles = () => {
   };
 };
 
-export const fetchTechnologies = () => {
+export const fetchTechnologies = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/get-technologies", {
@@ -54,7 +51,7 @@ export const fetchTechnologies = () => {
   };
 };
 
-export const fetchProjects = () => {
+export const fetchProjects = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/get-projects", {
@@ -64,7 +61,7 @@ export const fetchProjects = () => {
   };
 };
 
-export const createProfile = profile => {
+export const createProfile = (profile, token) => {
   return dispatch => {
     // axios
     //   .post("http://laravel.local/api/store-profile", {
@@ -80,6 +77,6 @@ export const createProfile = profile => {
       body: JSON.stringify(profile)
     })
       .then(res => res.json())
-      .then(res => dispatch({ type: CREATE_PROFILE, payload: res }));
+      .then(res => dispatch({ type: ADD_PROFILE, payload: res }));
   };
 };

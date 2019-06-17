@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styles from "./ProfileList.module.css";
-import searchIcon from "../../../images/searchIcon.png";
 import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
@@ -79,7 +78,7 @@ export default class ProfileList extends Component {
     this.setState({ currentPage: page });
   };
 
-  createPrfile = () => {
+  createProfile = () => {
     const {
       name,
       phone,
@@ -259,7 +258,7 @@ export default class ProfileList extends Component {
             ]}
             onChange={this.handleChange}
             handleMultiSelect={this.handleMultiSelect}
-            createProfile={this.createPrfile}
+            createProfile={this.createProfile}
           />
         )}
       </div>

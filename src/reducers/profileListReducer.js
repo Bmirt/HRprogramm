@@ -22,8 +22,18 @@ const profileListReducer = (state = initialState, action) => {
         profiles: action.payload.profiles
       };
     case ADD_PROFILE:
-      console.log("add profile");
-      return state;
+      console.log(action.payload);
+      return {
+        ...state,
+        profiles: [
+          ...state.profiles,
+          {
+            ...action.payload.profile,
+            technologies: [...action.payload.technologies],
+            projects: [...action.payload.projects]
+          }
+        ]
+      };
     case DELETE_PROFILE:
       console.log("delete profile");
       return state;
@@ -46,6 +56,7 @@ const profileListReducer = (state = initialState, action) => {
         projects: action.payload.projects
       };
     case CHANGE_PROFILE:
+      console.log(action.payload);
       return {
         ...state,
         profiles: [...state.profiles, action.payload.profile]
