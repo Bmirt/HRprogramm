@@ -13,7 +13,7 @@ const modal = props => {
           if (item.type === "select") {
             const content = item.options ? (
               <select name={item.name} onChange={props.onChange}>
-                <option value="">Choose</option>
+                <option value="notSelected">Choose</option>
                 {item.options.map(itm => {
                   return <option value={itm.value}>{itm.value}</option>;
                 })}

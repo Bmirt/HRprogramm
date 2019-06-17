@@ -16,7 +16,6 @@ class SmartTable extends Component {
 
     return [coorX0, coorX1, coorX2];
   };
-
   placeBefore = (movingItem, origin) => {
     let movingObject = this.state.columnHeaders.find(x => x.name == movingItem);
     if (movingItem !== origin) {
@@ -85,17 +84,6 @@ class SmartTable extends Component {
     });
   };
 
-  hoverBox = () => {
-    return (
-      <>
-        {this.state.hoveruser ? (
-          <div className={styles.hoverUser}>
-            <h1>Hello {this.state.hoveruser.Profile}</h1>
-          </div>
-        ) : null}
-      </>
-    );
-  };
   makeItString = a => {
     if (isArray(a)) {
       return a.map(item => {
@@ -163,8 +151,6 @@ class SmartTable extends Component {
       return (
         <tr
           key={this.props.rows.indexOf(row)}
-          onMouseEnter={() => this.hoverModal(row.id)}
-          onMouseLeave={this.hoverLeave}
           bgcolor={row.black_list ? "#dc3545" : "white"}
         >
           {currentrow}
@@ -176,7 +162,6 @@ class SmartTable extends Component {
   render() {
     return (
       <div className={styles.container}>
-        {this.hoverBox()}
         <table id="html_to_excel">
           <thead>{this.headerRow()}</thead>
           {this.contentRows()}
