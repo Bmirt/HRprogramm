@@ -16,7 +16,6 @@ class SmartTable extends Component {
 
     return [coorX0, coorX1, coorX2];
   };
-
   placeBefore = (movingItem, origin) => {
     let movingObject = this.state.columnHeaders.find(x => x.name == movingItem);
     if (movingItem !== origin) {

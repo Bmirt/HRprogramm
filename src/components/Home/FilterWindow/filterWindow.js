@@ -42,6 +42,7 @@ class FilterWindow extends Component {
           technologies: dataStringified
         }
       });
+      console.log(this.state.technologies);
     }
     if (category === "projects") {
       this.setState({
@@ -68,7 +69,10 @@ class FilterWindow extends Component {
         row.comment.includes(
           this.state.filterWindowValues.comment.toLocaleLowerCase()
         ) &&
-        row.english.includes
+        row.english == this.state.english &&
+        row.source == this.state.source &&
+        row.status == this.state.filterWindowValues.status &&
+        true ////hereeeeeeee
       )
         return;
     });
@@ -77,6 +81,7 @@ class FilterWindow extends Component {
   };
 
   render() {
+    console.log(this.props.currentRows);
     return (
       <Modal
         title="Add Candidate"
@@ -113,7 +118,6 @@ class FilterWindow extends Component {
               { value: "Job Post", label: "Job Post" }
             ]
           },
-          { name: "profile", type: "text", label: "Profile" },
           {
             name: "technologies",
             type: "multiSelect",
