@@ -1,17 +1,13 @@
 import { connect } from "react-redux";
 import Projects from "../components/Home/Projects/Projects";
 
-const mapStateToProps = state => ({
-  state: state
-});
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    dispatch
+    projects: state.profileListReducer.projects
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(Projects);
