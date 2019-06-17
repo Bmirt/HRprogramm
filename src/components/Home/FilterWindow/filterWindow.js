@@ -28,6 +28,7 @@ class FilterWindow extends Component {
         [e.target.name]: e.target.value.toLowerCase()
       }
     });
+    console.log(this.state.filterWindowValues);
   };
   handleMultiSelect = (category, data) => {
     let dataStringified = [];
