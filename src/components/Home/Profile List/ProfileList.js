@@ -4,6 +4,7 @@ import Modal from "../../Modal/Modal";
 import Backdrop from "../../Backdrop/Backdrop";
 import SmartTable from "../SmartTable/SmartTable";
 import FilterIcon from "../../../images/filterIcon.png";
+import ReloadIcon from "../../../images/reloadIcon.png";
 import Pagination from "../../pagination/Pagination";
 import { paginate } from "../../../utils/paginate";
 import ExportFile from "../../ExportFile/ExportFile";
@@ -70,8 +71,14 @@ export default class ProfileList extends Component {
   drawFilter = () => {
     this.setState({ drawFilter: !this.state.drawFilter });
   };
+  closeFilter = () => {
+    this.setState({ drawFilter: false });
+  };
   filteredRows = a => {
     this.setState({ filtered: a });
+  };
+  cancelFilter = () => {
+    this.setState({ filtered: "" });
   };
 
   handlePageChange = page => {
@@ -139,6 +146,14 @@ export default class ProfileList extends Component {
                 <img src={FilterIcon} className={styles.btnIcon} />
                 <span>Filter</span>
               </button>
+              <button
+                onClick={this.cancelFilter}
+                className={styles.profilesListBtn}
+                disabled={!this.props.profiles.length}
+              >
+                <img src={ReloadIcon} className={styles.btnIcon} />
+                <span>Clear Filter</span>
+              </button>
             </div>
           </div>
           <div className={styles.profilesTable}>
@@ -160,6 +175,7 @@ export default class ProfileList extends Component {
             projects={this.props.projects}
             technologies={this.props.technologies}
             filteredRows={this.filteredRows}
+            closeFilter={this.closeFilter}
           />
         )}
         {this.state.creating && <Backdrop />}

@@ -17,7 +17,9 @@ class SmartTable extends Component {
     return [coorX0, coorX1, coorX2];
   };
   placeBefore = (movingItem, origin) => {
-    let movingObject = this.state.columnHeaders.find(x => x.name == movingItem);
+    let movingObject = this.state.columnHeaders.find(
+      x => x.name === movingItem
+    );
     if (movingItem !== origin) {
       let currentArray = this.state.columnHeaders.filter(
         x => x.name !== movingItem
@@ -25,12 +27,12 @@ class SmartTable extends Component {
       let filteredDown = currentArray.filter(
         x =>
           currentArray.indexOf(x) <
-          currentArray.indexOf(currentArray.find(x => x.name == origin))
+          currentArray.indexOf(currentArray.find(x => x.name === origin))
       );
       let filteredUp = currentArray.filter(
         x =>
           currentArray.indexOf(x) >=
-          currentArray.indexOf(currentArray.find(x => x.name == origin))
+          currentArray.indexOf(currentArray.find(x => x.name === origin))
       );
 
       this.setState({
@@ -39,7 +41,9 @@ class SmartTable extends Component {
     }
   };
   placeAfter = (movingItem, origin) => {
-    let movingObject = this.state.columnHeaders.find(x => x.name == movingItem);
+    let movingObject = this.state.columnHeaders.find(
+      x => x.name === movingItem
+    );
     if (movingItem !== origin) {
       let currentArray = this.state.columnHeaders.filter(
         x => x.name !== movingItem
@@ -47,12 +51,12 @@ class SmartTable extends Component {
       let filteredDown = currentArray.filter(
         x =>
           currentArray.indexOf(x) <=
-          currentArray.indexOf(currentArray.find(x => x.name == origin))
+          currentArray.indexOf(currentArray.find(x => x.name === origin))
       );
       let filteredUp = currentArray.filter(
         x =>
           currentArray.indexOf(x) >
-          currentArray.indexOf(currentArray.find(x => x.name == origin))
+          currentArray.indexOf(currentArray.find(x => x.name === origin))
       );
 
       this.setState({
@@ -94,7 +98,7 @@ class SmartTable extends Component {
   };
 
   hoverModal = id => {
-    const FiltUser = this.props.rows.filter(row => row.id == id);
+    const FiltUser = this.props.rows.filter(row => row.id === id);
     this.setState({ hoveruser: FiltUser[0] });
   };
   hoverLeave = () => {

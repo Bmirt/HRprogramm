@@ -87,18 +87,18 @@ class FilterWindow extends Component {
           row.portfolio.includes(
             this.state.filterWindowValues.portfolio.toLowerCase()
           )) ||
-          this.state.filterWindowValues.portfolio == "") &&
+          this.state.filterWindowValues.portfolio === "") &&
         row.comment
           .toLowerCase()
           .includes(this.state.filterWindowValues.comment.toLowerCase()) &&
-        (row.english == this.state.filterWindowValues.english ||
-          this.state.filterWindowValues.english == "" ||
+        (row.english === this.state.filterWindowValues.english ||
+          this.state.filterWindowValues.english === "" ||
           this.state.filterWindowValues.english === "notselected") &&
-        (row.source == this.state.filterWindowValues.source ||
-          this.state.filterWindowValues.source == "" ||
+        (row.source === this.state.filterWindowValues.source ||
+          this.state.filterWindowValues.source === "" ||
           this.state.filterWindowValues.source === "notselected") &&
-        (row.status == this.state.filterWindowValues.status ||
-          this.state.filterWindowValues.status == "" ||
+        (row.status === this.state.filterWindowValues.status ||
+          this.state.filterWindowValues.status === "" ||
           this.state.filterWindowValues.status === "notselected") &&
         (this.checkItemsInArray(
           this.state.filterWindowValues.technologies,
@@ -120,6 +120,7 @@ class FilterWindow extends Component {
         )
       )
         filtered.push(row);
+      this.props.closeFilter();
       return;
     });
     this.props.filteredRows(filtered);
@@ -131,7 +132,7 @@ class FilterWindow extends Component {
         title="Add Candidate"
         canCancel
         canConfirm
-        onCancel={this.modalCancelHandler}
+        onCancel={this.props.closeFilter}
         createProfile={this.filter}
         fields={[
           { name: "name", type: "text", label: "Name,Surname" },
