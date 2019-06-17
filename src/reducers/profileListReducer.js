@@ -5,12 +5,15 @@ import {
   FETCH_PROFILES,
   FILTER_PROFILES,
   FETCH_PROJECTS,
-  FETCH_TECHNOLOGIES
+  FETCH_TECHNOLOGIES,
+  FETCH_PROJECT
 } from "../constants/profileListConstants";
 const initialState = {
   profiles: [],
   technologies: [],
   projects: [],
+  choosenProject: {},
+  choosenTechnology: {},
   error: null
 };
 
@@ -55,12 +58,16 @@ const profileListReducer = (state = initialState, action) => {
         ...state,
         projects: action.payload.projects
       };
-    case CHANGE_PROFILE:
-      console.log(action.payload);
+    case FETCH_PROJECT:
       return {
         ...state,
-        profiles: [...state.profiles, action.payload.profile]
+        choosenProject: {
+          ...action.payload.project,
+          profiles: [...action.payload.profiles]
+        }
       };
+    case CHANGE_PROFILE:
+      console.log(action.payload);
     default:
       return state;
   }
