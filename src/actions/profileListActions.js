@@ -10,8 +10,6 @@ import {
 
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-
 export const addProfile = (newId, name) => ({
   type: ADD_PROFILE,
   newId,
@@ -33,7 +31,7 @@ export const filteredProfiles = profiles => ({
   profiles
 });
 
-export const fetchProfiles = () => {
+export const fetchProfiles = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/all-profiles", {
@@ -43,7 +41,7 @@ export const fetchProfiles = () => {
   };
 };
 
-export const fetchTechnologies = () => {
+export const fetchTechnologies = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/get-technologies", {
@@ -53,7 +51,7 @@ export const fetchTechnologies = () => {
   };
 };
 
-export const fetchProjects = () => {
+export const fetchProjects = token => {
   return dispatch => {
     axios
       .get("http://laravel.local/api/get-projects", {
@@ -63,7 +61,7 @@ export const fetchProjects = () => {
   };
 };
 
-export const createProfile = profile => {
+export const createProfile = (profile, token) => {
   return dispatch => {
     // axios
     //   .post("http://laravel.local/api/store-profile", {
