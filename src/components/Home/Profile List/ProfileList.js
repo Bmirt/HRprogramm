@@ -42,7 +42,6 @@ export default class ProfileList extends Component {
       { title: "Comment", name: "comment" },
       { title: "Date", name: "created_at" }
     ],
-    rows: [],
     technologies: [],
     projects: [],
     chosenTechnologies: [],
@@ -113,13 +112,11 @@ export default class ProfileList extends Component {
   };
 
   render() {
-    console.log(this.props);
     const profiles = paginate(
-      this.props.profiles,
+      this.state.filtered || this.props.profiles,
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(this.state);
     return (
       <div className={styles.container}>
         <div className={styles.content}>
@@ -161,9 +158,9 @@ export default class ProfileList extends Component {
         {this.state.drawFilter && (
           <FilterWindow
             currentRows={this.props.profiles}
-            projects={this.state.projects}
-            technologies={this.state.technologies}
-            // filteredRows={this.filteredRows}
+            projects={this.props.projects}
+            technologies={this.props.technologies}
+            filteredRows={this.filteredRows}
           />
         )}
         {this.state.creating && <Backdrop />}

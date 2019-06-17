@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from "../../Modal/Modal";
+import moment from "moment";
 
 class FilterWindow extends Component {
   state = {
@@ -15,81 +16,123 @@ class FilterWindow extends Component {
       status: "",
       projects: [""],
       comment: "",
-      startDate: "",
-      endDate: ""
+      startDate: "1200-10-10",
+      endDate: "3000-10-10"
     },
+    startDate: "1200-10-10",
+    endDate: "3000-10-10",
     projects: this.props.projects,
     technologies: this.props.technologies
   };
   handleChange = e => {
+    let data =
+      e.target.type == "date" && e.target.value == ""
+        ? this.state[e.target.name]
+        : e.target.value.toLowerCase();
     this.setState({
       filterWindowValues: {
         ...this.state.filterWindowValues,
-        [e.target.name]: e.target.value.toLowerCase()
+        [e.target.name]: data
       }
     });
     console.log(this.state.filterWindowValues);
   };
   handleMultiSelect = (category, data) => {
-    let dataStringified = [];
-    data.map(item => {
-      dataStringified.push(
-        this.state[category].find(x => x.value == item).label
-      );
-    });
     if (category === "technologies") {
       this.setState({
         filterWindowValues: {
-          technologies: dataStringified
+          ...this.state.filterWindowValues,
+          technologies: data
         }
       });
-      console.log(this.state.technologies);
     }
     if (category === "projects") {
       this.setState({
-        filterWindowValues: { ...this.state.filterWindowValues, projects: data }
+        filterWindowValues: {
+          ...this.state.filterWindowValues,
+          projects: data
+        }
       });
     }
+    // console.log(this.state.filterWindowValues);
+  };
+  checkItemsInArray = (a, b) => {
+    let result = true;
+    for (var i = 0; i < a.length; i++) {
+      if (!b.includes(a[i])) result = false;
+    }
+    return result;
+  };
+  getIdsFromArrOfObjects = a => {
+    return a.map(elem => {
+      return elem.id;
+    });
   };
 
   filter = () => {
     let filtered = [];
     this.props.currentRows.map(row => {
       if (
-        row.name.includes(this.state.filterWindowValues.name.toLowerCase()) &&
+        row.name
+          .toLowerCase()
+          .includes(this.state.filterWindowValues.name.toLowerCase()) &&
         row.phone.includes(this.state.filterWindowValues.phone.toLowerCase()) &&
-        row.position.includes(
-          this.state.filterWindowValues.position.toLowerCase()
-        ) &&
+        row.position
+          .toLowerCase()
+          .includes(this.state.filterWindowValues.position.toLowerCase()) &&
         row.profile.includes(
           this.state.filterWindowValues.profile.toLowerCase()
         ) &&
-        row.portfolio.includes(
-          this.state.filterWindowValues.portfolio.toLowerCase()
-        ) &&
-        row.comment.includes(
-          this.state.filterWindowValues.comment.toLocaleLowerCase()
-        ) &&
-        row.english == this.state.english &&
-        row.source == this.state.source &&
-        row.status == this.state.filterWindowValues.status &&
-        true ////hereeeeeeee
+        ((row.portfolio &&
+          row.portfolio.includes(
+            this.state.filterWindowValues.portfolio.toLowerCase()
+          )) ||
+          this.state.filterWindowValues.portfolio == "") &&
+        row.comment
+          .toLowerCase()
+          .includes(this.state.filterWindowValues.comment.toLowerCase()) &&
+        (row.english == this.state.filterWindowValues.english ||
+          this.state.filterWindowValues.english == "" ||
+          this.state.filterWindowValues.english === "notselected") &&
+        (row.source == this.state.filterWindowValues.source ||
+          this.state.filterWindowValues.source == "" ||
+          this.state.filterWindowValues.source === "notselected") &&
+        (row.status == this.state.filterWindowValues.status ||
+          this.state.filterWindowValues.status == "" ||
+          this.state.filterWindowValues.status === "notselected") &&
+        (this.checkItemsInArray(
+          this.state.filterWindowValues.technologies,
+          this.getIdsFromArrOfObjects(row.technologies)
+        ) ||
+          this.state.filterWindowValues.technologies == "") &&
+        (this.checkItemsInArray(
+          this.state.filterWindowValues.projects,
+          this.getIdsFromArrOfObjects(row.projects)
+        ) ||
+          this.state.filterWindowValues.projects == "") &&
+        moment(
+          moment(row.created_at)
+            .format()
+            .split("T")[0]
+        ).isBetween(
+          this.state.filterWindowValues.startDate,
+          this.state.filterWindowValues.endDate
+        )
       )
-        return;
+        filtered.push(row);
+      return;
     });
     this.props.filteredRows(filtered);
-    console.log(filtered);
   };
 
   render() {
-    console.log(this.props.currentRows);
     return (
       <Modal
         title="Add Candidate"
         canCancel
         canConfirm
         onCancel={this.modalCancelHandler}
-        // createProfile={this.filter}
+        createProfile={this.filter}
         fields={[
           { name: "name", type: "text", label: "Name,Surname" },
           { name: "phone", type: "number", label: "Phone" },
@@ -102,7 +145,6 @@ class FilterWindow extends Component {
             type: "select",
             label: "English",
             options: [
-              { value: "any", label: "any" },
               { value: "no english", label: "no english" },
               { value: "good", label: "good" },
               { value: "fluent", label: "fluent" }
@@ -113,23 +155,39 @@ class FilterWindow extends Component {
             type: "select",
             label: "Source",
             options: [
-              { value: "any", label: "any" },
               { value: "Linkedin", label: "Linkedin" },
               { value: "Refference", label: "Refference" },
               { value: "Job Post", label: "Job Post" }
             ]
           },
           {
+            name: "status",
+            type: "select",
+            label: "Status",
+            options: [
+              { value: "wrote on Linkedin", label: "wrote on Linkedin" },
+              { value: "refused", label: "refused" },
+              { value: "interested", label: "interested" },
+              { value: "rejected", label: "rejected" },
+              { value: "shortlisted", label: "shortlisted" },
+              { value: "hired", label: "hired" }
+            ]
+          },
+          {
             name: "technologies",
             type: "multiSelect",
             label: "Technologies",
-            options: this.state.technologies
+            options: this.props.technologies.map(item => {
+              return { value: item.id, label: item.title };
+            })
           },
           {
             name: "projects",
             type: "multiSelect",
             label: "Projects",
-            options: this.state.projects
+            options: this.props.projects.map(item => {
+              return { value: item.id, label: item.title };
+            })
           },
           { name: "startDate", type: "date", label: "From" },
           { name: "endDate", type: "date", label: "To" }
